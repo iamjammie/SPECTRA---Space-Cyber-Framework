@@ -1,0 +1,1 @@
+assessment,date,assessor,technique_id,attack_path,environment,precondition_met,status,first_breakpoint_control,time_to_detect,time_to_respond,service_delivered_pct,time_to_trusted_recovery,evidence_reference,residual_risk,engineering_action,owner,due

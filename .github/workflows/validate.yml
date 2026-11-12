@@ -1,0 +1,27 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Dataset integrity, navigator is up to date
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate dataset (ids, required fields, cross-references)
+        run: python3 scripts/validate.py
+      - name: Built navigator and catalogue are up to date with the data
+        run: |
+          python3 scripts/build_navigator.py
+          git diff --exit-code -- index.html docs/technique-catalogue.md || (echo "Stale build: run scripts/build_navigator.py and commit" && exit 1)
+      - name: Navigator makes no external requests
+        run: |
+          ! grep -nE '(src|href)="https?://' navigator/template.html
