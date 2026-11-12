@@ -1,0 +1,18 @@
+SPECTRA - data provenance and trademark notice
+
+SPECTRA is an independent, educational and defensive project. It is not affiliated with, sponsored
+by or endorsed by The Aerospace Corporation, The MITRE Corporation, the European Space Agency,
+NIST, CCSDS, BSI or any organisation named in its records.
+
+Content
+- Technique, control and mission-effect text is original to this project.
+- Crosswalks to other frameworks are at tactic level only. No technique identifiers or text are
+  copied from them.
+- Actor and incident records are short summaries of public reporting, each with its sources and an
+  attribution label. Claims made by actors themselves are labelled "claimed" and are not verified.
+- Capability tiers, evidence labels and control mappings are the project's judgement.
+
+Trademarks
+MITRE ATT&CK(R) and EMB3D(TM) are trademarks of The MITRE Corporation. SPARTA is a project of The
+Aerospace Corporation. SPACE-SHIELD is a project of the European Space Agency. All trademarks are
+the property of their respective owners.

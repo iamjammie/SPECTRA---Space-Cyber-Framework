@@ -1,0 +1,8 @@
+{
+  "name": "SPECTRA",
+  "long_name": "Space Protection, Exploitation, Continuity, Threat Response & Assurance",
+  "version": "0.2.0",
+  "released": "2026-11-12",
+  "license": "Apache-2.0",
+  "notice": "SPECTRA content is original, paraphrased educational material for defensive assessment. Techniques are described at the level of behaviour, never as procedures. Actor and incident records summarise public reporting and carry an attribution label; claims by actors themselves are marked as claimed and are not verified by SPECTRA."
+}

@@ -1,0 +1,711 @@
+[
+  {
+    "id": "TA-01",
+    "name": "Sandworm",
+    "aliases": [
+      "APT44",
+      "Seashell Blizzard",
+      "GRU Unit 74455"
+    ],
+    "type": "state",
+    "origin": "Russia",
+    "tier": 4,
+    "motivation": "Disruption in support of military operations",
+    "summary": "Russian military intelligence unit publicly blamed by the US, UK and EU for the February 2022 attack on the KA-SAT network, in which tens of thousands of modems were disabled. Researchers linked the AcidRain wiper used there, and the later AcidPour variant, to the group's tooling.",
+    "techniques": [
+      {
+        "id": "MSN-10",
+        "basis": "A"
+      },
+      {
+        "id": "POS-02",
+        "basis": "R"
+      },
+      {
+        "id": "TRN-01",
+        "basis": "R"
+      },
+      {
+        "id": "CTL-11",
+        "basis": "R"
+      },
+      {
+        "id": "SRV-08",
+        "basis": "R"
+      },
+      {
+        "id": "EFX-04",
+        "basis": "R"
+      },
+      {
+        "id": "EFX-05",
+        "basis": "R"
+      }
+    ],
+    "sources": [
+      "Viasat, KA-SAT Network cyber attack overview (30 March 2022)",
+      "SentinelLabs, AcidRain: A Modem Wiper Rains Down on Europe (2022)",
+      "Council of the EU, UK FCDO and US State Department statements (10 May 2022)"
+    ]
+  },
+  {
+    "id": "TA-02",
+    "name": "Turla",
+    "aliases": [
+      "Secret Blizzard",
+      "Venomous Bear",
+      "Snake"
+    ],
+    "type": "state",
+    "origin": "Russia",
+    "tier": 4,
+    "motivation": "Espionage",
+    "summary": "Long-running espionage group attributed to Russia's FSB. Kaspersky documented its use of other parties' unencrypted satellite internet downlinks to receive stolen data and hide its control servers.",
+    "techniques": [
+      {
+        "id": "MSN-11",
+        "basis": "R"
+      },
+      {
+        "id": "MNP-03",
+        "basis": "R"
+      },
+      {
+        "id": "POS-01",
+        "basis": "R"
+      },
+      {
+        "id": "MNP-14",
+        "basis": "A"
+      }
+    ],
+    "sources": [
+      "Kaspersky GReAT, Satellite Turla: APT Command and Control in the Sky (2015)"
+    ]
+  },
+  {
+    "id": "TA-03",
+    "name": "APT28",
+    "aliases": [
+      "Fancy Bear",
+      "Forest Blizzard",
+      "GRU Unit 26165"
+    ],
+    "type": "state",
+    "origin": "Russia",
+    "tier": 4,
+    "motivation": "Espionage",
+    "summary": "Russian military intelligence group with a long record against aerospace and defence. CISA incident responders said in late 2022 that they had found the group inside the network of a US satellite communications provider.",
+    "techniques": [
+      {
+        "id": "POS-01",
+        "basis": "R"
+      },
+      {
+        "id": "POS-03",
+        "basis": "R"
+      },
+      {
+        "id": "POS-02",
+        "basis": "R"
+      },
+      {
+        "id": "TRN-01",
+        "basis": "A"
+      },
+      {
+        "id": "SRV-03",
+        "basis": "A"
+      },
+      {
+        "id": "MNP-14",
+        "basis": "R"
+      }
+    ],
+    "sources": [
+      "CyberScoop, CISA researchers: Russia's Fancy Bear infiltrated US satellite network (December 2022)"
+    ]
+  },
+  {
+    "id": "TA-04",
+    "name": "Thrip",
+    "aliases": [
+      "Lotus Blossom (linked)",
+      "Billbug (linked)"
+    ],
+    "type": "state",
+    "origin": "China (vendor-assessed)",
+    "tier": 3,
+    "motivation": "Espionage, with interest in operational systems",
+    "summary": "Symantec reported in 2018 that this group had compromised a satellite communications operator and sought out machines running software that monitors and controls satellites, relying heavily on built-in administration tools.",
+    "techniques": [
+      {
+        "id": "POS-01",
+        "basis": "A"
+      },
+      {
+        "id": "SRV-08",
+        "basis": "R"
+      },
+      {
+        "id": "TRN-01",
+        "basis": "R"
+      },
+      {
+        "id": "CTL-08",
+        "basis": "A"
+      },
+      {
+        "id": "MNP-14",
+        "basis": "R"
+      }
+    ],
+    "sources": [
+      "Symantec, Thrip: Espionage Group Hits Satellite, Telecoms, and Defense Companies (2018)"
+    ]
+  },
+  {
+    "id": "TA-05",
+    "name": "Salt Typhoon",
+    "aliases": [
+      "Earth Estries (overlap)",
+      "GhostEmperor (overlap)"
+    ],
+    "type": "state",
+    "origin": "China",
+    "tier": 4,
+    "motivation": "Espionage against communications providers",
+    "summary": "Group behind the wide compromise of telecommunications carriers disclosed in 2024. In June 2025 Bloomberg reported satellite operator Viasat among the victims; Viasat confirmed unauthorised access through a compromised device and said it found no customer impact.",
+    "techniques": [
+      {
+        "id": "POS-02",
+        "basis": "R"
+      },
+      {
+        "id": "CTL-08",
+        "basis": "R"
+      },
+      {
+        "id": "SRV-03",
+        "basis": "R"
+      },
+      {
+        "id": "MNP-13",
+        "basis": "R"
+      },
+      {
+        "id": "MNP-14",
+        "basis": "A"
+      }
+    ],
+    "sources": [
+      "Via Satellite, Viasat confirms unauthorized access after Bloomberg report of Salt Typhoon impact (18 June 2025)"
+    ]
+  },
+  {
+    "id": "TA-06",
+    "name": "Peach Sandstorm",
+    "aliases": [
+      "APT33",
+      "Refined Kitten",
+      "Elfin"
+    ],
+    "type": "state",
+    "origin": "Iran (IRGC)",
+    "tier": 3,
+    "motivation": "Espionage",
+    "summary": "Iranian group that Microsoft observed password-spraying satellite, defence and pharmaceutical organisations in 2023 and deploying the Tickler backdoor against satellite and communications-equipment targets in 2024. In 2026 it was reported using a space-conference theme in phishing against aerospace companies.",
+    "techniques": [
+      {
+        "id": "POS-03",
+        "basis": "R"
+      },
+      {
+        "id": "POS-01",
+        "basis": "R"
+      },
+      {
+        "id": "EXP-10",
+        "basis": "R"
+      },
+      {
+        "id": "SRV-03",
+        "basis": "R"
+      },
+      {
+        "id": "MNP-14",
+        "basis": "R"
+      }
+    ],
+    "sources": [
+      "Microsoft Threat Intelligence, Peach Sandstorm password spray campaigns (September 2023)",
+      "Microsoft Threat Intelligence, Peach Sandstorm deploys new custom Tickler malware (August 2024)",
+      "Via Satellite, The Space Sector Under Cyber Fire in the US-Israel-Iran War (17 June 2026)"
+    ]
+  },
+  {
+    "id": "TA-07",
+    "name": "Lazarus cluster",
+    "aliases": [
+      "Hidden Cobra",
+      "Diamond Sleet",
+      "Andariel (related)"
+    ],
+    "type": "state",
+    "origin": "North Korea",
+    "tier": 3,
+    "motivation": "Espionage and technology acquisition",
+    "summary": "North Korean groups that repeatedly target aerospace and defence engineers with fake job offers, and that a 2024 multi-government advisory described as seeking aerospace, satellite and related technical data.",
+    "techniques": [
+      {
+        "id": "POS-01",
+        "basis": "R"
+      },
+      {
+        "id": "EXP-10",
+        "basis": "R"
+      },
+      {
+        "id": "POS-05",
+        "basis": "R"
+      },
+      {
+        "id": "SRV-03",
+        "basis": "A"
+      },
+      {
+        "id": "MNP-14",
+        "basis": "R"
+      }
+    ],
+    "sources": [
+      "ESET, Operation In(ter)ception (2020)",
+      "CISA and partners, joint advisory on Andariel (July 2024)"
+    ]
+  },
+  {
+    "id": "TA-08",
+    "name": "Space Pirates",
+    "aliases": [],
+    "type": "state",
+    "origin": "China (vendor-assessed)",
+    "tier": 3,
+    "motivation": "Espionage",
+    "summary": "Group named by Positive Technologies in 2022 for a campaign of phishing and custom backdoors against Russian aerospace organisations.",
+    "techniques": [
+      {
+        "id": "POS-01",
+        "basis": "R"
+      },
+      {
+        "id": "SRV-03",
+        "basis": "R"
+      },
+      {
+        "id": "MNP-14",
+        "basis": "R"
+      }
+    ],
+    "sources": [
+      "Positive Technologies, Space Pirates: analyzing the tools and connections of a new hacker group (2022)"
+    ]
+  },
+  {
+    "id": "TA-09",
+    "name": "State electronic-warfare forces",
+    "aliases": [],
+    "type": "state",
+    "origin": "Several states",
+    "tier": 4,
+    "motivation": "Denial and deception in and around conflict zones",
+    "summary": "Military units operating jammers and spoofers. Public reporting covers persistent navigation interference around the Baltic, Black Sea and Middle East, jamming of commercial satellite broadband in Ukraine, and interference with broadcast satellites raised at the ITU in 2024.",
+    "techniques": [
+      {
+        "id": "MSN-03",
+        "basis": "A"
+      },
+      {
+        "id": "EXP-01",
+        "basis": "A"
+      },
+      {
+        "id": "EFX-01",
+        "basis": "R"
+      },
+      {
+        "id": "EFX-02",
+        "basis": "R"
+      },
+      {
+        "id": "EFX-03",
+        "basis": "R"
+      },
+      {
+        "id": "MNP-09",
+        "basis": "R"
+      },
+      {
+        "id": "EFX-11",
+        "basis": "R"
+      }
+    ],
+    "sources": [
+      "ITU Radio Regulations Board decisions on harmful interference (2024)",
+      "EASA and IATA statements on GNSS interference (2024)"
+    ]
+  },
+  {
+    "id": "TA-10",
+    "name": "Mobir",
+    "aliases": [
+      "Cyberban News (channel)"
+    ],
+    "type": "state-linked",
+    "origin": "Iran (IRGC link reported)",
+    "tier": 2,
+    "motivation": "Disruption and intimidation during conflict",
+    "summary": "Persona that in March and April 2026 claimed intrusions and data destruction at Gulf satellite operators and a space agency. Analysts linked it to the IRGC; a released screen recording partly supported one claim, and others remain unverified.",
+    "techniques": [
+      {
+        "id": "POS-04",
+        "basis": "C"
+      },
+      {
+        "id": "MNP-13",
+        "basis": "C"
+      },
+      {
+        "id": "MNP-14",
+        "basis": "C"
+      },
+      {
+        "id": "EFX-05",
+        "basis": "C"
+      },
+      {
+        "id": "EFX-15",
+        "basis": "A"
+      }
+    ],
+    "sources": [
+      "Via Satellite, The Space Sector Under Cyber Fire in the US-Israel-Iran War (17 June 2026)"
+    ]
+  },
+  {
+    "id": "TA-11",
+    "name": "Handala",
+    "aliases": [],
+    "type": "state-linked",
+    "origin": "Iran (MOIS link reported)",
+    "tier": 2,
+    "motivation": "Intimidation and hack-and-leak",
+    "summary": "Persona reported to have messaged employees of an aerospace prime in Israel in March 2026 claiming their personal data was breached, and to have published names of purported geospatial-intelligence staff.",
+    "techniques": [
+      {
+        "id": "MSN-08",
+        "basis": "R"
+      },
+      {
+        "id": "MNP-14",
+        "basis": "C"
+      },
+      {
+        "id": "EFX-14",
+        "basis": "A"
+      }
+    ],
+    "sources": [
+      "Via Satellite, The Space Sector Under Cyber Fire in the US-Israel-Iran War (17 June 2026)"
+    ]
+  },
+  {
+    "id": "TA-12",
+    "name": "Lab Dookhtegan",
+    "aliases": [
+      "Read My Lips"
+    ],
+    "type": "hacktivist",
+    "origin": "Anti-Iranian-government",
+    "tier": 2,
+    "motivation": "Disruption of Iranian state-linked logistics",
+    "summary": "Group that claimed in March 2025 to have cut satellite communications on 116 Iranian tankers and cargo ships by attacking their maritime terminal systems, and claimed a second wave later that year.",
+    "techniques": [
+      {
+        "id": "POS-10",
+        "basis": "C"
+      },
+      {
+        "id": "CTL-11",
+        "basis": "C"
+      },
+      {
+        "id": "EFX-04",
+        "basis": "C"
+      }
+    ],
+    "sources": [
+      "The Maritime Executive, Cyber Hackers Claim to Have Disabled Iranian Ship Communications (March 2025)"
+    ]
+  },
+  {
+    "id": "TA-13",
+    "name": "Killnet",
+    "aliases": [],
+    "type": "hacktivist",
+    "origin": "Pro-Russian",
+    "tier": 1,
+    "motivation": "Publicity and harassment",
+    "summary": "Pro-Russian collective known for denial-of-service campaigns; it claimed an attack on a satellite broadband provider's customer sign-in service in November 2022.",
+    "techniques": [
+      {
+        "id": "EFX-15",
+        "basis": "C"
+      }
+    ],
+    "sources": [
+      "Trustwave SpiderLabs reporting on Killnet claims (November 2022)"
+    ]
+  },
+  {
+    "id": "TA-14",
+    "name": "GhostSec",
+    "aliases": [],
+    "type": "hacktivist",
+    "origin": "Mixed",
+    "tier": 1,
+    "motivation": "Publicity",
+    "summary": "Group that in 2023 claimed to have accessed and wiped internet-exposed satellite navigation receivers.",
+    "techniques": [
+      {
+        "id": "MSN-10",
+        "basis": "C"
+      },
+      {
+        "id": "POS-02",
+        "basis": "C"
+      }
+    ],
+    "sources": [
+      "Cyble, GhostSec targeting satellite receivers (March 2023)"
+    ]
+  },
+  {
+    "id": "TA-15",
+    "name": "Network Battalion 65",
+    "aliases": [
+      "NB65"
+    ],
+    "type": "hacktivist",
+    "origin": "Pro-Ukrainian",
+    "tier": 1,
+    "motivation": "Publicity and disruption",
+    "summary": "Group that in March 2022 claimed to have taken files from, and disrupted, a system at Russia's space agency. The agency's then director denied that control systems were affected.",
+    "techniques": [
+      {
+        "id": "POS-02",
+        "basis": "C"
+      },
+      {
+        "id": "MNP-02",
+        "basis": "C"
+      }
+    ],
+    "sources": [
+      "Media reporting of NB65 claims and Roscosmos denial (March 2022)"
+    ]
+  },
+  {
+    "id": "TA-16",
+    "name": "Dozor-Teleport intruders",
+    "aliases": [],
+    "type": "hacktivist",
+    "origin": "Self-described Wagner-aligned",
+    "tier": 2,
+    "motivation": "Disruption",
+    "summary": "Unidentified actors who claimed the June 2023 attack on a Russian satellite communications provider, saying they damaged user terminals and leaked files. Network measurements confirmed an outage; the claimed affiliation was not verified.",
+    "techniques": [
+      {
+        "id": "POS-02",
+        "basis": "A"
+      },
+      {
+        "id": "CTL-11",
+        "basis": "C"
+      },
+      {
+        "id": "EFX-04",
+        "basis": "C"
+      },
+      {
+        "id": "EFX-05",
+        "basis": "C"
+      },
+      {
+        "id": "MNP-14",
+        "basis": "C"
+      }
+    ],
+    "sources": [
+      "The Record, Hackers claim to take down Russian satellite communications provider (June 2023)"
+    ]
+  },
+  {
+    "id": "TA-17",
+    "name": "Ransomware and data-extortion crews",
+    "aliases": [
+      "Scattered Lapsus$ Hunters",
+      "LockBit",
+      "DoppelPaymer",
+      "Play",
+      "Medusa"
+    ],
+    "type": "criminal",
+    "origin": "Various",
+    "tier": 2,
+    "motivation": "Money",
+    "summary": "Financially motivated groups that reach space companies mostly through suppliers. Space ISAC tracked close to seventy claimed attacks on the sector in the first part of 2026, more than half against manufacturers, contractors and integrators.",
+    "techniques": [
+      {
+        "id": "MSN-13",
+        "basis": "R"
+      },
+      {
+        "id": "EXP-08",
+        "basis": "R"
+      },
+      {
+        "id": "POS-01",
+        "basis": "R"
+      },
+      {
+        "id": "POS-03",
+        "basis": "R"
+      },
+      {
+        "id": "CTL-08",
+        "basis": "R"
+      },
+      {
+        "id": "MNP-02",
+        "basis": "R"
+      },
+      {
+        "id": "MNP-14",
+        "basis": "R"
+      },
+      {
+        "id": "RSL-03",
+        "basis": "R"
+      },
+      {
+        "id": "EFX-05",
+        "basis": "R"
+      },
+      {
+        "id": "EFX-14",
+        "basis": "R"
+      }
+    ],
+    "sources": [
+      "Space ISAC, Threat Briefing 46: Data Extortion Actors and Initial Access Brokers (June 2026)"
+    ]
+  },
+  {
+    "id": "TA-18",
+    "name": "Initial access brokers",
+    "aliases": [],
+    "type": "criminal",
+    "origin": "Various",
+    "tier": 1,
+    "motivation": "Money",
+    "summary": "Sellers of stolen credentials, sessions and remote access. Space ISAC notes access to space-sector suppliers being sold and reaching leak sites within weeks.",
+    "techniques": [
+      {
+        "id": "MSN-13",
+        "basis": "R"
+      },
+      {
+        "id": "EXP-08",
+        "basis": "R"
+      },
+      {
+        "id": "POS-02",
+        "basis": "R"
+      },
+      {
+        "id": "POS-03",
+        "basis": "R"
+      }
+    ],
+    "sources": [
+      "Space ISAC, Threat Briefing 46: Data Extortion Actors and Initial Access Brokers (June 2026)"
+    ]
+  },
+  {
+    "id": "TA-19",
+    "name": "Malicious or coerced insider",
+    "aliases": [],
+    "type": "insider",
+    "origin": "Any",
+    "tier": 2,
+    "motivation": "Grievance, money or coercion",
+    "summary": "A generic actor class: someone with legitimate access to operations, keys, build systems or sites. Included so that assessments test separation of duties rather than only the perimeter.",
+    "techniques": [
+      {
+        "id": "EXP-12",
+        "basis": "A"
+      },
+      {
+        "id": "POS-13",
+        "basis": "A"
+      },
+      {
+        "id": "CTL-03",
+        "basis": "A"
+      },
+      {
+        "id": "CTL-14",
+        "basis": "A"
+      },
+      {
+        "id": "SRV-05",
+        "basis": "A"
+      },
+      {
+        "id": "MNP-10",
+        "basis": "A"
+      }
+    ],
+    "sources": [
+      "CISA, Insider Threat Mitigation Guide"
+    ]
+  },
+  {
+    "id": "TA-20",
+    "name": "Signal pirates and broadcast intruders",
+    "aliases": [],
+    "type": "other",
+    "origin": "Various",
+    "tier": 2,
+    "motivation": "Free capacity, protest or propaganda",
+    "summary": "Individuals and groups who transmit through satellites without permission, from the 1986 override of a US pay-television channel and long-running misuse of military UHF transponders in Brazil to wartime replacement of television programming.",
+    "techniques": [
+      {
+        "id": "EXP-01",
+        "basis": "R"
+      },
+      {
+        "id": "MNP-11",
+        "basis": "R"
+      },
+      {
+        "id": "EFX-11",
+        "basis": "R"
+      }
+    ],
+    "sources": [
+      "Wired, The Great Brazilian Sat-Hack Crackdown (2009)",
+      "US court records, United States v. MacDougall (1986)"
+    ]
+  }
+]

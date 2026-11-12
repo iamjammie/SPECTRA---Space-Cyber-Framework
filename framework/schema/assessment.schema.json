@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "spectra/assessment.schema.json",
+  "title": "SPECTRA assessment export",
+  "type": "object",
+  "required": [
+    "format",
+    "techniques",
+    "controls"
+  ],
+  "properties": {
+    "format": {
+      "const": "spectra-assessment"
+    },
+    "spectra_version": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "exported": {
+      "type": "string"
+    },
+    "techniques": {
+      "type": "object",
+      "description": "Keyed by technique id.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "",
+              "exposed",
+              "partial",
+              "verified",
+              "na"
+            ]
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "controls": {
+      "type": "object",
+      "description": "Keyed by control id. Absent means not in place.",
+      "additionalProperties": {
+        "enum": [
+          "partial",
+          "full"
+        ]
+      }
+    }
+  }
+}

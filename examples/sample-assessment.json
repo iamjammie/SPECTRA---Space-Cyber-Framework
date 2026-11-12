@@ -1,0 +1,120 @@
+{
+  "format": "spectra-assessment",
+  "spectra_version": "0.2.0",
+  "name": "Kestrel-1 (fictional Earth-observation smallsat)",
+  "exported": "2026-11-12T00:00:00Z",
+  "techniques": {
+    "MSN-02": {
+      "status": "exposed",
+      "note": "Filings give uplink frequency and station sites. Accepted: no control relies on these being secret."
+    },
+    "MSN-10": {
+      "status": "partial",
+      "note": "One antenna-controller web UI reachable from the internet at the polar site. Withdrawn during assessment; scan scheduled monthly."
+    },
+    "MSN-13": {
+      "status": "exposed",
+      "note": "Provider API key found in a public CI log. Rotated in 3 h 20 min; one pass missed during rotation."
+    },
+    "EXP-07": {
+      "status": "exposed",
+      "note": "Safe mode accepts commands without authentication (design decision from 2021). Raised as top finding."
+    },
+    "POS-01": {
+      "status": "partial",
+      "note": "Range exercise: lure reached operator laptop; privileged-access workstation stopped the path to the console."
+    },
+    "POS-04": {
+      "status": "exposed",
+      "note": "Provider key scope allowed schedule changes for all missions in the tenant."
+    },
+    "POS-08": {
+      "status": "verified",
+      "note": "Cabled RF plus flatsat: unkeyed frames rejected in nominal mode, rejected-frame counter visible in telemetry within one pass."
+    },
+    "CTL-01": {
+      "status": "verified",
+      "note": "Replay rejected; counter survives reboot."
+    },
+    "CTL-02": {
+      "status": "partial",
+      "note": "Rejected in nominal mode, accepted in safe mode. See EXP-07."
+    },
+    "CTL-03": {
+      "status": "exposed",
+      "note": "Twin: no second approval for propulsion arming from a single console."
+    },
+    "CTL-05": {
+      "status": "verified",
+      "note": "Unsigned and wrongly signed images refused on flatsat."
+    },
+    "CTL-13": {
+      "status": "exposed",
+      "note": "Schedule change through provider API not alerted."
+    },
+    "SRV-04": {
+      "status": "partial",
+      "note": "Attitude cross-checked against tracking; power telemetry has no independent check."
+    },
+    "SRV-05": {
+      "status": "verified",
+      "note": "Command history forwarded to write-once store outside operations administration."
+    },
+    "TRN-01": {
+      "status": "partial",
+      "note": "One file-transfer path from enterprise to mission found; inspected but not content-filtered."
+    },
+    "MNP-04": {
+      "status": "exposed",
+      "note": "Products not signed between processing and delivery."
+    },
+    "MNP-12": {
+      "status": "partial",
+      "note": "Pass plan is reconciled after execution, not before."
+    },
+    "EFX-05": {
+      "status": "partial",
+      "note": "Rebuild from offline backup took 31 h against a 12 h target."
+    },
+    "EFX-08": {
+      "status": "partial",
+      "note": "On-board delta-v limit per command exists; no limit per day."
+    },
+    "RSL-01": {
+      "status": "exposed",
+      "note": "Confirmed on flatsat. Engineering action: enforce authentication in safe mode by patch."
+    },
+    "RSL-03": {
+      "status": "verified",
+      "note": "Immutable backup copy survived administrator deletion test."
+    },
+    "RSL-05": {
+      "status": "exposed",
+      "note": "Primary and backup stations share one provider and one API key."
+    },
+    "POS-15": {
+      "status": "na",
+      "note": "No crosslink fitted."
+    },
+    "TRN-05": {
+      "status": "na",
+      "note": "Single spacecraft."
+    }
+  },
+  "controls": {
+    "SC-04": "full",
+    "SC-07": "partial",
+    "SC-08": "full",
+    "SC-09": "full",
+    "SC-11": "full",
+    "SC-14": "partial",
+    "SC-15": "full",
+    "SC-16": "partial",
+    "SC-25": "partial",
+    "SC-28": "partial",
+    "SC-31": "partial",
+    "SC-35": "full",
+    "SC-10": "partial",
+    "SC-13": "partial"
+  }
+}

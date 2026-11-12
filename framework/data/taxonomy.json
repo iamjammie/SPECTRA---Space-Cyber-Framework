@@ -1,0 +1,434 @@
+{
+  "segments": [
+    {
+      "id": "space",
+      "name": "Space segment",
+      "desc": "Spacecraft bus, payload, on-board software and crosslinks."
+    },
+    {
+      "id": "link",
+      "name": "Link segment",
+      "desc": "Telecommand, telemetry, payload and navigation signals in transit."
+    },
+    {
+      "id": "ground",
+      "name": "Ground segment",
+      "desc": "Stations, mission control, flight dynamics, data processing, cloud and enterprise IT."
+    },
+    {
+      "id": "user",
+      "name": "User segment",
+      "desc": "User terminals, receivers, hubs and the services built on them."
+    },
+    {
+      "id": "supply",
+      "name": "Supply chain and build",
+      "desc": "Vendors, development toolchains, integration and test, launch interfaces, people."
+    }
+  ],
+  "assets": [
+    {
+      "id": "obc",
+      "seg": "space",
+      "name": "On-board computer and data handling"
+    },
+    {
+      "id": "fsw",
+      "seg": "space",
+      "name": "Flight software and bootloader"
+    },
+    {
+      "id": "bus",
+      "seg": "space",
+      "name": "On-board data bus"
+    },
+    {
+      "id": "aocs",
+      "seg": "space",
+      "name": "Attitude and orbit control"
+    },
+    {
+      "id": "eps",
+      "seg": "space",
+      "name": "Power and thermal"
+    },
+    {
+      "id": "payload",
+      "seg": "space",
+      "name": "Mission payload"
+    },
+    {
+      "id": "crypto",
+      "seg": "space",
+      "name": "On-board crypto unit and keys"
+    },
+    {
+      "id": "hosted",
+      "seg": "space",
+      "name": "Hosted payload and third-party apps"
+    },
+    {
+      "id": "isl",
+      "seg": "space",
+      "name": "Inter-satellite link terminal"
+    },
+    {
+      "id": "tc",
+      "seg": "link",
+      "name": "Telecommand uplink"
+    },
+    {
+      "id": "tm",
+      "seg": "link",
+      "name": "Telemetry downlink"
+    },
+    {
+      "id": "pdl",
+      "seg": "link",
+      "name": "Payload and feeder link"
+    },
+    {
+      "id": "gnss",
+      "seg": "link",
+      "name": "Navigation signal"
+    },
+    {
+      "id": "gs",
+      "seg": "ground",
+      "name": "Ground station, modem and antenna control"
+    },
+    {
+      "id": "moc",
+      "seg": "ground",
+      "name": "Mission control system"
+    },
+    {
+      "id": "fds",
+      "seg": "ground",
+      "name": "Flight dynamics and mission planning"
+    },
+    {
+      "id": "net",
+      "seg": "ground",
+      "name": "Ground networks and remote access"
+    },
+    {
+      "id": "cloud",
+      "seg": "ground",
+      "name": "Cloud and ground-station-as-a-service"
+    },
+    {
+      "id": "kms",
+      "seg": "ground",
+      "name": "Key management"
+    },
+    {
+      "id": "dataproc",
+      "seg": "ground",
+      "name": "Payload data processing and archive"
+    },
+    {
+      "id": "it",
+      "seg": "ground",
+      "name": "Enterprise IT and identity"
+    },
+    {
+      "id": "ut",
+      "seg": "user",
+      "name": "User terminal and modem"
+    },
+    {
+      "id": "rx",
+      "seg": "user",
+      "name": "Navigation receiver and user application"
+    },
+    {
+      "id": "nms",
+      "seg": "user",
+      "name": "Hub, gateway and network management"
+    },
+    {
+      "id": "dev",
+      "seg": "supply",
+      "name": "Development and build pipeline"
+    },
+    {
+      "id": "cots",
+      "seg": "supply",
+      "name": "Components and vendors"
+    },
+    {
+      "id": "ait",
+      "seg": "supply",
+      "name": "Integration, test and ground support equipment"
+    },
+    {
+      "id": "launch",
+      "seg": "supply",
+      "name": "Launch and early-operations interface"
+    },
+    {
+      "id": "people",
+      "seg": "supply",
+      "name": "Personnel and contractors"
+    }
+  ],
+  "vectors": [
+    {
+      "id": "rf",
+      "name": "Radio frequency",
+      "desc": "Access through the electromagnetic spectrum."
+    },
+    {
+      "id": "net",
+      "name": "Network",
+      "desc": "Remote access over terrestrial networks."
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud and API",
+      "desc": "Access through cloud consoles, tenants and service APIs."
+    },
+    {
+      "id": "supply",
+      "name": "Supply chain",
+      "desc": "Access through a vendor, component, update or toolchain."
+    },
+    {
+      "id": "phys",
+      "name": "Physical",
+      "desc": "Hands-on or close-proximity access to equipment."
+    },
+    {
+      "id": "insider",
+      "name": "Insider",
+      "desc": "Access through someone who already holds legitimate rights."
+    },
+    {
+      "id": "social",
+      "name": "Human",
+      "desc": "Access by persuading or deceiving people."
+    }
+  ],
+  "missions": [
+    {
+      "id": "satcom",
+      "name": "Satellite communications"
+    },
+    {
+      "id": "eo",
+      "name": "Earth observation"
+    },
+    {
+      "id": "pnt",
+      "name": "Positioning, navigation and timing"
+    },
+    {
+      "id": "sci",
+      "name": "Science and exploration"
+    },
+    {
+      "id": "crew",
+      "name": "Crewed spaceflight"
+    },
+    {
+      "id": "const",
+      "name": "Large constellations"
+    }
+  ],
+  "tiers": [
+    {
+      "id": 1,
+      "name": "Opportunistic",
+      "desc": "Public tools and information; hacktivists, hobbyists, low-skill criminals."
+    },
+    {
+      "id": 2,
+      "name": "Capable",
+      "desc": "Skilled individuals or crews with radio equipment, reverse-engineering skill or bought access."
+    },
+    {
+      "id": 3,
+      "name": "Advanced",
+      "desc": "Persistent, well-resourced groups able to hold ground-segment access for months."
+    },
+    {
+      "id": 4,
+      "name": "Strategic",
+      "desc": "State programmes with supply-chain reach, electronic-warfare units or space assets."
+    }
+  ],
+  "basis": [
+    {
+      "id": "O",
+      "name": "Observed",
+      "desc": "Publicly reported in real incidents against space or satellite-service organisations."
+    },
+    {
+      "id": "D",
+      "name": "Demonstrated",
+      "desc": "Shown by researchers, exercises or on-orbit tests, not known from real attacks."
+    },
+    {
+      "id": "T",
+      "name": "Theorised",
+      "desc": "Assessed as plausible from system design; no public demonstration known."
+    }
+  ],
+  "envs": [
+    {
+      "id": "osint",
+      "name": "Passive open-source review"
+    },
+    {
+      "id": "tab",
+      "name": "Tabletop exercise"
+    },
+    {
+      "id": "range",
+      "name": "Isolated cyber range"
+    },
+    {
+      "id": "twin",
+      "name": "Digital twin"
+    },
+    {
+      "id": "hil",
+      "name": "Hardware-in-the-loop or flatsat"
+    },
+    {
+      "id": "rf",
+      "name": "Shielded or cabled RF lab"
+    },
+    {
+      "id": "auth",
+      "name": "Authorised assessment of ground systems"
+    }
+  ],
+  "functions": [
+    {
+      "id": "GV",
+      "name": "Govern"
+    },
+    {
+      "id": "ID",
+      "name": "Identify"
+    },
+    {
+      "id": "PR",
+      "name": "Protect"
+    },
+    {
+      "id": "DE",
+      "name": "Detect"
+    },
+    {
+      "id": "RS",
+      "name": "Respond"
+    },
+    {
+      "id": "RC",
+      "name": "Recover"
+    }
+  ],
+  "attribution": [
+    {
+      "id": "gov",
+      "name": "Government-attributed",
+      "desc": "Publicly attributed by one or more governments."
+    },
+    {
+      "id": "vendor",
+      "name": "Vendor or media reported",
+      "desc": "Attributed by security vendors, researchers or press reporting."
+    },
+    {
+      "id": "claimed",
+      "name": "Self-claimed",
+      "desc": "Claimed by the actor; impact not independently confirmed."
+    },
+    {
+      "id": "unattributed",
+      "name": "Unattributed",
+      "desc": "No public attribution."
+    },
+    {
+      "id": "research",
+      "name": "Research",
+      "desc": "Authorised research, exercise or demonstration."
+    }
+  ],
+  "actor_types": [
+    {
+      "id": "state",
+      "name": "State"
+    },
+    {
+      "id": "state-linked",
+      "name": "State-linked persona"
+    },
+    {
+      "id": "hacktivist",
+      "name": "Hacktivist"
+    },
+    {
+      "id": "criminal",
+      "name": "Criminal"
+    },
+    {
+      "id": "insider",
+      "name": "Insider"
+    },
+    {
+      "id": "other",
+      "name": "Other"
+    }
+  ],
+  "incident_kinds": [
+    {
+      "id": "attack",
+      "name": "Disruptive attack"
+    },
+    {
+      "id": "espionage",
+      "name": "Espionage"
+    },
+    {
+      "id": "intrusion",
+      "name": "Intrusion"
+    },
+    {
+      "id": "interference",
+      "name": "Radio interference"
+    },
+    {
+      "id": "extortion",
+      "name": "Extortion"
+    },
+    {
+      "id": "claim",
+      "name": "Unverified claim"
+    },
+    {
+      "id": "research",
+      "name": "Research or exercise"
+    }
+  ],
+  "map_basis": [
+    {
+      "id": "R",
+      "name": "Reported",
+      "desc": "Behaviour described in public reporting on this actor."
+    },
+    {
+      "id": "C",
+      "name": "Claimed",
+      "desc": "Behaviour the actor claims; not independently confirmed."
+    },
+    {
+      "id": "A",
+      "name": "Assessed",
+      "desc": "Typical of this actor class; SPECTRA's own assessment."
+    }
+  ]
+}
