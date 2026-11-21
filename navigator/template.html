@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPECTRA Navigator</title>
+<meta name="description" content="Offline navigator for the SPECTRA space cyber framework: attack-path matrix, threat surface, actors, incidents, controls and assessment.">
+<style>
+:root{
+  --bg:#eef1f8; --surface:#ffffff; --raised:#f5f7fc; --line:#d3daea; --text:#1b2240; --muted:#5a668a;
+  --accent:#2d4fb3; --accent-ink:#ffffff; --shadow:0 10px 30px rgba(27,34,64,.16);
+  --bad:#cf3f55; --warn:#c98a12; --good:#2b9a62; --na:#8c95b0;
+  --MSN:#8f6cf2; --EXP:#5c7cf5; --POS:#2f9fe6; --CTL:#19b3b3; --SRV:#3bb273; --TRN:#b3b12e; --MNP:#e8a22c; --EFX:#e5553f; --RSL:#7f8bb0;
+  --font:"Avenir Next","Segoe UI Variable Text","Segoe UI","Helvetica Neue",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  --r:6px; --top:104px;
+}
+:root[data-theme="dark"]{
+  --bg:#141a31; --surface:#1c2441; --raised:#252f54; --line:#34406b; --text:#e9ecf7; --muted:#9ba6c9;
+  --accent:#a9c8ff; --accent-ink:#141a31; --shadow:0 14px 40px rgba(4,8,24,.55);
+  --bad:#f0667b; --warn:#f0b849; --good:#55c98a; --na:#7b86ab; --RSL:#cfd6ea;
+}
+*{box-sizing:border-box}
+html{font-family:var(--font);font-size:15px;line-height:1.45;color:var(--text);background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3,h4{margin:0;font-weight:650;line-height:1.2}
+p{margin:0 0 .7em}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+[data-ph="MSN"]{--ph:var(--MSN)}[data-ph="EXP"]{--ph:var(--EXP)}[data-ph="POS"]{--ph:var(--POS)}[data-ph="CTL"]{--ph:var(--CTL)}[data-ph="SRV"]{--ph:var(--SRV)}[data-ph="TRN"]{--ph:var(--TRN)}[data-ph="MNP"]{--ph:var(--MNP)}[data-ph="EFX"]{--ph:var(--EFX)}[data-ph="RSL"]{--ph:var(--RSL)}
+
+/* header */
+.top{position:sticky;top:0;z-index:45;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:14px;padding:10px 18px}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--text);white-space:nowrap}
+.brand b{font-size:1.25rem;font-weight:750;letter-spacing:.22em}
+.brand span{color:var(--muted);font-size:.82rem}
+.search{flex:1;max-width:460px;margin-left:auto;position:relative}
+.search input{width:100%;padding:8px 12px;border:1px solid var(--line);border-radius:var(--r);background:var(--raised)}
+.iconbtn{border:1px solid var(--line);background:var(--raised);border-radius:var(--r);padding:7px 11px;white-space:nowrap}
+.iconbtn:hover{border-color:var(--accent)}
+.rainbow{height:4px;display:flex}
+.rainbow i{flex:1;background:var(--ph)}
+.tabs{display:flex;gap:2px;padding:0 12px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{border:0;background:none;padding:10px 12px;color:var(--muted);border-bottom:3px solid transparent;white-space:nowrap;font-weight:550}
+.tab:hover{color:var(--text)}
+.tab[aria-selected="true"]{color:var(--text);border-bottom-color:var(--accent)}
+
+/* layout */
+.shell{display:grid;grid-template-columns:248px minmax(0,1fr);align-items:start}
+.shell.nofilters{grid-template-columns:minmax(0,1fr)}
+.filters{position:sticky;top:var(--top);height:calc(100vh - var(--top));overflow:auto;border-right:1px solid var(--line);background:var(--surface);padding:12px 14px 40px}
+.shell.nofilters .filters{display:none}
+main{padding:16px 18px 80px;min-width:0}
+.filters h2{font-size:.95rem;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.linkbtn{border:0;background:none;color:var(--accent);padding:2px 0;text-decoration:underline;text-underline-offset:2px}
+.facet{border-top:1px solid var(--line);padding:4px 0}
+.facet summary{list-style:none;cursor:pointer;padding:6px 0;font-weight:600;display:flex;justify-content:space-between;gap:8px}
+.facet summary::-webkit-details-marker{display:none}
+.facet summary em{font-style:normal;color:var(--accent-ink);background:var(--accent);border-radius:10px;padding:0 7px;font-size:.78rem}
+.facet .grp{color:var(--muted);font-size:.8rem;margin:8px 0 2px}
+.opt{display:flex;align-items:flex-start;gap:7px;padding:3px 0;font-size:.9rem;cursor:pointer}
+.opt input{margin-top:3px;accent-color:var(--accent)}
+.opt span{flex:1}
+.opt i{font-style:normal;color:var(--muted);font-variant-numeric:tabular-nums;font-size:.82rem}
+.opt.zero{opacity:.45}
+
+/* common bits */
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-bottom:12px}
+.toolbar .grow{flex:1}
+.count{font-weight:600}
+.count small{color:var(--muted);font-weight:400}
+select,.field{border:1px solid var(--line);background:var(--surface);border-radius:var(--r);padding:6px 9px}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:var(--r);padding:6px 12px}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:2px 4px 2px 10px;font-size:.84rem}
+.chip button{border:0;background:var(--raised);border-radius:50%;width:20px;height:20px;line-height:1;padding:0}
+.tag{display:inline-block;border:1px solid var(--line);border-radius:4px;padding:0 6px;font-size:.78rem;color:var(--muted);white-space:nowrap}
+.tag.ph{border-color:var(--ph);color:var(--text);background:color-mix(in srgb,var(--ph) 16%,var(--surface))}
+.tag.O,.tag.R,.tag.gov{border-color:var(--bad);color:var(--text)}
+.tag.D,.tag.A,.tag.vendor{border-color:var(--warn);color:var(--text)}
+.tag.T,.tag.research{border-color:var(--EXP);color:var(--text)}
+.tag.C,.tag.claimed{border-style:dashed;color:var(--text)}
+.id{font-variant-numeric:tabular-nums;font-weight:650;font-size:.8rem;color:var(--muted);letter-spacing:.02em}
+.lede{max-width:70ch;color:var(--muted);margin-bottom:14px}
+.empty{border:1px dashed var(--line);border-radius:var(--r);padding:28px;text-align:center;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.82rem;color:var(--muted);margin-bottom:10px;align-items:center}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px;border:1px solid var(--line)}
+
+/* matrix */
+.matrix{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(120px,1fr);gap:6px;overflow-x:auto;padding-bottom:10px;align-items:start}
+.col{min-width:0}
+.colhead{display:block;width:100%;text-align:left;border:0;border-top:5px solid var(--ph);border-radius:var(--r) var(--r) 0 0;background:color-mix(in srgb,var(--ph) 20%,var(--surface));padding:8px 9px 9px;position:sticky;top:0}
+.colhead b{display:block;font-size:.98rem}
+.colhead span{display:block;font-size:.78rem;color:var(--muted);min-height:2.7em;line-height:1.3;margin-top:2px}
+.colhead em{font-style:normal;font-size:.78rem;font-variant-numeric:tabular-nums}
+.cells{display:flex;flex-direction:column;gap:4px;margin-top:4px}
+.cell{display:block;width:100%;text-align:left;border:1px solid var(--line);border-left:3px solid var(--ph);border-radius:4px;padding:6px 8px 7px;
+  background:color-mix(in srgb,var(--heat,transparent) var(--amt,0%),var(--surface));position:relative}
+.cell:hover{border-color:var(--accent);border-left-color:var(--ph)}
+.cell.sel{outline:2px solid var(--accent);outline-offset:1px}
+.cell.dim{opacity:.22}
+.cell .nm{display:block;font-size:.86rem;line-height:1.25;margin-top:1px}
+.cell .meta{display:flex;gap:6px;align-items:center;margin-top:5px}
+.bars{display:inline-flex;gap:2px;align-items:flex-end;height:10px}
+.bars i{width:3px;background:var(--line);border-radius:1px}
+.bars i:nth-child(1){height:4px}.bars i:nth-child(2){height:6px}.bars i:nth-child(3){height:8px}.bars i:nth-child(4){height:10px}
+.bars i.on{background:var(--text)}
+.dot{flex:none;width:9px;height:9px;border-radius:50%;margin-left:auto;border:1px solid var(--line)}
+.dot.exposed{background:var(--bad);border-color:var(--bad)}.dot.partial{background:var(--warn);border-color:var(--warn)}.dot.verified{background:var(--good);border-color:var(--good)}.dot.na{background:var(--na);border-color:var(--na)}
+
+/* lists */
+.rows{display:flex;flex-direction:column;gap:6px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;align-items:center;text-align:left;width:100%;border:1px solid var(--line);background:var(--surface);border-radius:var(--r);padding:10px 12px}
+button.row:hover{border-color:var(--accent)}
+.row h3{font-size:1rem}
+.row p{margin:3px 0 0;color:var(--muted);font-size:.88rem}
+.row .side{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;align-items:center}
+.year{font-size:1.5rem;font-weight:700;margin:22px 0 8px;font-variant-numeric:tabular-nums}
+.year:first-child{margin-top:0}
+.group{margin:22px 0 8px;display:flex;align-items:baseline;gap:10px}
+.group:first-of-type{margin-top:4px}
+.group small{color:var(--muted)}
+.seg3{display:inline-flex;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.seg3 button{border:0;background:var(--surface);padding:5px 9px;font-size:.82rem;border-left:1px solid var(--line)}
+.seg3 button:first-child{border-left:0}
+.seg3 button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);font-weight:600}
+.meter{height:6px;background:var(--raised);border-radius:3px;overflow:hidden;min-width:70px}
+.meter i{display:block;height:100%;background:var(--accent)}
+
+/* surface */
+.surface{display:grid;gap:10px;grid-template-columns:1fr 1.2fr 1.2fr;grid-template-areas:"supply space space" "supply link link" "supply ground user"}
+.segbox{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:12px}
+.segbox header{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:4px}
+.segbox header button{border:0;background:none;padding:0;font-weight:650;font-size:1.05rem;text-align:left;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:4px}
+.segbox header button:hover{text-decoration-color:var(--accent)}
+.segbox>p{color:var(--muted);font-size:.86rem;margin-bottom:8px}
+.assets{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:6px}
+.asset{position:relative;overflow:hidden;text-align:left;border:1px solid var(--line);background:var(--raised);border-radius:4px;padding:7px 9px;display:flex;justify-content:space-between;gap:8px;font-size:.88rem}
+.asset:hover{border-color:var(--accent)}
+.asset::before{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);background:color-mix(in srgb,var(--accent) 16%,transparent)}
+.asset span,.asset b{position:relative}
+.asset b{font-variant-numeric:tabular-nums}
+.a-space{grid-area:space}.a-link{grid-area:link}.a-ground{grid-area:ground}.a-user{grid-area:user}.a-supply{grid-area:supply}
+.a-supply .assets{grid-template-columns:1fr}
+
+/* paths */
+.path{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);margin-bottom:8px}
+.path summary{list-style:none;cursor:pointer;padding:12px 14px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px}
+.path summary::-webkit-details-marker{display:none}
+.path summary h3{font-size:1.02rem}
+.path summary p{grid-column:1/-1;color:var(--muted);margin:0;font-size:.9rem;max-width:80ch}
+.strip{display:flex;gap:2px;align-items:center}
+.strip i{width:14px;height:8px;border-radius:2px;background:var(--ph)}
+.pathbody{padding:2px 14px 14px}
+.steps{list-style:none;margin:8px 0 14px;padding:0}
+.steps li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:0 10px;position:relative;padding-bottom:10px}
+.steps li::before{content:"";grid-row:1/3;width:12px;height:12px;border-radius:50%;background:var(--ph);margin:5px 0 0 5px;z-index:1}
+.steps li::after{content:"";position:absolute;left:10px;top:12px;bottom:-6px;width:2px;background:var(--line)}
+.steps li:last-child::after{display:none}
+.steps button{border:0;background:none;padding:0;text-align:left;font-weight:600;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.steps button:hover{text-decoration-color:var(--accent)}
+.steps small{grid-column:2;color:var(--muted);font-size:.88rem}
+.inline{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:6px 0}
+.pill{border:1px solid var(--line);background:var(--raised);border-radius:4px;padding:3px 8px;font-size:.84rem;text-align:left}
+button.pill:hover{border-color:var(--accent)}
+
+/* assess */
+.phasebars{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px;margin-bottom:16px}
+.pb{border:1px solid var(--line);border-top:4px solid var(--ph);border-radius:var(--r);background:var(--surface);padding:8px 10px}
+.pb b{display:block;font-size:.9rem}
+.pb small{color:var(--muted)}
+.stack{display:flex;height:8px;border-radius:4px;overflow:hidden;background:var(--raised);margin:6px 0 4px}
+.stack i{display:block}
+.s-exposed{background:var(--bad)}.s-partial{background:var(--warn)}.s-verified{background:var(--good)}.s-na{background:var(--na)}
+table{border-collapse:collapse;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top;font-size:.9rem}
+th{font-size:.82rem;color:var(--muted);font-weight:600;background:var(--raised)}
+td select{padding:3px 6px;font-size:.86rem}
+td button.linkbtn{text-align:left;color:var(--text)}
+.tablewrap{overflow-x:auto}
+
+/* drawer */
+.scrim{position:fixed;inset:0;background:rgba(10,14,34,.35);z-index:40;display:none}
+.scrim.on{display:block}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(520px,100vw);background:var(--surface);border-left:1px solid var(--line);box-shadow:var(--shadow);z-index:50;transform:translateX(102%);transition:transform .18s ease;display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.drawer header{padding:14px 18px 12px;border-bottom:1px solid var(--line);border-top:5px solid var(--ph,var(--accent));display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.drawer header h2{font-size:1.25rem;margin-top:4px}
+.drawer header .iconbtn{align-self:start}
+.drawer .body{overflow:auto;padding:14px 18px 60px}
+.drawer h4{font-size:.86rem;color:var(--muted);font-weight:600;margin:16px 0 5px}
+.drawer h4:first-child{margin-top:0}
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font-size:.9rem}
+.kv dt{color:var(--muted)}.kv dd{margin:0}
+.box{border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;background:var(--raised)}
+.box p:last-child{margin:0}
+textarea{width:100%;min-height:74px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:8px;resize:vertical}
+.list{display:flex;flex-direction:column;gap:4px}
+.list button{text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:6px 9px;display:flex;gap:8px;align-items:baseline}
+.list button:hover{border-color:var(--accent)}
+.list button>span{flex:1}
+.list button>.id,.list button>.tag{flex:none}
+.prose{max-width:74ch}
+.prose h2{font-size:1.25rem;margin:26px 0 8px}
+.prose h2:first-child{margin-top:0}
+.prose ol,.prose ul{padding-left:1.3em;margin:0 0 .8em}
+.prose li{margin-bottom:.25em}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--text);color:var(--bg);padding:8px 14px;border-radius:var(--r);z-index:60;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+.only-m{display:none}
+
+@media (max-width:900px){
+  :root{--top:0px}
+  .top{position:static}
+  .bar{flex-wrap:wrap;padding:10px 12px;gap:8px}
+  .brand span{display:none}
+  .search{order:3;flex-basis:100%;max-width:none;margin:0}
+  .bar .spacer{flex:1}
+  .only-m{display:inline-block}
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .filters{position:fixed;inset:0 18% 0 0;height:auto;z-index:50;transform:translateX(-102%);transition:transform .18s ease;box-shadow:var(--shadow)}
+  .filters.on{transform:none}
+  main{padding:12px 12px 80px}
+  .matrix{display:block;overflow:visible}
+  .col{margin-bottom:6px}
+  .colhead{position:static;border-radius:var(--r);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 10px;align-items:center}
+  .colhead span{min-height:0;grid-column:1}
+  .colhead em{grid-column:2;grid-row:1/3}
+  .col.shut .cells{display:none}
+  .cells{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .surface{grid-template-columns:1fr;grid-template-areas:"space" "link" "ground" "user" "supply"}
+  .a-supply .assets{grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+  .row{grid-template-columns:minmax(0,1fr)}
+  .row .side{justify-content:flex-start}
+  .drawer{width:100vw}
+}
+@media (prefers-reduced-motion:reduce){.drawer,.filters,.toast{transition:none}}
+@media print{
+  .top,.filters,.drawer,.scrim,.toolbar .btn,.toast{display:none!important}
+  .shell{display:block}
+  html{font-size:11px;background:#fff}
+  .matrix{display:block}.cells{display:grid;grid-template-columns:repeat(4,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="bar">
+    <a class="brand" href="#view=matrix" data-act="home"><b>SPECTRA</b><span id="ver"></span></a>
+    <span class="spacer"></span>
+    <button class="iconbtn only-m" data-act="filters" id="fbtn">Filters</button>
+    <label class="search"><span class="sr">Search</span><input id="q" type="search" placeholder="Search techniques, actors, incidents, controls" autocomplete="off"></label>
+    <button class="iconbtn" data-act="theme" id="themebtn" aria-label="Switch colour theme">Dark</button>
+  </div>
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Views"></nav>
+  <div class="rainbow" id="rainbow" aria-hidden="true"></div>
+</div>
+<div class="shell" id="shell">
+  <aside class="filters" id="filters" aria-label="Filters"></aside>
+  <main id="main" tabindex="-1"></main>
+</div>
+<div class="scrim" id="scrim" data-act="close"></div>
+<aside class="drawer" id="drawer" aria-label="Details"></aside>
+<div class="toast" id="toast" role="status"></div>
+<input type="file" id="file" accept="application/json,.json" hidden>
+
+<script>
+"use strict";
+const DATA = /*__SPECTRA_DATA__*/null;
+
+/* ───────── indexes ───────── */
+const X = DATA.taxonomy;
+const by = a => Object.fromEntries(a.map(o => [o.id, o]));
+const PH = by(DATA.phases), TQ = by(DATA.techniques), SC = by(DATA.controls), ME = by(DATA.mission_effects),
+      DS = by(DATA.data_sources), TA = by(DATA.actors), INC = by(DATA.incidents), AP = by(DATA.attack_paths);
+const TX = {}; for (const k in X) TX[k] = by(X[k]);
+const rev = () => ({});
+const actorsOf = rev(), incsOf = rev(), pathsOf = rev(), techsOfCtl = rev(), incsOfActor = rev();
+const push = (m, k, v) => (m[k] = m[k] || []).push(v);
+DATA.actors.forEach(a => a.techniques.forEach(m => push(actorsOf, m.id, {a, basis: m.basis})));
+DATA.incidents.forEach(i => { i.techniques.forEach(t => push(incsOf, t, i)); i.actors.forEach(a => push(incsOfActor, a, i)); });
+DATA.attack_paths.forEach(p => [...new Set(p.steps.map(s => s.technique))].forEach(t => push(pathsOf, t, p)));
+DATA.techniques.forEach(t => t.controls.forEach(c => push(techsOfCtl, c, t)));
+const MAXACT = Math.max(...DATA.techniques.map(t => (actorsOf[t.id] || []).length));
+
+const VIEWS = [["matrix", "Matrix"], ["surface", "Threat surface"], ["paths", "Attack paths"], ["actors", "Threat actors"],
+  ["incidents", "Incidents"], ["controls", "Controls"], ["assess", "Assessment"], ["about", "About"]];
+const FILTER_VIEWS = new Set(["matrix", "assess"]);
+const STATUS = [["", "Not assessed"], ["exposed", "Exposed"], ["partial", "Partly mitigated"], ["verified", "Mitigated and verified"], ["na", "Not applicable"]];
+const CSTAT = [["", "Not in place"], ["partial", "Partial"], ["full", "In place"]];
+const FACETS = [
+  {k: "seg", label: "Segment", items: X.segments, get: t => t.segments, open: true},
+  {k: "asset", label: "Asset", items: X.assets, get: t => t.assets, groupBy: "seg", groups: TX.segments},
+  {k: "vec", label: "Way in", items: X.vectors, get: t => t.vectors},
+  {k: "mission", label: "Mission type", items: X.missions, get: t => t.missions.length ? t.missions : X.missions.map(m => m.id)},
+  {k: "tier", label: "Adversary capability", items: X.tiers, get: t => [t.tier]},
+  {k: "basis", label: "Evidence", items: X.basis, get: t => [t.basis]},
+  {k: "actor", label: "Threat actor", items: DATA.actors, get: t => (actorsOf[t.id] || []).map(m => m.a.id)},
+  {k: "effect", label: "Mission effect", items: DATA.mission_effects, get: t => t.effects},
+  {k: "control", label: "Control", items: DATA.controls, get: t => t.controls, groupBy: "function", groups: TX.functions},
+  {k: "ds", label: "Detection data", items: DATA.data_sources, get: t => t.data_sources},
+];
+const FK = Object.fromEntries(FACETS.map(f => [f.k, f]));
+
+/* ───────── state ───────── */
+const S = {view: "matrix", q: "", f: {}, pin: null, color: "phase", dim: false, sel: null, open: {seg: true}, shut: {},
+  aType: "", iKind: "", assess: {name: "", t: {}, c: {}}};
+FACETS.forEach(f => S.f[f.k] = new Set());
+const KEY = "spectra.assessment.v1";
+const store = {
+  load() { try { const v = JSON.parse(localStorage.getItem(KEY)); if (v && v.t && v.c) S.assess = v; } catch (e) {} },
+  save() { try { localStorage.setItem(KEY, JSON.stringify(S.assess)); } catch (e) {} },
+  theme(v) { try { if (v) localStorage.setItem("spectra.theme", v); else return localStorage.getItem("spectra.theme"); } catch (e) { return null; } }
+};
+
+/* ───────── helpers ───────── */
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const nm = (map, id) => esc((map[id] || {}).name || id);
+const plural = (n, w) => n + " " + w + (n === 1 ? "" : "s");
+const hay = o => JSON.stringify(o).toLowerCase();
+const HAY = new Map();
+const hit = o => { if (!S.q) return true; let h = HAY.get(o); if (!h) HAY.set(o, h = hay(o)); return S.q.toLowerCase().split(/\s+/).every(w => h.includes(w)); };
+
+function matches(t, skip) {
+  if (S.pin && !S.pin.ids.has(t.id)) return false;
+  for (const f of FACETS) {
+    if (f.k === skip) continue;
+    const set = S.f[f.k];
+    if (set.size && !f.get(t).some(v => set.has(String(v)))) return false;
+  }
+  return hit(t);
+}
+const visible = () => DATA.techniques.filter(t => matches(t));
+const anyFilter = () => !!S.pin || !!S.q || FACETS.some(f => S.f[f.k].size);
+function coverage(t) {
+  let s = 0; t.controls.forEach(c => { const v = S.assess.c[c]; s += v === "full" ? 1 : v === "partial" ? .5 : 0; });
+  return s / t.controls.length;
+}
+function heat(t) {
+  const st = (S.assess.t[t.id] || {}).status || "";
+  switch (S.color) {
+    case "tier": return ["var(--EFX)", t.tier * 14];
+    case "basis": return [{O: "var(--bad)", D: "var(--warn)", T: "var(--EXP)"}[t.basis], 26];
+    case "actors": { const n = (actorsOf[t.id] || []).length; return ["var(--MSN)", n ? 12 + 48 * n / MAXACT : 0]; }
+    case "coverage": { const c = coverage(t); return c >= 1 ? ["var(--good)", 30] : ["var(--bad)", 5 + 27 * (1 - c)]; }
+    case "status": return [{exposed: "var(--bad)", partial: "var(--warn)", verified: "var(--good)", na: "var(--na)"}[st] || "transparent", st ? 34 : 0];
+  }
+  return ["transparent", 0];
+}
+
+/* ───────── hash ───────── */
+function writeHash() {
+  const p = ["view=" + S.view];
+  FACETS.forEach(f => { if (S.f[f.k].size) p.push(f.k + "=" + [...S.f[f.k]].join(",")); });
+  if (S.q) p.push("q=" + encodeURIComponent(S.q));
+  if (S.sel) p.push("sel=" + S.sel);
+  const h = "#" + p.join("&");
+  if (location.hash !== h) history.replaceState(null, "", h);
+}
+function readHash() {
+  const h = location.hash.replace(/^#/, ""); if (!h) return;
+  FACETS.forEach(f => S.f[f.k].clear()); S.sel = null; S.q = "";
+  h.split("&").forEach(kv => {
+    const i = kv.indexOf("="); if (i < 0) return;
+    const k = kv.slice(0, i), v = decodeURIComponent(kv.slice(i + 1));
+    if (k === "view" && VIEWS.some(x => x[0] === v)) S.view = v;
+    else if (k === "q") S.q = v;
+    else if (k === "sel" && lookup(v)) S.sel = v;
+    else if (FK[k]) v.split(",").forEach(x => { if (FK[k].items.some(it => String(it.id) === x)) S.f[k].add(x); });
+  });
+  $("q").value = S.q;
+}
+const lookup = id => TQ[id] || SC[id] || TA[id] || INC[id];
+
+/* ───────── chrome ───────── */
+function renderTabs() {
+  $("tabs").innerHTML = VIEWS.map(([k, l]) => `<button class="tab" role="tab" aria-selected="${S.view === k}" data-act="view" data-v="${k}">${l}</button>`).join("");
+}
+function renderFilters() {
+  const n = FACETS.reduce((a, f) => a + S.f[f.k].size, 0);
+  let h = `<h2>Filter techniques <span>${n || S.pin ? `<button class="linkbtn" data-act="clear">Clear all</button> ` : ""}<button class="iconbtn only-m" data-act="filters">Done</button></span></h2>`;
+  for (const f of FACETS) {
+    const base = DATA.techniques.filter(t => matches(t, f.k));
+    const cnt = {}; base.forEach(t => f.get(t).forEach(v => cnt[v] = (cnt[v] || 0) + 1));
+    const opt = it => { const c = cnt[it.id] || 0, on = S.f[f.k].has(String(it.id));
+      return `<label class="opt${c || on ? "" : " zero"}" title="${esc(it.desc || it.description || "")}"><input type="checkbox" data-facet="${f.k}" value="${esc(it.id)}"${on ? " checked" : ""}><span>${esc(it.name)}</span><i>${c}</i></label>`; };
+    let body = "";
+    if (f.groupBy) for (const g of Object.values(f.groups)) { const its = f.items.filter(it => it[f.groupBy] === g.id); if (its.length) body += `<div class="grp">${esc(g.name)}</div>` + its.map(opt).join(""); }
+    else body = f.items.map(opt).join("");
+    h += `<details class="facet" data-fk="${f.k}"${S.open[f.k] ? " open" : ""}><summary>${f.label}${S.f[f.k].size ? `<em>${S.f[f.k].size}</em>` : ""}</summary>${body}</details>`;
+  }
+  $("filters").innerHTML = h;
+}
+function chipsHtml() {
+  let h = "";
+  if (S.pin) h += `<span class="chip">${esc(S.pin.label)}<button data-act="unpin" aria-label="Remove">×</button></span>`;
+  FACETS.forEach(f => S.f[f.k].forEach(v => { const it = f.items.find(i => String(i.id) === v);
+    h += `<span class="chip">${f.label}: ${esc(it ? it.name : v)}<button data-act="unfilter" data-k="${f.k}" data-v="${esc(v)}" aria-label="Remove">×</button></span>`; }));
+  if (S.q) h += `<span class="chip">Search: ${esc(S.q)}<button data-act="unq" aria-label="Remove">×</button></span>`;
+  return h ? `<div class="chips">${h}<button class="linkbtn" data-act="clear">Clear all</button></div>` : "";
+}
+
+/* ───────── views ───────── */
+function cellHtml(t, shown) {
+  const [c, a] = heat(t), st = (S.assess.t[t.id] || {}).status;
+  return `<button class="cell${shown ? "" : " dim"}${S.sel === t.id ? " sel" : ""}" data-act="open" data-id="${t.id}" style="--heat:${c};--amt:${a.toFixed(0)}%">
+    <span class="id">${t.id}</span><span class="nm">${esc(t.name)}</span>
+    <span class="meta"><span class="bars" title="Capability: ${nm(TX.tiers, t.tier)}">${[1, 2, 3, 4].map(i => `<i class="${i <= t.tier ? "on" : ""}"></i>`).join("")}</span><span class="tag ${t.basis}" title="${esc(TX.basis[t.basis].desc)}">${nm(TX.basis, t.basis)}</span>${st ? `<span class="dot ${st}" title="${esc(STATUS.find(s => s[0] === st)[1])}"></span>` : ""}</span></button>`;
+}
+function legendHtml() {
+  const sw = (c, l) => `<span><i style="background:${c}"></i>${l}</span>`;
+  switch (S.color) {
+    case "tier": return `<div class="legend">Deeper colour needs a more capable adversary. Bars on each cell show the tier, 1 to 4.</div>`;
+    case "basis": return `<div class="legend">${sw("color-mix(in srgb,var(--bad) 40%,var(--surface))", "Observed in real incidents")}${sw("color-mix(in srgb,var(--warn) 40%,var(--surface))", "Demonstrated by research")}${sw("color-mix(in srgb,var(--EXP) 40%,var(--surface))", "Theorised")}</div>`;
+    case "actors": return `<div class="legend">Deeper colour means more catalogued actors are linked to the technique.</div>`;
+    case "coverage": return `<div class="legend">${sw("color-mix(in srgb,var(--bad) 32%,var(--surface))", "No mapped control in place")}${sw("color-mix(in srgb,var(--good) 30%,var(--surface))", "All mapped controls in place")} Set control status in the Controls view.</div>`;
+    case "status": return `<div class="legend">${STATUS.slice(1).map(s => `<span><i class="s-${s[0]}"></i>${s[1]}</span>`).join("")}</div>`;
+  }
+  return "";
+}
+function vMatrix() {
+  const vis = new Set(visible().map(t => t.id));
+  let h = `<div class="toolbar"><span class="count">${vis.size} <small>of ${DATA.techniques.length} techniques</small></span><span class="grow"></span>
+    <label>Colour by <select id="color">${[["phase", "Phase"], ["tier", "Adversary capability"], ["basis", "Evidence"], ["actors", "Actor activity"], ["coverage", "Control coverage"], ["status", "Assessment status"]].map(o => `<option value="${o[0]}"${S.color === o[0] ? " selected" : ""}>${o[1]}</option>`).join("")}</select></label>
+    <label class="opt"><input type="checkbox" id="dim"${S.dim ? " checked" : ""}><span>Dim instead of hide</span></label>
+    <button class="btn" data-act="csv">Export CSV</button></div>${chipsHtml()}${legendHtml()}`;
+  if (!vis.size) return h + `<div class="empty">No technique matches these filters. <button class="linkbtn" data-act="clear">Clear all filters</button></div>`;
+  h += `<div class="matrix" id="matrix">`;
+  for (const p of DATA.phases) {
+    const all = DATA.techniques.filter(t => t.phase === p.id), shown = all.filter(t => vis.has(t.id));
+    const list = S.dim ? all : shown;
+    h += `<section class="col${S.shut[p.id] ? " shut" : ""}" data-ph="${p.id}"><button class="colhead" data-act="col" data-id="${p.id}" title="${esc(p.desc)}"><b>${p.n}. ${esc(p.name)}</b><span>${esc(p.verb)}</span><em>${shown.length} of ${all.length}</em></button>
+      <div class="cells">${list.map(t => cellHtml(t, vis.has(t.id))).join("")}</div></section>`;
+  }
+  return h + `</div>`;
+}
+function vSurface() {
+  const cnt = {}, segc = {}, vecc = {};
+  DATA.techniques.forEach(t => { t.assets.forEach(a => cnt[a] = (cnt[a] || 0) + 1); t.segments.forEach(s => segc[s] = (segc[s] || 0) + 1); t.vectors.forEach(v => vecc[v] = (vecc[v] || 0) + 1); });
+  const mx = Math.max(...Object.values(cnt));
+  let h = `<p class="lede">The threat surface of a space mission, by segment and asset. Numbers count the techniques that touch each one. Select any item to see those techniques on the matrix.</p><div class="surface">`;
+  for (const s of X.segments) h += `<section class="segbox a-${s.id}"><header><button data-act="go" data-k="seg" data-v="${s.id}">${esc(s.name)}</button><span class="tag">${plural(segc[s.id] || 0, "technique")}</span></header><p>${esc(s.desc)}</p>
+    <div class="assets">${X.assets.filter(a => a.seg === s.id).map(a => `<button class="asset" style="--w:${Math.round(100 * (cnt[a.id] || 0) / mx)}%" data-act="go" data-k="asset" data-v="${a.id}"><span>${esc(a.name)}</span><b>${cnt[a.id] || 0}</b></button>`).join("")}</div></section>`;
+  h += `</div><div class="group"><h2>Ways in</h2><small>How an adversary reaches the surface</small></div><div class="assets">${X.vectors.map(v => `<button class="asset" style="--w:${Math.round(100 * vecc[v.id] / DATA.techniques.length)}%" data-act="go" data-k="vec" data-v="${v.id}" title="${esc(v.desc)}"><span>${esc(v.name)}</span><b>${vecc[v.id]}</b></button>`).join("")}</div>`;
+  return h;
+}
+function vPaths() {
+  const ps = DATA.attack_paths.filter(hit);
+  let h = `<p class="lede">An attack path is a chain of state transitions from first knowledge of the mission to an effect on it. Each path lists the controls most likely to break it first.</p>`;
+  if (!ps.length) return h + `<div class="empty">No attack path matches “${esc(S.q)}”.</div>`;
+  for (const p of ps) {
+    h += `<details class="path"${S.open[p.id] ? " open" : ""} data-pk="${p.id}"><summary><h3><span class="id">${p.id}</span> ${esc(p.name)}</h3><span class="strip">${p.steps.map(s => `<i data-ph="${s.technique.slice(0, 3)}"></i>`).join("")}</span><p>${esc(p.summary)}</p></summary><div class="pathbody">
+      <ol class="steps">${p.steps.map(s => `<li data-ph="${s.technique.slice(0, 3)}"><button data-act="open" data-id="${s.technique}"><span class="id">${s.technique}</span> ${nm(TQ, s.technique)}</button><small>${esc(s.note)}</small></li>`).join("")}</ol>
+      <h4>Where to break it</h4><div class="inline">${p.breakpoints.map(c => `<button class="pill" data-act="open" data-id="${c}"><span class="id">${c}</span> ${nm(SC, c)}</button>`).join("")}</div>
+      ${p.incidents.length ? `<h4>Related incidents and research</h4><div class="inline">${p.incidents.map(i => `<button class="pill" data-act="open" data-id="${i}">${INC[i].year}: ${nm({[i]: {name: INC[i].title}}, i)}</button>`).join("")}</div>` : ""}
+      <div class="inline" style="margin-top:12px"><button class="btn primary" data-act="pin" data-kind="path" data-id="${p.id}">Show this path on the matrix</button></div></div></details>`;
+  }
+  return h;
+}
+function vActors() {
+  const as = DATA.actors.filter(a => (!S.aType || a.type === S.aType) && hit(a));
+  let h = `<p class="lede">Actors publicly linked to space and satellite-service targets. Every technique link carries a label: reported, claimed by the actor, or assessed by SPECTRA.</p>
+    <div class="toolbar"><div class="seg3"><button data-act="atype" data-v="" aria-pressed="${!S.aType}">All</button>${X.actor_types.map(t => `<button data-act="atype" data-v="${t.id}" aria-pressed="${S.aType === t.id}">${esc(t.name)}</button>`).join("")}</div><span class="count"><small>${plural(as.length, "actor")}</small></span></div>`;
+  if (!as.length) return h + `<div class="empty">No actor matches.</div>`;
+  h += `<div class="rows">` + as.map(a => `<button class="row" data-act="open" data-id="${a.id}"><div><h3>${esc(a.name)}</h3><p>${esc(a.motivation)}. ${esc(a.origin)}.</p></div>
+    <div class="side"><span class="tag">${nm(TX.actor_types, a.type)}</span><span class="tag">${plural(a.techniques.length, "technique")}</span><span class="tag">${plural((incsOfActor[a.id] || []).length, "incident")}</span></div></button>`).join("") + `</div>`;
+  return h;
+}
+function vIncidents() {
+  const is = DATA.incidents.filter(i => (!S.iKind || i.kind === S.iKind) && hit(i)).sort((a, b) => b.year - a.year || b.id.localeCompare(a.id));
+  let h = `<p class="lede">Public incidents, claims and research, mapped to techniques. Claims by actors are labelled as such and are not verified here.</p>
+    <div class="toolbar"><label>Kind <select id="ikind"><option value="">All</option>${X.incident_kinds.map(k => `<option value="${k.id}"${S.iKind === k.id ? " selected" : ""}>${esc(k.name)}</option>`).join("")}</select></label><span class="count"><small>${plural(is.length, "record")}</small></span></div>`;
+  if (!is.length) return h + `<div class="empty">No incident matches.</div>`;
+  let y = 0;
+  for (const i of is) {
+    if (i.year !== y) { h += `${y ? "</div>" : ""}<div class="year">${i.year}</div><div class="rows">`; y = i.year; }
+    h += `<button class="row" data-act="open" data-id="${i.id}"><div><h3>${esc(i.title)}</h3><p>${esc(i.date)}${i.actors.length ? ". " + i.actors.map(a => nm(TA, a)).join(", ") : ""}</p></div>
+      <div class="side"><span class="tag ${i.attribution}">${nm(TX.attribution, i.attribution)}</span><span class="tag">${nm(TX.incident_kinds, i.kind)}</span></div></button>`;
+  }
+  return h + "</div>";
+}
+function vControls() {
+  const cs = DATA.controls.filter(hit), full = DATA.controls.filter(c => S.assess.c[c.id] === "full").length,
+        bare = DATA.techniques.filter(t => coverage(t) === 0).length;
+  let h = `<p class="lede">Controls are the defensive breakpoints. Mark what you have in place and the matrix can colour each technique by how well it is covered.</p>
+    <div class="toolbar"><span class="count">${full} <small>of ${DATA.controls.length} in place</small></span><span class="count">${bare} <small>techniques with no mapped control in place</small></span><span class="grow"></span><button class="btn primary" data-act="covmatrix">Show coverage on the matrix</button></div>`;
+  if (!cs.length) return h + `<div class="empty">No control matches.</div>`;
+  for (const f of X.functions) {
+    const list = cs.filter(c => c.function === f.id); if (!list.length) continue;
+    h += `<div class="group"><h2>${esc(f.name)}</h2><small>${plural(list.length, "control")}</small></div><div class="rows">` + list.map(c => {
+      const n = (techsOfCtl[c.id] || []).length, v = S.assess.c[c.id] || "";
+      return `<div class="row"><div><button class="linkbtn" style="color:var(--text);text-align:left" data-act="open" data-id="${c.id}"><h3><span class="id">${c.id}</span> ${esc(c.name)}</h3></button><p>${esc(c.description)}</p></div>
+        <div class="side"><span class="tag">Breaks ${plural(n, "technique")}</span><div class="seg3" role="group" aria-label="Status of ${esc(c.name)}">${CSTAT.map(s => `<button data-act="cstat" data-id="${c.id}" data-v="${s[0]}" aria-pressed="${v === s[0]}">${s[1]}</button>`).join("")}</div></div></div>`; }).join("") + `</div>`;
+  }
+  return h;
+}
+function vAssess() {
+  const vis = visible(), A = S.assess;
+  let h = `<p class="lede">Record what you found for each technique. Everything stays in this browser until you export it; nothing is sent anywhere.</p>
+    <div class="toolbar"><label>Assessment name <input class="field" id="aname" value="${esc(A.name)}" placeholder="Mission or system"></label><span class="grow"></span>
+    <button class="btn primary" data-act="export">Export assessment</button><button class="btn" data-act="import">Import assessment</button><button class="btn" data-act="csv">Export CSV</button><button class="btn" data-act="print">Print</button><button class="btn" data-act="reset">Reset</button></div>
+    <div class="phasebars">`;
+  for (const p of DATA.phases) {
+    const ts = DATA.techniques.filter(t => t.phase === p.id), c = {};
+    ts.forEach(t => { const s = (A.t[t.id] || {}).status; if (s) c[s] = (c[s] || 0) + 1; });
+    const done = Object.values(c).reduce((a, b) => a + b, 0);
+    h += `<div class="pb" data-ph="${p.id}"><b>${esc(p.name)}</b><div class="stack">${["exposed", "partial", "verified", "na"].map(s => `<i class="s-${s}" style="width:${100 * (c[s] || 0) / ts.length}%"></i>`).join("")}</div><small>${done} of ${ts.length} assessed${c.exposed ? ", " + c.exposed + " exposed" : ""}</small></div>`;
+  }
+  h += `</div>${chipsHtml()}`;
+  if (!vis.length) return h + `<div class="empty">No technique matches these filters. <button class="linkbtn" data-act="clear">Clear all filters</button></div>`;
+  h += `<div class="tablewrap"><table><thead><tr><th>Technique</th><th>Status</th><th>Controls in place</th><th>Notes</th></tr></thead><tbody>` + vis.map(t => {
+    const a = A.t[t.id] || {};
+    return `<tr data-ph="${t.phase}"><td><button class="linkbtn" data-act="open" data-id="${t.id}"><span class="id">${t.id}</span> ${esc(t.name)}</button></td>
+      <td><select data-status="${t.id}" aria-label="Status of ${t.id}">${STATUS.map(s => `<option value="${s[0]}"${(a.status || "") === s[0] ? " selected" : ""}>${s[1]}</option>`).join("")}</select></td>
+      <td><div class="meter" title="${Math.round(coverage(t) * 100)}% of mapped controls"><i style="width:${coverage(t) * 100}%"></i></div></td><td>${esc(a.note || "")}</td></tr>`; }).join("") + `</tbody></table></div>`;
+  return h;
+}
+function vAbout() {
+  const m = DATA.meta, n = DATA.techniques.length;
+  return `<div class="prose"><h2>What SPECTRA is</h2>
+    <p>${esc(m.long_name)}. A mission-first framework for assessing how space systems are attacked, defended and recovered. Its unit is the attack-path state transition, not the isolated technique:</p>
+    <p><strong>${DATA.phases.map(p => esc(p.name)).join(" to ")}</strong></p>
+    <p>This navigator holds ${n} techniques, ${DATA.controls.length} controls, ${DATA.mission_effects.length} mission effects, ${DATA.actors.length} actor profiles, ${DATA.incidents.length} incident and research records and ${DATA.attack_paths.length} worked attack paths. It is one HTML file with no network calls.</p>
+    <h2>The nine states</h2>
+    <div class="tablewrap"><table><thead><tr><th>State</th><th>What the adversary does</th><th>What the defender tests</th><th>Closest SPARTA tactic</th><th>Closest ATT&amp;CK tactic</th></tr></thead><tbody>${DATA.phases.map(p => `<tr data-ph="${p.id}"><td><span class="tag ph">${p.n}. ${esc(p.name)}</span></td><td>${esc(p.desc)}</td><td>${esc(p.defender)}</td><td>${esc(p.sparta.join(", "))}</td><td>${esc(p.attack.join(", "))}</td></tr>`).join("")}</tbody></table></div>
+    <p style="margin-top:.7em">The crosswalk is at tactic level only. SPECTRA does not copy or renumber technique identifiers from other frameworks.</p>
+    <h2>How to run an assessment</h2>
+    <ol><li>Map mission dependencies and trust boundaries. Start in Threat surface.</li><li>Choose an attack path, or build one from the matrix.</li><li>Define preconditions and an authorised test environment for each step.</li><li>Run the minimum controlled test that answers the technique's assessment question.</li><li>Capture the evidence the technique names.</li><li>Find the first control that breaks the path.</li><li>Measure detection, response and containment.</li><li>Measure mission continuity while the effect is in force.</li><li>Run the recovery test where authorised.</li><li>Record status and notes in Assessment, then export.</li></ol>
+    <h2>Reading the labels</h2>
+    <p><strong>Evidence.</strong> ${X.basis.map(b => `<span class="tag ${b.id}">${esc(b.name)}</span> ${esc(b.desc)}`).join(" ")}</p>
+    <p><strong>Adversary capability.</strong> ${X.tiers.map(t => `Tier ${t.id}, ${esc(t.name.toLowerCase())}: ${esc(t.desc)}`).join(" ")}</p>
+    <p><strong>Actor links.</strong> ${X.map_basis.map(b => `<span class="tag ${b.id}">${esc(b.name)}</span> ${esc(b.desc)}`).join(" ")}</p>
+    <p><strong>Attribution.</strong> ${X.attribution.map(b => `<span class="tag ${b.id}">${esc(b.name)}</span> ${esc(b.desc)}`).join(" ")}</p>
+    <h2>Limits you should know</h2>
+    <ul><li>${esc(m.notice)}</li><li>Capability tiers, evidence labels and control mappings are SPECTRA's judgement. Challenge them for your mission.</li><li>Standards named under each control are pointers for further reading, not claims of compliance mapping.</li><li>Records reflect public reporting up to ${esc(m.released)}.</li></ul>
+    <h2>Safe use</h2>
+    <p>For defensive research, engineering assurance, education, cyber ranges, digital twins, hardware-in-the-loop and explicitly authorised assessments. Do not test operational spacecraft or third-party systems without authorisation and appropriate safety controls.</p>
+    <h2>Influences</h2>
+    <p>SPECTRA draws lessons from Aerospace SPARTA, MITRE ATT&amp;CK and EMB3D, ESA SPACE-SHIELD, NIST IR 8270, 8401, 8323 and 8441, CCSDS 350.1-G and 355.0-B, and BSI TR-03184. It is independent of, and not endorsed by, those organisations. ATT&amp;CK and EMB3D are trademarks of The MITRE Corporation.</p>
+    <p class="id">SPECTRA ${esc(m.version)}, ${esc(m.license)}</p></div>`;
+}
+
+/* ───────── drawer ───────── */
+const tbtn = id => `<button data-act="open" data-id="${id}" data-ph="${id.slice(0, 3)}"><span class="tag ph">${id}</span><span>${nm(TQ, id)}</span></button>`;
+function dTechnique(t) {
+  const p = PH[t.phase], a = S.assess.t[t.id] || {}, as = actorsOf[t.id] || [], is = incsOf[t.id] || [], ps = pathsOf[t.id] || [];
+  const names = (map, ids) => ids.map(i => nm(map, i)).join(", ");
+  return [`<div><span class="tag ph">${p.n}. ${esc(p.name)}</span> <span class="id">${t.id}</span><h2>${esc(t.name)}</h2></div>`,
+    `<p>${esc(t.description)}</p>
+    <dl class="kv"><dt>Segments</dt><dd>${names(TX.segments, t.segments)}</dd><dt>Assets</dt><dd>${names(TX.assets, t.assets)}</dd><dt>Ways in</dt><dd>${names(TX.vectors, t.vectors)}</dd>
+    <dt>Mission types</dt><dd>${t.missions.length ? names(TX.missions, t.missions) : "All"}</dd><dt>Capability</dt><dd>Tier ${t.tier}, ${nm(TX.tiers, t.tier).toLowerCase()}</dd><dt>Evidence</dt><dd><span class="tag ${t.basis}">${nm(TX.basis, t.basis)}</span></dd>
+    <dt>Precondition</dt><dd>${esc(t.precondition)}</dd></dl>
+    <h4>Mission effects</h4><div class="inline">${t.effects.map(e => `<span class="pill" title="${esc(ME[e].description)}">${nm(ME, e)}</span>`).join("")}</div>
+    <h4>Detection</h4><p>${esc(t.detection)}</p><div class="inline">${t.data_sources.map(d => `<span class="pill" title="${esc(DS[d].description)}">${nm(DS, d)}</span>`).join("")}</div>
+    <h4>Controls that break it</h4><div class="list">${t.controls.map(c => `<button data-act="open" data-id="${c}"><span class="id">${c}</span><span>${nm(SC, c)}</span>${S.assess.c[c] ? `<span class="tag">${S.assess.c[c] === "full" ? "In place" : "Partial"}</span>` : ""}</button>`).join("")}</div>
+    <h4>How to assess it safely</h4><div class="box"><p><strong>${esc(t.assessment.question)}</strong></p>
+      <dl class="kv"><dt>Where</dt><dd>${names(TX.envs, t.assessment.environments)}</dd><dt>Evidence</dt><dd>${esc(t.assessment.evidence)}</dd><dt>Recovery test</dt><dd>${esc(t.assessment.recovery_test)}</dd></dl></div>
+    <h4>Your assessment</h4><div class="seg3" style="flex-wrap:wrap" role="group" aria-label="Status">${STATUS.map(s => `<button data-act="tstat" data-id="${t.id}" data-v="${s[0]}" aria-pressed="${(a.status || "") === s[0]}">${s[1]}</button>`).join("")}</div>
+    <label><span class="sr">Notes</span><textarea data-note="${t.id}" placeholder="Notes, evidence references, residual risk" style="margin-top:8px">${esc(a.note || "")}</textarea></label>
+    ${as.length ? `<h4>Actors linked to it</h4><div class="list">${as.map(m => `<button data-act="open" data-id="${m.a.id}"><span>${esc(m.a.name)}</span><span class="tag ${m.basis}">${nm(TX.map_basis, m.basis)}</span></button>`).join("")}</div>` : ""}
+    ${is.length ? `<h4>Incidents and research</h4><div class="list">${is.map(i => `<button data-act="open" data-id="${i.id}"><span class="id">${i.year}</span><span>${esc(i.title)}</span></button>`).join("")}</div>` : ""}
+    ${ps.length ? `<h4>Attack paths that use it</h4><div class="list">${ps.map(x => `<button data-act="path" data-id="${x.id}"><span class="id">${x.id}</span><span>${esc(x.name)}</span></button>`).join("")}</div>` : ""}`, t.phase];
+}
+function dControl(c) {
+  const ts = techsOfCtl[c.id] || [], v = S.assess.c[c.id] || "";
+  return [`<div><span class="tag">${nm(TX.functions, c.function)}</span> <span class="id">${c.id}</span><h2>${esc(c.name)}</h2></div>`,
+    `<p>${esc(c.description)}</p><h4>How to verify it</h4><div class="box"><p>${esc(c.verify)}</p></div>
+    <h4>Your status</h4><div class="seg3" role="group" aria-label="Status">${CSTAT.map(s => `<button data-act="cstat" data-id="${c.id}" data-v="${s[0]}" aria-pressed="${v === s[0]}">${s[1]}</button>`).join("")}</div>
+    <h4>Further reading</h4><div class="inline">${c.references.map(r => `<span class="pill">${esc(r)}</span>`).join("")}</div>
+    <h4>Techniques it breaks (${ts.length})</h4><div class="list">${ts.map(t => tbtn(t.id)).join("")}</div>
+    <div class="inline" style="margin-top:12px"><button class="btn primary" data-act="go" data-k="control" data-v="${c.id}">Show on the matrix</button></div>`, null];
+}
+function dActor(a) {
+  const is = incsOfActor[a.id] || [];
+  return [`<div><span class="tag">${nm(TX.actor_types, a.type)}</span> <span class="id">${a.id}</span><h2>${esc(a.name)}</h2></div>`,
+    `<p>${esc(a.summary)}</p><dl class="kv">${a.aliases.length ? `<dt>Also known as</dt><dd>${esc(a.aliases.join(", "))}</dd>` : ""}<dt>Origin</dt><dd>${esc(a.origin)}</dd><dt>Motivation</dt><dd>${esc(a.motivation)}</dd><dt>Capability</dt><dd>Tier ${a.tier}, ${nm(TX.tiers, a.tier).toLowerCase()}</dd></dl>
+    <h4>Techniques (${a.techniques.length})</h4><div class="list">${[...a.techniques].sort((x, y) => PH[x.id.slice(0, 3)].n - PH[y.id.slice(0, 3)].n).map(m => `<button data-act="open" data-id="${m.id}" data-ph="${m.id.slice(0, 3)}"><span class="tag ph">${m.id}</span><span>${nm(TQ, m.id)}</span><span class="tag ${m.basis}" title="${esc(TX.map_basis[m.basis].desc)}">${nm(TX.map_basis, m.basis)}</span></button>`).join("")}</div>
+    <div class="inline" style="margin-top:12px"><button class="btn primary" data-act="go" data-k="actor" data-v="${a.id}">Show on the matrix</button></div>
+    ${is.length ? `<h4>Incidents</h4><div class="list">${is.map(i => `<button data-act="open" data-id="${i.id}"><span class="id">${i.year}</span><span>${esc(i.title)}</span></button>`).join("")}</div>` : ""}
+    <h4>Sources</h4><ul style="padding-left:1.2em;margin:0">${a.sources.map(s => `<li>${esc(s)}</li>`).join("")}</ul>`, null];
+}
+function dIncident(i) {
+  return [`<div><span class="tag ${i.attribution}" title="${esc(TX.attribution[i.attribution].desc)}">${nm(TX.attribution, i.attribution)}</span> <span class="tag">${nm(TX.incident_kinds, i.kind)}</span><h2>${esc(i.title)}</h2></div>`,
+    `<p>${esc(i.summary)}</p><dl class="kv"><dt>When</dt><dd>${esc(i.date)}</dd><dt>Segments</dt><dd>${i.segments.map(s => nm(TX.segments, s)).join(", ")}</dd></dl>
+    ${i.actors.length ? `<h4>Actors</h4><div class="list">${i.actors.map(a => `<button data-act="open" data-id="${a}"><span>${nm(TA, a)}</span></button>`).join("")}</div>` : ""}
+    <h4>Techniques</h4><div class="list">${i.techniques.map(tbtn).join("")}</div>
+    <div class="inline" style="margin-top:12px"><button class="btn primary" data-act="pin" data-kind="incident" data-id="${i.id}">Show on the matrix</button></div>
+    <h4>Sources</h4><ul style="padding-left:1.2em;margin:0">${i.sources.map(s => `<li>${esc(s.title)}${s.url ? `<br><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.url)}</a>` : ""}</li>`).join("")}</ul>`, null];
+}
+function renderDrawer() {
+  const d = $("drawer"), o = S.sel && lookup(S.sel);
+  if (!o) { d.classList.remove("on"); $("scrim").classList.remove("on"); d.innerHTML = ""; return; }
+  const [head, body, ph] = TQ[S.sel] ? dTechnique(o) : SC[S.sel] ? dControl(o) : TA[S.sel] ? dActor(o) : dIncident(o);
+  const keep = d.dataset.id === S.sel ? (d.querySelector(".body") || {}).scrollTop : 0;
+  d.dataset.id = S.sel;
+  if (ph) d.dataset.ph = ph; else delete d.dataset.ph;
+  d.innerHTML = `<header>${head}<button class="iconbtn" data-act="close" aria-label="Close details">Close</button></header><div class="body">${body}</div>`;
+  d.querySelector(".body").scrollTop = keep || 0;
+  d.classList.add("on"); $("scrim").classList.add("on");
+}
+
+/* ───────── render ───────── */
+const VIEWFN = {matrix: vMatrix, surface: vSurface, paths: vPaths, actors: vActors, incidents: vIncidents, controls: vControls, assess: vAssess, about: vAbout};
+function render(keepScroll) {
+  const mx = $("matrix"), sl = mx ? mx.scrollLeft : 0, sy = window.scrollY;
+  renderTabs();
+  const hasF = FILTER_VIEWS.has(S.view);
+  $("shell").classList.toggle("nofilters", !hasF);
+  $("fbtn").style.visibility = hasF ? "visible" : "hidden";
+  if (hasF) renderFilters();
+  $("main").innerHTML = VIEWFN[S.view]();
+  if (keepScroll) { const m2 = $("matrix"); if (m2) m2.scrollLeft = sl; window.scrollTo(0, sy); } else window.scrollTo(0, 0);
+  renderDrawer(); writeHash();
+}
+function toast(msg) { const t = $("toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove("on"), 2200); }
+function download(name, text, type) {
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text], {type})); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+function csv() {
+  const q = v => '"' + String(v).replace(/"/g, '""') + '"';
+  const rows = [["id", "phase", "name", "segments", "assets", "ways_in", "tier", "evidence", "mission_effects", "controls", "control_coverage", "status", "notes"]];
+  visible().forEach(t => { const a = S.assess.t[t.id] || {}; rows.push([t.id, PH[t.phase].name, t.name, t.segments.join(" "), t.assets.join(" "), t.vectors.join(" "), t.tier, TX.basis[t.basis].name,
+    t.effects.map(e => ME[e].name).join("; "), t.controls.join(" "), Math.round(coverage(t) * 100) + "%", (STATUS.find(s => s[0] === (a.status || "")) || [0, ""])[1], a.note || ""]); });
+  download("spectra-techniques.csv", rows.map(r => r.map(q).join(",")).join("\r\n"), "text/csv");
+  toast("Exported " + (rows.length - 1) + " techniques");
+}
+function exportLayer() {
+  const out = {format: "spectra-assessment", spectra_version: DATA.meta.version, name: S.assess.name, exported: new Date().toISOString(), techniques: S.assess.t, controls: S.assess.c};
+  download((S.assess.name || "spectra-assessment").replace(/[^\w.-]+/g, "-").toLowerCase() + ".json", JSON.stringify(out, null, 2), "application/json");
+  toast("Assessment exported");
+}
+function importLayer(text) {
+  let o; try { o = JSON.parse(text); } catch (e) { return toast("That file is not valid JSON"); }
+  if (!o || o.format !== "spectra-assessment") return toast("That file is not a SPECTRA assessment");
+  const t = {}, c = {}; let skipped = 0;
+  for (const [k, v] of Object.entries(o.techniques || {})) { if (TQ[k] && v && typeof v === "object") { const st = STATUS.some(s => s[0] === v.status) ? v.status : ""; t[k] = {status: st, note: String(v.note || "").slice(0, 4000)}; } else skipped++; }
+  for (const [k, v] of Object.entries(o.controls || {})) { if (SC[k] && CSTAT.some(s => s[0] === v)) c[k] = v; else skipped++; }
+  S.assess = {name: String(o.name || "").slice(0, 120), t, c}; store.save(); render(true);
+  toast("Assessment imported" + (skipped ? ", " + skipped + " unknown entries skipped" : ""));
+}
+function setTheme(v) { document.documentElement.dataset.theme = v; $("themebtn").textContent = v === "dark" ? "Light" : "Dark"; }
+
+/* ───────── events ───────── */
+const ACT = {
+  view(e) { S.view = e.dataset.v; S.sel = null; $("filters").classList.remove("on"); render(); },
+  home(e, ev) { ev.preventDefault(); S.view = "matrix"; S.sel = null; render(); },
+  open(e) { S.sel = e.dataset.id; renderDrawer(); writeHash(); document.querySelectorAll(".cell.sel").forEach(c => c.classList.remove("sel")); const c = document.querySelector(`.cell[data-id="${S.sel}"]`); if (c) c.classList.add("sel"); },
+  close() { if ($("filters").classList.contains("on") && !S.sel) { $("filters").classList.remove("on"); $("scrim").classList.remove("on"); return; } S.sel = null; renderDrawer(); writeHash(); document.querySelectorAll(".cell.sel").forEach(c => c.classList.remove("sel")); },
+  filters() { const f = $("filters"); f.classList.toggle("on"); $("scrim").classList.toggle("on", f.classList.contains("on")); },
+  theme() { const v = document.documentElement.dataset.theme === "dark" ? "light" : "dark"; setTheme(v); store.theme(v); },
+  clear() { FACETS.forEach(f => S.f[f.k].clear()); S.pin = null; S.q = ""; $("q").value = ""; render(true); },
+  unfilter(e) { S.f[e.dataset.k].delete(e.dataset.v); render(true); },
+  unpin() { S.pin = null; render(true); },
+  unq() { S.q = ""; $("q").value = ""; render(true); },
+  col(e) { S.shut[e.dataset.id] = !S.shut[e.dataset.id]; e.parentElement.classList.toggle("shut"); },
+  go(e) { FACETS.forEach(f => S.f[f.k].clear()); S.pin = null; S.f[e.dataset.k].add(e.dataset.v); S.open[e.dataset.k] = true; S.view = "matrix"; S.sel = null; render(); },
+  pin(e) { const o = e.dataset.kind === "path" ? AP[e.dataset.id] : INC[e.dataset.id];
+    S.pin = {label: (e.dataset.kind === "path" ? "Path: " + o.name : "Incident: " + o.title), ids: new Set(o.steps ? o.steps.map(s => s.technique) : o.techniques)};
+    S.view = "matrix"; S.sel = null; S.dim = true; render(); },
+  path(e) { S.view = "paths"; S.sel = null; S.open[e.dataset.id] = true; S.q = ""; $("q").value = ""; render(); const el = document.querySelector(`[data-pk="${e.dataset.id}"]`); if (el) el.scrollIntoView({block: "start"}); },
+  atype(e) { S.aType = e.dataset.v; render(true); },
+  cstat(e) { if (e.dataset.v) S.assess.c[e.dataset.id] = e.dataset.v; else delete S.assess.c[e.dataset.id]; store.save(); render(true); },
+  tstat(e) { const a = S.assess.t[e.dataset.id] = S.assess.t[e.dataset.id] || {}; a.status = e.dataset.v; if (!a.status && !a.note) delete S.assess.t[e.dataset.id]; store.save(); render(true); },
+  covmatrix() { S.color = "coverage"; S.view = "matrix"; render(); },
+  csv, export: exportLayer,
+  import() { $("file").click(); },
+  print() { window.print(); },
+  reset() { if (confirm("Clear every status and note in this assessment? Export first if you want to keep it.")) { S.assess = {name: "", t: {}, c: {}}; store.save(); render(true); toast("Assessment cleared"); } },
+};
+document.addEventListener("click", ev => { const e = ev.target.closest("[data-act]"); if (e && ACT[e.dataset.act]) ACT[e.dataset.act](e, ev); });
+document.addEventListener("change", ev => {
+  const e = ev.target;
+  if (e.dataset.facet) { const s = S.f[e.dataset.facet]; e.checked ? s.add(e.value) : s.delete(e.value); render(true); }
+  else if (e.id === "color") { S.color = e.value; render(true); }
+  else if (e.id === "dim") { S.dim = e.checked; render(true); }
+  else if (e.id === "ikind") { S.iKind = e.value; render(true); }
+  else if (e.id === "aname") { S.assess.name = e.value; store.save(); }
+  else if (e.dataset.status) { const a = S.assess.t[e.dataset.status] = S.assess.t[e.dataset.status] || {}; a.status = e.value; if (!a.status && !a.note) delete S.assess.t[e.dataset.status]; store.save(); render(true); }
+  else if (e.id === "file" && e.files[0]) { const r = new FileReader(); r.onload = () => importLayer(String(r.result)); r.readAsText(e.files[0]); e.value = ""; }
+});
+document.addEventListener("input", ev => {
+  const e = ev.target;
+  if (e.dataset.note) { const a = S.assess.t[e.dataset.note] = S.assess.t[e.dataset.note] || {}; a.note = e.value; if (!a.status && !a.note) delete S.assess.t[e.dataset.note]; store.save(); }
+  else if (e.id === "q") { S.q = e.value.trim(); clearTimeout(render.h); render.h = setTimeout(() => render(true), 120); }
+});
+document.addEventListener("toggle", ev => { const e = ev.target; if (e.dataset && e.dataset.fk) S.open[e.dataset.fk] = e.open; else if (e.dataset && e.dataset.pk) S.open[e.dataset.pk] = e.open; }, true);
+document.addEventListener("keydown", ev => {
+  if (ev.key === "Escape") ACT.close();
+  else if (ev.key === "/" && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) { ev.preventDefault(); $("q").focus(); }
+});
+window.addEventListener("hashchange", () => { readHash(); render(true); });
+
+/* ───────── start ───────── */
+$("ver").textContent = "Space cyber framework " + DATA.meta.version;
+$("rainbow").innerHTML = DATA.phases.map(p => `<i data-ph="${p.id}"></i>`).join("");
+setTheme(store.theme() || (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+store.load(); readHash();
+if (window.innerWidth <= 900) DATA.phases.forEach((p, i) => { if (i) S.shut[p.id] = true; });
+render();
+</script>
+</body>
+</html>

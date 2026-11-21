@@ -1,0 +1,408 @@
+[
+  {
+    "id": "SC-01",
+    "function": "GV",
+    "name": "Mission-driven threat modelling",
+    "description": "Maintain a threat model that starts from mission objectives and names an owner for each risk across all segments.",
+    "verify": "Pick one attack path and confirm the model predicted it, an owner exists and the residual risk was accepted in writing.",
+    "references": [
+      "NIST IR 8270",
+      "CCSDS 350.1-G",
+      "NASA Space Security Best Practices Guide"
+    ]
+  },
+  {
+    "id": "SC-02",
+    "function": "GV",
+    "name": "Supply chain assurance and bills of materials",
+    "description": "Require software and hardware bills of materials, provenance evidence and security terms from every supplier of flight and ground items.",
+    "verify": "Trace one flight component and one ground product back to source and show the bill of materials matches what is installed.",
+    "references": [
+      "NIST SP 800-161",
+      "NIST IR 8270",
+      "Space Policy Directive-5"
+    ]
+  },
+  {
+    "id": "SC-03",
+    "function": "GV",
+    "name": "Security terms for shared and third-party services",
+    "description": "Contract for isolation, logging, incident notification and exit rights with ground-station, cloud and managed-service providers.",
+    "verify": "Ask the provider for tenant-isolation evidence and your own audit logs for a named pass; time how long it takes.",
+    "references": [
+      "NIST IR 8401",
+      "ISO/IEC 27036"
+    ]
+  },
+  {
+    "id": "SC-04",
+    "function": "ID",
+    "name": "Mission dependency and trust-boundary map",
+    "description": "Keep a current map of assets, data flows, radio links and trust boundaries, including those owned by others.",
+    "verify": "Walk a command from operator console to actuator and check every hop and key appears on the map.",
+    "references": [
+      "NIST IR 8401",
+      "NIST CSF 2.0 ID.AM"
+    ]
+  },
+  {
+    "id": "SC-05",
+    "function": "ID",
+    "name": "Public exposure management",
+    "description": "Review what filings, papers, job adverts, repositories and internet scans reveal, and remove or accept each item.",
+    "verify": "Have an outsider build a target pack from public sources in a day and compare it with your own list.",
+    "references": [
+      "NIST CSF 2.0 ID.RA",
+      "ENISA Space Threat Landscape"
+    ]
+  },
+  {
+    "id": "SC-06",
+    "function": "ID",
+    "name": "Vulnerability management for flight and ground",
+    "description": "Track vulnerabilities in flight software, ground products and terminals, with a decision for assets that cannot be patched.",
+    "verify": "Select a recent advisory for a ground product in use and show time to triage, decision and closure.",
+    "references": [
+      "NIST IR 8401",
+      "NIST SP 800-40"
+    ]
+  },
+  {
+    "id": "SC-07",
+    "function": "PR",
+    "name": "Authenticated telecommand",
+    "description": "Authenticate every telecommand at the link layer so the spacecraft only acts on frames from a holder of the mission key.",
+    "verify": "In a lab, send a well-formed but unauthenticated command and confirm it is rejected and reported in telemetry.",
+    "references": [
+      "CCSDS 355.0-B (SDLS)",
+      "CCSDS 352.0-B",
+      "BSI TR-03184"
+    ]
+  },
+  {
+    "id": "SC-08",
+    "function": "PR",
+    "name": "Link encryption",
+    "description": "Encrypt telecommand, telemetry and payload links wherever mission and regulation allow, using reviewed algorithms.",
+    "verify": "Capture a downlink in the lab and confirm no housekeeping or user data is readable without keys.",
+    "references": [
+      "CCSDS 352.0-B",
+      "CCSDS 355.0-B (SDLS)",
+      "CNSSP-12"
+    ]
+  },
+  {
+    "id": "SC-09",
+    "function": "PR",
+    "name": "Anti-replay protection",
+    "description": "Bind commands to counters or time windows so a recorded frame cannot be accepted twice or out of order.",
+    "verify": "Replay a previously accepted command in the lab and confirm rejection and counter behaviour across a reboot.",
+    "references": [
+      "CCSDS 355.0-B (SDLS)"
+    ]
+  },
+  {
+    "id": "SC-10",
+    "function": "PR",
+    "name": "Key management and on-orbit rekey",
+    "description": "Generate, store, rotate and revoke keys under hardware protection, with a rehearsed way to rekey spacecraft in orbit.",
+    "verify": "Rehearse a key compromise: rotate the active key on a flatsat and measure time and operator steps.",
+    "references": [
+      "CCSDS 355.1-B",
+      "NIST SP 800-57",
+      "BSI TR-03184"
+    ]
+  },
+  {
+    "id": "SC-11",
+    "function": "PR",
+    "name": "Signed updates and secure boot",
+    "description": "Accept only cryptographically signed software, firmware and bitstreams, verified at load and at boot from an immutable root.",
+    "verify": "Attempt to load an unsigned and a wrongly signed image on a test unit and confirm both are refused and logged.",
+    "references": [
+      "NIST SP 800-193",
+      "BSI TR-03184"
+    ]
+  },
+  {
+    "id": "SC-12",
+    "function": "PR",
+    "name": "On-board partitioning and least privilege",
+    "description": "Separate payload, hosted and platform functions so a fault or compromise in one cannot command another.",
+    "verify": "From the payload interface on a flatsat, try to address platform functions and confirm the bus gateway blocks it.",
+    "references": [
+      "NIST IR 8270",
+      "ECSS-E-ST-40C",
+      "BSI TR-03184"
+    ]
+  },
+  {
+    "id": "SC-13",
+    "function": "PR",
+    "name": "Critical-command authorisation",
+    "description": "Classify hazardous commands and require independent approval or an arming sequence before they execute.",
+    "verify": "Try to issue a hazardous command with one operator account and confirm the system demands a second approval.",
+    "references": [
+      "NASA-STD-1006",
+      "NIST IR 8401"
+    ]
+  },
+  {
+    "id": "SC-14",
+    "function": "PR",
+    "name": "Ground network segmentation",
+    "description": "Isolate mission operations, station equipment and enterprise IT, with tightly defined and monitored crossings.",
+    "verify": "From an enterprise workstation, enumerate reachable mission services; the expected answer is none.",
+    "references": [
+      "NIST IR 8401",
+      "IEC 62443-3-3",
+      "NIST SP 800-82"
+    ]
+  },
+  {
+    "id": "SC-15",
+    "function": "PR",
+    "name": "Strong identity for mission operations",
+    "description": "Require phishing-resistant multi-factor sign-in, privileged-access workstations and session recording for mission roles.",
+    "verify": "Review last month's mission-enclave sign-ins for any single-factor, shared or unowned account.",
+    "references": [
+      "NIST SP 800-63B",
+      "NIST IR 8401"
+    ]
+  },
+  {
+    "id": "SC-16",
+    "function": "PR",
+    "name": "Hardened stations, modems and remote access",
+    "description": "Harden and patch internet-facing appliances, modems, baseband units and antenna controllers; remove default access.",
+    "verify": "Scan your own address space and station subnets for management interfaces and default credentials.",
+    "references": [
+      "NIST IR 8401",
+      "CIS Controls v8"
+    ]
+  },
+  {
+    "id": "SC-17",
+    "function": "PR",
+    "name": "Secure development and toolchain integrity",
+    "description": "Protect source, build and signing systems; use reviewed changes, reproducible builds and separated signing keys.",
+    "verify": "Rebuild a released flight image from source on a clean machine and compare hashes with what was flown.",
+    "references": [
+      "NIST SP 800-218 (SSDF)",
+      "SLSA",
+      "ECSS-Q-ST-80C"
+    ]
+  },
+  {
+    "id": "SC-18",
+    "function": "PR",
+    "name": "Interference-resistant links and navigation",
+    "description": "Use spreading, hopping, directional antennas, power margin and authenticated navigation signals to resist jamming and spoofing.",
+    "verify": "Inject calibrated interference in a cabled test and record the margin at which the link or fix is lost.",
+    "references": [
+      "NIST IR 8323",
+      "CCSDS 350.1-G",
+      "Galileo OSNMA"
+    ]
+  },
+  {
+    "id": "SC-19",
+    "function": "PR",
+    "name": "User terminal and fleet-management hardening",
+    "description": "Sign terminal firmware, isolate the management plane from user traffic and rate-limit fleet-wide actions.",
+    "verify": "Try to push a configuration to more than a set fraction of test terminals at once and confirm a brake engages.",
+    "references": [
+      "NIST IR 8441",
+      "ETSI EN 303 645"
+    ]
+  },
+  {
+    "id": "SC-20",
+    "function": "PR",
+    "name": "Physical and hardware tamper protection",
+    "description": "Control physical access to sites and hardware; disable debug ports and design against fault injection where exposure is high.",
+    "verify": "Inspect a terminal or test unit for live debug interfaces and unattended access routes at a remote site.",
+    "references": [
+      "NIST SP 800-53 PE",
+      "BSI TR-03184"
+    ]
+  },
+  {
+    "id": "SC-21",
+    "function": "PR",
+    "name": "Cloud tenant isolation and API security",
+    "description": "Scope cloud and service credentials tightly, rotate them, and verify tenant separation for scheduling, data and keys.",
+    "verify": "Use a deliberately over-used test credential and confirm it cannot see or schedule another mission's contacts.",
+    "references": [
+      "CSA CCM v4",
+      "NIST IR 8401"
+    ]
+  },
+  {
+    "id": "SC-22",
+    "function": "PR",
+    "name": "Data integrity and provenance",
+    "description": "Sign or seal mission products and operational data such as ephemerides so recipients can detect alteration.",
+    "verify": "Alter one byte of a test product and an orbit file in staging and confirm downstream consumers reject them.",
+    "references": [
+      "NIST IR 8270",
+      "NIST SP 800-53 SI-7"
+    ]
+  },
+  {
+    "id": "SC-23",
+    "function": "PR",
+    "name": "Personnel security and insider-risk programme",
+    "description": "Vet, train and support staff and contractors; watch for coercion and separate duties for sensitive roles.",
+    "verify": "Check whether one person could alone change flight software and release it to operations.",
+    "references": [
+      "NIST SP 800-53 PS",
+      "CISA Insider Threat Mitigation Guide"
+    ]
+  },
+  {
+    "id": "SC-24",
+    "function": "PR",
+    "name": "Authenticated crosslinks and mesh routing",
+    "description": "Authenticate and authorise inter-satellite traffic so one spacecraft cannot command or reroute its neighbours.",
+    "verify": "In a constellation simulator, let one node misbehave and confirm neighbours reject its control traffic.",
+    "references": [
+      "NIST IR 8441",
+      "CCSDS 355.0-B (SDLS)"
+    ]
+  },
+  {
+    "id": "SC-25",
+    "function": "DE",
+    "name": "Command and telemetry anomaly detection",
+    "description": "Reconcile commands sent with commands received and check telemetry for physically implausible values and patterns.",
+    "verify": "Inject an unlogged command in a twin and measure how long before an analyst is alerted.",
+    "references": [
+      "NIST IR 8270",
+      "NIST CSF 2.0 DE.CM"
+    ]
+  },
+  {
+    "id": "SC-26",
+    "function": "DE",
+    "name": "On-board integrity monitoring",
+    "description": "Monitor memory, tables and execution on board, and report or act on unexpected change.",
+    "verify": "Modify a table on a flatsat outside the normal procedure and confirm the change is flagged in telemetry.",
+    "references": [
+      "NIST IR 8270",
+      "DHS S&T on-board detection research"
+    ]
+  },
+  {
+    "id": "SC-27",
+    "function": "DE",
+    "name": "Spectrum monitoring and interference geolocation",
+    "description": "Monitor carriers and noise floors for unexpected emitters and keep a route to geolocate and report interference.",
+    "verify": "Introduce a test carrier in a monitored band and time detection, characterisation and escalation.",
+    "references": [
+      "ITU Radio Regulations Art. 15",
+      "NIST IR 8323"
+    ]
+  },
+  {
+    "id": "SC-28",
+    "function": "DE",
+    "name": "Mission-aware security operations",
+    "description": "Feed mission control, station and identity logs to analysts who understand space protocols and operations tempo.",
+    "verify": "Ask the SOC to explain an out-of-window command burst from last month's logs within an hour.",
+    "references": [
+      "NIST IR 8401",
+      "NIST CSF 2.0 DE.AE"
+    ]
+  },
+  {
+    "id": "SC-29",
+    "function": "DE",
+    "name": "Threat intelligence and sector sharing",
+    "description": "Consume and contribute space-sector threat reporting and act on indicators and warnings.",
+    "verify": "Trace the last sector advisory received to a concrete change or a recorded decision not to act.",
+    "references": [
+      "Space ISAC",
+      "EU Space ISAC",
+      "NIST CSF 2.0 ID.RA"
+    ]
+  },
+  {
+    "id": "SC-30",
+    "function": "DE",
+    "name": "Navigation and timing integrity monitoring",
+    "description": "Cross-check position and time against independent sources and alarm on divergence.",
+    "verify": "Offset one timing source in a lab and confirm the alarm fires and the system holds over on a trusted source.",
+    "references": [
+      "NIST IR 8323",
+      "RTCA DO-235"
+    ]
+  },
+  {
+    "id": "SC-31",
+    "function": "RS",
+    "name": "Space-specific incident response",
+    "description": "Maintain response plans that cover spacecraft, links and providers, with pre-agreed authority to act during a pass.",
+    "verify": "Run a timed exercise in which control of one spacecraft is in doubt and record every decision delay.",
+    "references": [
+      "NIST SP 800-61r3",
+      "NIST IR 8401"
+    ]
+  },
+  {
+    "id": "SC-32",
+    "function": "RS",
+    "name": "Cyber-aware safe mode",
+    "description": "Give the spacecraft a minimal, well-protected state that keeps authentication on and can refuse an untrusted ground.",
+    "verify": "Force safe mode on a flatsat and confirm command authentication, counters and logging remain enforced.",
+    "references": [
+      "NASA-STD-1006",
+      "NIST IR 8270"
+    ]
+  },
+  {
+    "id": "SC-33",
+    "function": "RS",
+    "name": "Alternate command paths and sites",
+    "description": "Hold a geographically and administratively separate way to command the spacecraft with its own credentials.",
+    "verify": "Command a test spacecraft or twin from the alternate site with the primary site declared lost.",
+    "references": [
+      "NIST IR 8401",
+      "NIST SP 800-34"
+    ]
+  },
+  {
+    "id": "SC-34",
+    "function": "RC",
+    "name": "Trusted recovery of spacecraft software",
+    "description": "Keep an immutable known-good image and a verified procedure to restore and attest flight software.",
+    "verify": "Corrupt the active image on a flatsat and restore from the protected image; verify by measurement, not by telemetry alone.",
+    "references": [
+      "NIST SP 800-193",
+      "NIST IR 8270"
+    ]
+  },
+  {
+    "id": "SC-35",
+    "function": "RC",
+    "name": "Ground backup and rebuild",
+    "description": "Keep offline, tested backups of mission systems, databases, procedures and key material, and rehearse rebuild.",
+    "verify": "Rebuild the mission control system from backups on clean hardware and command a simulator.",
+    "references": [
+      "NIST SP 800-34",
+      "NIST IR 8401"
+    ]
+  },
+  {
+    "id": "SC-36",
+    "function": "RC",
+    "name": "Mission continuity and graceful degradation",
+    "description": "Design for degraded service: spares, alternative providers, fallback navigation and user communication plans.",
+    "verify": "Remove one spacecraft, one station or one provider in an exercise and measure service delivered to users.",
+    "references": [
+      "NIST IR 8441",
+      "NIST IR 8323",
+      "EU NIS2 Directive"
+    ]
+  }
+]

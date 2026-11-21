@@ -1,0 +1,74 @@
+[
+  {
+    "id": "ME-01",
+    "name": "Loss of command authority",
+    "description": "The operator can no longer be sure it is the only party commanding the asset.",
+    "property": "control"
+  },
+  {
+    "id": "ME-02",
+    "name": "Loss of confidentiality",
+    "description": "Mission, user or design information is exposed to an unauthorised party.",
+    "property": "confidentiality"
+  },
+  {
+    "id": "ME-03",
+    "name": "Loss of data integrity",
+    "description": "Data, parameters or products are altered and may be trusted wrongly.",
+    "property": "integrity"
+  },
+  {
+    "id": "ME-04",
+    "name": "Service outage",
+    "description": "The mission service is unavailable to some or all users.",
+    "property": "availability"
+  },
+  {
+    "id": "ME-05",
+    "name": "Service degradation",
+    "description": "The service continues with reduced capacity, accuracy or timeliness.",
+    "property": "availability"
+  },
+  {
+    "id": "ME-06",
+    "name": "Loss of health visibility",
+    "description": "The operator cannot see, or cannot trust, the true state of the spacecraft.",
+    "property": "integrity"
+  },
+  {
+    "id": "ME-07",
+    "name": "Loss of navigation and timing trust",
+    "description": "Position or time delivered to users or used by the system is wrong or unavailable.",
+    "property": "integrity"
+  },
+  {
+    "id": "ME-08",
+    "name": "Recoverable asset degradation",
+    "description": "Consumables, lifetime or performance are spent but the asset can be recovered.",
+    "property": "availability"
+  },
+  {
+    "id": "ME-09",
+    "name": "Permanent asset loss",
+    "description": "A spacecraft, terminal fleet or ground capability is lost beyond recovery.",
+    "property": "availability"
+  },
+  {
+    "id": "ME-10",
+    "name": "Safety and collision risk",
+    "description": "Risk to people, to other spacecraft or to the orbital environment.",
+    "property": "safety"
+  },
+  {
+    "id": "ME-11",
+    "name": "Downstream cascade",
+    "description": "Customers and dependent sectors lose a service they rely on.",
+    "property": "availability"
+  },
+  {
+    "id": "ME-12",
+    "name": "Loss of assurance",
+    "description": "The operator cannot prove the system is in a trusted state, even if it works.",
+    "property": "control"
+  }
+]

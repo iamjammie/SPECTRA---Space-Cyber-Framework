@@ -1,0 +1,82 @@
+[
+  {
+    "id": "DS-01",
+    "name": "Command history and verification",
+    "description": "Ground command logs reconciled with on-board command counters and acknowledgements."
+  },
+  {
+    "id": "DS-02",
+    "name": "Housekeeping telemetry",
+    "description": "Bus and payload health parameters and their trends."
+  },
+  {
+    "id": "DS-03",
+    "name": "On-board events and fault records",
+    "description": "Event logs, fault-protection activations and reboot causes."
+  },
+  {
+    "id": "DS-04",
+    "name": "Memory and image integrity",
+    "description": "Checksums, dumps and attestation of on-board software and tables."
+  },
+  {
+    "id": "DS-05",
+    "name": "Spectrum and link metrics",
+    "description": "Carrier monitoring, signal-to-noise, receiver lock and gain-control values."
+  },
+  {
+    "id": "DS-06",
+    "name": "Ground network traffic",
+    "description": "Flow and packet data, including space-protocol-aware inspection."
+  },
+  {
+    "id": "DS-07",
+    "name": "Ground host and application logs",
+    "description": "Endpoint, mission-control and station software logs."
+  },
+  {
+    "id": "DS-08",
+    "name": "Identity and remote-access logs",
+    "description": "Directory, sign-in, VPN and privileged-session records."
+  },
+  {
+    "id": "DS-09",
+    "name": "Cloud and service audit logs",
+    "description": "Provider audit trails for scheduling, API use and data access."
+  },
+  {
+    "id": "DS-10",
+    "name": "Build and supply chain records",
+    "description": "Source history, build logs, signatures and bills of materials."
+  },
+  {
+    "id": "DS-11",
+    "name": "Navigation and timing observables",
+    "description": "Receiver measurements cross-checked against independent sources."
+  },
+  {
+    "id": "DS-12",
+    "name": "Terminal fleet telemetry",
+    "description": "Terminal status, firmware versions and network-management logs."
+  },
+  {
+    "id": "DS-13",
+    "name": "Orbit and tracking data",
+    "description": "Operator ephemerides compared with independent tracking."
+  },
+  {
+    "id": "DS-14",
+    "name": "Physical access records",
+    "description": "Site access logs, video and tamper indications."
+  },
+  {
+    "id": "DS-15",
+    "name": "External intelligence",
+    "description": "Open-source, sector-sharing and exposure-monitoring reports."
+  },
+  {
+    "id": "DS-16",
+    "name": "Mission product quality checks",
+    "description": "Validation of payload data and products against expectations."
+  }
+]

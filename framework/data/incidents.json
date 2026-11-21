@@ -1,0 +1,910 @@
+[
+  {
+    "id": "INC-01",
+    "year": 1986,
+    "date": "April 1986",
+    "title": "Pay-television uplink override",
+    "actors": [
+      "TA-20"
+    ],
+    "attribution": "gov",
+    "kind": "interference",
+    "segments": [
+      "link"
+    ],
+    "techniques": [
+      "EXP-01",
+      "EFX-11"
+    ],
+    "summary": "A teleport engineer overpowered a pay-television channel's uplink for several minutes to display a protest message. He was identified and prosecuted.",
+    "sources": [
+      {
+        "title": "US court records, United States v. MacDougall"
+      }
+    ]
+  },
+  {
+    "id": "INC-02",
+    "year": 2008,
+    "date": "2007 to 2008",
+    "title": "Interference with two US Earth-observation satellites",
+    "actors": [],
+    "attribution": "unattributed",
+    "kind": "intrusion",
+    "segments": [
+      "ground",
+      "link",
+      "space"
+    ],
+    "techniques": [
+      "POS-02",
+      "CTL-13",
+      "CTL-03"
+    ],
+    "summary": "A US congressional commission reported that two civil Earth-observation satellites experienced interference through a commercial ground station; for one, the responsible party completed every step needed to command it but issued no commands.",
+    "sources": [
+      {
+        "title": "US-China Economic and Security Review Commission, 2011 Annual Report to Congress"
+      }
+    ]
+  },
+  {
+    "id": "INC-03",
+    "year": 2009,
+    "date": "March 2009",
+    "title": "Crackdown on misuse of military UHF transponders",
+    "actors": [
+      "TA-20"
+    ],
+    "attribution": "gov",
+    "kind": "interference",
+    "segments": [
+      "link",
+      "space"
+    ],
+    "techniques": [
+      "EXP-01",
+      "MNP-11"
+    ],
+    "summary": "Brazilian police acted against dozens of people using modified radios to talk through ageing military communications satellites that relayed any signal in band.",
+    "sources": [
+      {
+        "title": "Wired, The Great Brazilian Sat-Hack Crackdown"
+      }
+    ]
+  },
+  {
+    "id": "INC-04",
+    "year": 2014,
+    "date": "2014 and 2018",
+    "title": "Research into satellite terminal firmware",
+    "actors": [],
+    "attribution": "research",
+    "kind": "research",
+    "segments": [
+      "user"
+    ],
+    "techniques": [
+      "EXP-05",
+      "POS-09",
+      "SRV-10"
+    ],
+    "summary": "A researcher reported hard-coded credentials, undocumented protocols and other flaws across widely used maritime, aviation and military terminals, and later showed some could be reached from the internet.",
+    "sources": [
+      {
+        "title": "IOActive, A Wake-up Call for SATCOM Security (2014) and Last Call for SATCOM Security (2018)"
+      }
+    ]
+  },
+  {
+    "id": "INC-05",
+    "year": 2014,
+    "date": "Autumn 2014",
+    "title": "Breach of a weather agency's satellite data network",
+    "actors": [],
+    "attribution": "unattributed",
+    "kind": "intrusion",
+    "segments": [
+      "ground"
+    ],
+    "techniques": [
+      "POS-02",
+      "TRN-01",
+      "MNP-02",
+      "EFX-05"
+    ],
+    "summary": "A US weather agency took satellite data feeds offline for unscheduled maintenance after an intrusion. Officials told the press the attack came from China; no formal attribution followed.",
+    "sources": [
+      {
+        "title": "Washington Post reporting, November 2014"
+      }
+    ]
+  },
+  {
+    "id": "INC-06",
+    "year": 2015,
+    "date": "September 2015",
+    "title": "Satellite links used to hide espionage infrastructure",
+    "actors": [
+      "TA-02"
+    ],
+    "attribution": "vendor",
+    "kind": "espionage",
+    "segments": [
+      "link",
+      "user"
+    ],
+    "techniques": [
+      "MSN-11",
+      "MNP-03"
+    ],
+    "summary": "Researchers described an espionage group receiving stolen data by listening to other customers' unencrypted satellite internet downlinks across a wide beam.",
+    "sources": [
+      {
+        "title": "Kaspersky GReAT, Satellite Turla: APT Command and Control in the Sky"
+      }
+    ]
+  },
+  {
+    "id": "INC-07",
+    "year": 2018,
+    "date": "June 2018",
+    "title": "Espionage campaign reaches a satellite operator",
+    "actors": [
+      "TA-04"
+    ],
+    "attribution": "vendor",
+    "kind": "espionage",
+    "segments": [
+      "ground"
+    ],
+    "techniques": [
+      "SRV-08",
+      "TRN-01",
+      "MNP-14"
+    ],
+    "summary": "A security vendor reported a group inside a satellite communications operator that appeared most interested in the systems that monitor and control satellites.",
+    "sources": [
+      {
+        "title": "Symantec, Thrip: Espionage Group Hits Satellite, Telecoms, and Defense Companies"
+      }
+    ]
+  },
+  {
+    "id": "INC-08",
+    "year": 2020,
+    "date": "August 2020",
+    "title": "Research: reading geostationary broadband traffic",
+    "actors": [],
+    "attribution": "research",
+    "kind": "research",
+    "segments": [
+      "link",
+      "user"
+    ],
+    "techniques": [
+      "MSN-11",
+      "MNP-01"
+    ],
+    "summary": "A researcher showed that inexpensive home television equipment could capture unencrypted maritime, aviation and enterprise traffic from eighteen geostationary satellites.",
+    "sources": [
+      {
+        "title": "J. Pavur, Whispers Among the Stars, Black Hat USA 2020"
+      }
+    ]
+  },
+  {
+    "id": "INC-09",
+    "year": 2020,
+    "date": "June 2020",
+    "title": "Ransomware at a space-agency IT contractor",
+    "actors": [
+      "TA-17"
+    ],
+    "attribution": "claimed",
+    "kind": "extortion",
+    "segments": [
+      "supply",
+      "ground"
+    ],
+    "techniques": [
+      "POS-03",
+      "MNP-14",
+      "EFX-14"
+    ],
+    "summary": "A ransomware crew published files it said came from a contractor providing IT services to a space agency.",
+    "sources": [
+      {
+        "title": "ZDNet reporting on DoppelPaymer claims, June 2020"
+      }
+    ]
+  },
+  {
+    "id": "INC-10",
+    "year": 2022,
+    "date": "24 February 2022",
+    "title": "KA-SAT terminal wipe",
+    "actors": [
+      "TA-01"
+    ],
+    "attribution": "gov",
+    "kind": "attack",
+    "segments": [
+      "ground",
+      "user"
+    ],
+    "techniques": [
+      "POS-02",
+      "TRN-01",
+      "CTL-11",
+      "SRV-08",
+      "EFX-04"
+    ],
+    "summary": "Intruders used a misconfigured remote-access appliance to reach the management segment of a broadband satellite network and issued destructive commands that overwrote flash memory in tens of thousands of modems across Europe, also cutting remote monitoring of thousands of wind turbines.",
+    "sources": [
+      {
+        "title": "Viasat, KA-SAT Network cyber attack overview (30 March 2022)"
+      },
+      {
+        "title": "SentinelLabs, AcidRain: A Modem Wiper Rains Down on Europe"
+      }
+    ]
+  },
+  {
+    "id": "INC-11",
+    "year": 2022,
+    "date": "March 2022",
+    "title": "Claimed intrusion at a national space agency",
+    "actors": [
+      "TA-15"
+    ],
+    "attribution": "claimed",
+    "kind": "claim",
+    "segments": [
+      "ground"
+    ],
+    "techniques": [
+      "POS-02",
+      "MNP-02"
+    ],
+    "summary": "A hacktivist group published files and claimed to have disrupted a vehicle-monitoring system at Russia's space agency; the agency denied that control systems were affected.",
+    "sources": [
+      {
+        "title": "Media reporting of NB65 claims, March 2022"
+      }
+    ]
+  },
+  {
+    "id": "INC-12",
+    "year": 2022,
+    "date": "From March 2022",
+    "title": "Jamming of commercial satellite broadband in Ukraine",
+    "actors": [
+      "TA-09"
+    ],
+    "attribution": "gov",
+    "kind": "interference",
+    "segments": [
+      "link",
+      "user"
+    ],
+    "techniques": [
+      "EFX-01",
+      "EFX-02"
+    ],
+    "summary": "Terminals supplied to Ukraine were jammed near the front line. The operator changed software within days, and US defence officials later cited the speed of that response.",
+    "sources": [
+      {
+        "title": "US Department of Defense remarks reported by Breaking Defense, April 2022"
+      }
+    ]
+  },
+  {
+    "id": "INC-13",
+    "year": 2022,
+    "date": "August 2022",
+    "title": "Research: fault injection on a broadband user terminal",
+    "actors": [],
+    "attribution": "research",
+    "kind": "research",
+    "segments": [
+      "user"
+    ],
+    "techniques": [
+      "EXP-05",
+      "POS-09",
+      "SRV-10"
+    ],
+    "summary": "A researcher bypassed secure boot on a consumer satellite terminal with a custom board that glitches the power supply, gaining code execution on the device.",
+    "sources": [
+      {
+        "title": "L. Wouters, Glitched on Earth by Humans, Black Hat USA 2022"
+      }
+    ]
+  },
+  {
+    "id": "INC-14",
+    "year": 2022,
+    "date": "November 2022",
+    "title": "Claimed denial of service against a broadband constellation's sign-in",
+    "actors": [
+      "TA-13"
+    ],
+    "attribution": "claimed",
+    "kind": "claim",
+    "segments": [
+      "ground",
+      "user"
+    ],
+    "techniques": [
+      "EFX-15"
+    ],
+    "summary": "A pro-Russian collective claimed to have made a satellite broadband provider's customer sign-in unreachable for several hours.",
+    "sources": [
+      {
+        "title": "Trustwave SpiderLabs reporting, November 2022"
+      }
+    ]
+  },
+  {
+    "id": "INC-15",
+    "year": 2022,
+    "date": "Reported December 2022",
+    "title": "Intrusion at a US satellite communications provider",
+    "actors": [
+      "TA-03"
+    ],
+    "attribution": "gov",
+    "kind": "espionage",
+    "segments": [
+      "ground"
+    ],
+    "techniques": [
+      "POS-03",
+      "TRN-01",
+      "SRV-03"
+    ],
+    "summary": "Government incident responders said they found a Russian military intelligence group in the network of a satellite communications provider serving critical-infrastructure customers; it had been present for months.",
+    "sources": [
+      {
+        "title": "CyberScoop, CISA researchers: Russia's Fancy Bear infiltrated US satellite network",
+        "url": "https://cyberscoop.com/apt28-fancy-bear-satellite/"
+      }
+    ]
+  },
+  {
+    "id": "INC-16",
+    "year": 2022,
+    "date": "May 2022",
+    "title": "Espionage campaign against Russian aerospace",
+    "actors": [
+      "TA-08"
+    ],
+    "attribution": "vendor",
+    "kind": "espionage",
+    "segments": [
+      "ground",
+      "supply"
+    ],
+    "techniques": [
+      "POS-01",
+      "SRV-03",
+      "MNP-14"
+    ],
+    "summary": "A vendor described a group using phishing and custom backdoors against aerospace organisations over several years.",
+    "sources": [
+      {
+        "title": "Positive Technologies, Space Pirates"
+      }
+    ]
+  },
+  {
+    "id": "INC-17",
+    "year": 2023,
+    "date": "March 2023",
+    "title": "Claimed tampering with exposed navigation receivers",
+    "actors": [
+      "TA-14"
+    ],
+    "attribution": "claimed",
+    "kind": "claim",
+    "segments": [
+      "user"
+    ],
+    "techniques": [
+      "MSN-10",
+      "POS-02"
+    ],
+    "summary": "A hacktivist group posted screenshots it said showed access to internet-exposed satellite navigation receivers and deletion of their data.",
+    "sources": [
+      {
+        "title": "Cyble research blog, March 2023"
+      }
+    ]
+  },
+  {
+    "id": "INC-18",
+    "year": 2023,
+    "date": "April 2023",
+    "title": "Research: on-orbit takeover demonstration",
+    "actors": [],
+    "attribution": "research",
+    "kind": "research",
+    "segments": [
+      "space"
+    ],
+    "techniques": [
+      "POS-11",
+      "CTL-12",
+      "SRV-04",
+      "MNP-04"
+    ],
+    "summary": "At a security conference, a company team showed it could take control of functions on an experimental agency nanosatellite, alter imagery and hide the changes, working with the agency throughout.",
+    "sources": [
+      {
+        "title": "Thales, CYSAT 2023 demonstration on ESA OPS-SAT"
+      }
+    ]
+  },
+  {
+    "id": "INC-19",
+    "year": 2023,
+    "date": "May 2023",
+    "title": "Research: security analysis of satellite firmware",
+    "actors": [],
+    "attribution": "research",
+    "kind": "research",
+    "segments": [
+      "space",
+      "link"
+    ],
+    "techniques": [
+      "EXP-04",
+      "EXP-07",
+      "CTL-02",
+      "CTL-06"
+    ],
+    "summary": "Academics analysed three real satellite firmware images and found missing command protection and exploitable flaws, alongside a survey showing how often designers rely on obscurity.",
+    "sources": [
+      {
+        "title": "J. Willbold et al., Space Odyssey: An Experimental Software Security Analysis of Satellites, IEEE S&P 2023"
+      }
+    ]
+  },
+  {
+    "id": "INC-20",
+    "year": 2023,
+    "date": "29 June 2023",
+    "title": "Outage at a Russian satellite communications provider",
+    "actors": [
+      "TA-16"
+    ],
+    "attribution": "claimed",
+    "kind": "attack",
+    "segments": [
+      "ground",
+      "user"
+    ],
+    "techniques": [
+      "CTL-11",
+      "EFX-04",
+      "EFX-05",
+      "MNP-14"
+    ],
+    "summary": "A provider serving government and energy customers went offline. Unidentified actors claimed to have damaged terminals and leaked files; measurements confirmed the outage.",
+    "sources": [
+      {
+        "title": "The Record, Hackers claim to take down Russian satellite communications provider",
+        "url": "https://therecord.media/hackers-take-down-russian-satellite-provider"
+      }
+    ]
+  },
+  {
+    "id": "INC-21",
+    "year": 2023,
+    "date": "August 2023",
+    "title": "Exercise: first capture-the-flag on a satellite in orbit",
+    "actors": [],
+    "attribution": "research",
+    "kind": "research",
+    "segments": [
+      "space",
+      "link",
+      "ground"
+    ],
+    "techniques": [
+      "CTL-06",
+      "CTL-12",
+      "MNP-06"
+    ],
+    "summary": "Finalist teams in a government-sponsored contest attacked and defended a purpose-built cubesat in orbit, the first such event on a live spacecraft.",
+    "sources": [
+      {
+        "title": "Hack-A-Sat 4 final event on Moonlighter, DEF CON 31"
+      }
+    ]
+  },
+  {
+    "id": "INC-22",
+    "year": 2023,
+    "date": "February to July 2023",
+    "title": "Password-spray campaign including the satellite sector",
+    "actors": [
+      "TA-06"
+    ],
+    "attribution": "vendor",
+    "kind": "espionage",
+    "segments": [
+      "ground"
+    ],
+    "techniques": [
+      "POS-03",
+      "MNP-14"
+    ],
+    "summary": "A vendor observed thousands of organisations targeted with password spraying, with follow-on intrusion at a small number in the satellite, defence and pharmaceutical sectors.",
+    "sources": [
+      {
+        "title": "Microsoft Threat Intelligence, Peach Sandstorm password spray campaigns"
+      }
+    ]
+  },
+  {
+    "id": "INC-23",
+    "year": 2023,
+    "date": "Disclosed November 2023",
+    "title": "Breach at Japan's space agency",
+    "actors": [],
+    "attribution": "unattributed",
+    "kind": "intrusion",
+    "segments": [
+      "ground"
+    ],
+    "techniques": [
+      "POS-02",
+      "CTL-08",
+      "MNP-14"
+    ],
+    "summary": "The agency disclosed unauthorised access to its central directory server, reportedly through a network-device flaw, and later reported further attacks in 2024. It said launch and satellite operations data were not affected.",
+    "sources": [
+      {
+        "title": "JAXA statements and Japanese government briefings, 2023 to 2024"
+      }
+    ]
+  },
+  {
+    "id": "INC-24",
+    "year": 2024,
+    "date": "2023 to 2025",
+    "title": "Persistent navigation interference affecting aviation and shipping",
+    "actors": [
+      "TA-09"
+    ],
+    "attribution": "gov",
+    "kind": "interference",
+    "segments": [
+      "link",
+      "user"
+    ],
+    "techniques": [
+      "EFX-03",
+      "MNP-09",
+      "EFX-12"
+    ],
+    "summary": "Aircraft and ships around the Baltic, Black Sea and Middle East reported daily jamming and spoofing of satellite navigation. Several European governments raised the matter with international bodies.",
+    "sources": [
+      {
+        "title": "EASA and IATA statements on GNSS interference, 2024"
+      }
+    ]
+  },
+  {
+    "id": "INC-25",
+    "year": 2024,
+    "date": "March 2024",
+    "title": "New variant of the modem wiper appears",
+    "actors": [
+      "TA-01"
+    ],
+    "attribution": "vendor",
+    "kind": "attack",
+    "segments": [
+      "ground",
+      "user"
+    ],
+    "techniques": [
+      "EFX-04",
+      "EFX-05"
+    ],
+    "summary": "Researchers found a broader successor to the 2022 modem wiper, able to target more embedded device types, around the time of outages at Ukrainian providers.",
+    "sources": [
+      {
+        "title": "SentinelLabs, AcidPour: New Embedded Wiper Variant of AcidRain"
+      }
+    ]
+  },
+  {
+    "id": "INC-26",
+    "year": 2024,
+    "date": "2024",
+    "title": "Interference with European broadcast satellites",
+    "actors": [
+      "TA-09"
+    ],
+    "attribution": "gov",
+    "kind": "interference",
+    "segments": [
+      "link"
+    ],
+    "techniques": [
+      "EFX-01",
+      "EFX-11"
+    ],
+    "summary": "Operators and several European states reported uplink interference that disrupted or replaced television programming; the ITU's Radio Regulations Board called for it to stop.",
+    "sources": [
+      {
+        "title": "ITU Radio Regulations Board decisions, 2024"
+      }
+    ]
+  },
+  {
+    "id": "INC-27",
+    "year": 2024,
+    "date": "April to July 2024",
+    "title": "Custom backdoor used against satellite and communications-equipment firms",
+    "actors": [
+      "TA-06"
+    ],
+    "attribution": "vendor",
+    "kind": "espionage",
+    "segments": [
+      "ground"
+    ],
+    "techniques": [
+      "POS-03",
+      "POS-01",
+      "EXP-10",
+      "SRV-03"
+    ],
+    "summary": "A vendor reported a new multi-stage backdoor deployed against satellite, communications-equipment, energy and government targets, with attacker infrastructure hosted in fraudulently obtained cloud subscriptions.",
+    "sources": [
+      {
+        "title": "Microsoft Threat Intelligence, Peach Sandstorm deploys new custom Tickler malware",
+        "url": "https://www.microsoft.com/en-us/security/blog/?p=135563"
+      }
+    ]
+  },
+  {
+    "id": "INC-28",
+    "year": 2025,
+    "date": "March 2025",
+    "title": "Claimed cut of satellite communications on Iranian ships",
+    "actors": [
+      "TA-12"
+    ],
+    "attribution": "claimed",
+    "kind": "attack",
+    "segments": [
+      "user",
+      "ground"
+    ],
+    "techniques": [
+      "POS-10",
+      "CTL-11",
+      "EFX-04"
+    ],
+    "summary": "A group claimed to have disabled satellite terminals on 116 tankers and cargo ships by attacking the systems of their communications provider, and claimed a repeat later in the year.",
+    "sources": [
+      {
+        "title": "The Maritime Executive, Cyber Hackers Claim to Have Disabled Iranian Ship Communications",
+        "url": "https://maritime-executive.com/article/cyber-hackers-claim-to-have-disabled-iranian-ship-communications"
+      }
+    ]
+  },
+  {
+    "id": "INC-29",
+    "year": 2025,
+    "date": "March 2025",
+    "title": "Intrusion at Poland's space agency",
+    "actors": [],
+    "attribution": "unattributed",
+    "kind": "intrusion",
+    "segments": [
+      "ground"
+    ],
+    "techniques": [
+      "POS-02",
+      "EFX-05"
+    ],
+    "summary": "The agency disconnected its network from the internet after detecting unauthorised access to its IT systems, and national cyber services were brought in.",
+    "sources": [
+      {
+        "title": "Statements by the Polish Space Agency and the Minister for Digital Affairs, March 2025"
+      }
+    ]
+  },
+  {
+    "id": "INC-30",
+    "year": 2025,
+    "date": "Reported June 2025",
+    "title": "Telecom espionage campaign reaches a satellite operator",
+    "actors": [
+      "TA-05"
+    ],
+    "attribution": "vendor",
+    "kind": "espionage",
+    "segments": [
+      "ground"
+    ],
+    "techniques": [
+      "POS-02",
+      "SRV-03",
+      "MNP-13"
+    ],
+    "summary": "Press reports named a satellite operator among the victims of a state espionage campaign against communications carriers. The company confirmed unauthorised access through a compromised device and reported no customer impact.",
+    "sources": [
+      {
+        "title": "Via Satellite, Viasat confirms unauthorized access after Bloomberg report of Salt Typhoon impact",
+        "url": "https://www.satellitetoday.com/cybersecurity/2025/06/18/viasat-confirms-unauthorized-access-after-bloomberg-report-of-salt-typhoon-impact"
+      }
+    ]
+  },
+  {
+    "id": "INC-31",
+    "year": 2025,
+    "date": "June 2025",
+    "title": "Surge of operations against the space sector during the Israel-Iran war",
+    "actors": [],
+    "attribution": "claimed",
+    "kind": "claim",
+    "segments": [
+      "ground",
+      "user"
+    ],
+    "techniques": [
+      "EFX-15",
+      "MNP-14",
+      "POS-01"
+    ],
+    "summary": "A researcher counted more than 67 claimed operations by 25 actors against space organisations during the twelve-day conflict, mostly denial of service and data-leak claims.",
+    "sources": [
+      {
+        "title": "Via Satellite, The Space Sector Under Cyber Fire in the US-Israel-Iran War",
+        "url": "https://www.satellitetoday.com/opinion/2026/06/17/the-space-sector-under-cyber-fire-in-the-us-israel-iran-war/"
+      }
+    ]
+  },
+  {
+    "id": "INC-32",
+    "year": 2025,
+    "date": "October 2025",
+    "title": "Research: sensitive links found unencrypted on geostationary satellites",
+    "actors": [],
+    "attribution": "research",
+    "kind": "research",
+    "segments": [
+      "link",
+      "user"
+    ],
+    "techniques": [
+      "MSN-11",
+      "MNP-01"
+    ],
+    "summary": "University researchers scanning geostationary satellites with consumer equipment found a large share of links unencrypted, including mobile-network backhaul, corporate and government traffic.",
+    "sources": [
+      {
+        "title": "UC San Diego and University of Maryland, Don't Look Up, ACM CCS 2025"
+      }
+    ]
+  },
+  {
+    "id": "INC-33",
+    "year": 2025,
+    "date": "December 2025",
+    "title": "Data theft from a space agency's external servers",
+    "actors": [],
+    "attribution": "claimed",
+    "kind": "extortion",
+    "segments": [
+      "ground",
+      "supply"
+    ],
+    "techniques": [
+      "MSN-13",
+      "POS-03",
+      "MNP-14"
+    ],
+    "summary": "A seller claimed roughly 200 GB including source code and access tokens taken from collaboration servers. The agency said the affected servers were outside its corporate network and held unclassified material; a further, larger theft was claimed afterwards.",
+    "sources": [
+      {
+        "title": "Space.com, Cyberthieves hit European Space Agency, stealing hundreds of gigabytes of data",
+        "url": "https://www.space.com/space-exploration/esa-email-credentials-on-dark-web"
+      }
+    ]
+  },
+  {
+    "id": "INC-34",
+    "year": 2026,
+    "date": "March to April 2026",
+    "title": "Claimed intrusions at Gulf satellite operators",
+    "actors": [
+      "TA-10"
+    ],
+    "attribution": "claimed",
+    "kind": "attack",
+    "segments": [
+      "ground"
+    ],
+    "techniques": [
+      "POS-04",
+      "MNP-13",
+      "MNP-14",
+      "EFX-05"
+    ],
+    "summary": "During the 2026 conflict a persona claimed to have disrupted infrastructure, intercepted communications and deleted data at several Gulf satellite companies and a space agency. One screen recording lent partial support; other claims are unverified. No spacecraft were reported affected.",
+    "sources": [
+      {
+        "title": "Via Satellite, The Space Sector Under Cyber Fire in the US-Israel-Iran War",
+        "url": "https://www.satellitetoday.com/opinion/2026/06/17/the-space-sector-under-cyber-fire-in-the-us-israel-iran-war/"
+      }
+    ]
+  },
+  {
+    "id": "INC-35",
+    "year": 2026,
+    "date": "March 2026",
+    "title": "Intimidation messages to aerospace employees",
+    "actors": [
+      "TA-11"
+    ],
+    "attribution": "claimed",
+    "kind": "claim",
+    "segments": [
+      "supply"
+    ],
+    "techniques": [
+      "MSN-08",
+      "EFX-14"
+    ],
+    "summary": "Employees of an aerospace prime based in Israel received text messages claiming their personal data had been breached and urging them to leave.",
+    "sources": [
+      {
+        "title": "Via Satellite, The Space Sector Under Cyber Fire in the US-Israel-Iran War",
+        "url": "https://www.satellitetoday.com/opinion/2026/06/17/the-space-sector-under-cyber-fire-in-the-us-israel-iran-war/"
+      }
+    ]
+  },
+  {
+    "id": "INC-36",
+    "year": 2026,
+    "date": "First half of 2026",
+    "title": "Extortion crews and access brokers concentrate on suppliers",
+    "actors": [
+      "TA-17",
+      "TA-18"
+    ],
+    "attribution": "vendor",
+    "kind": "extortion",
+    "segments": [
+      "supply",
+      "ground"
+    ],
+    "techniques": [
+      "MSN-13",
+      "EXP-08",
+      "POS-03",
+      "MNP-14",
+      "EFX-14"
+    ],
+    "summary": "The sector's sharing centre tracked close to seventy claimed attacks, over half on manufacturers, contractors and integrators, with identity theft, session hijacking and help-desk deception as common ways in. Operators separately reported activity at four times its pre-war level.",
+    "sources": [
+      {
+        "title": "Space ISAC, Threat Briefing 46",
+        "url": "https://www.kratosspace.com/constellations/articles/analysis-of-data-extortion-actors-and-initial-access-brokers-on-the-commercial-space-industry"
+      },
+      {
+        "title": "Via Satellite, Space Sector Faces 400% Surge in Cyberattacks Amid Iran War",
+        "url": "https://www.satellitetoday.com/cybersecurity/2026/06/23/space-sector-faces-400-surge-in-cyberattacks-amid-iran-war-experts-say/"
+      }
+    ]
+  }
+]

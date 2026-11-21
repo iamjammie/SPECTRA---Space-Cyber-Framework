@@ -1,0 +1,493 @@
+[
+  {
+    "id": "AP-01",
+    "name": "Terminal fleet wipe through the management plane",
+    "summary": "An intruder enters through an internet-facing appliance, reaches the network that manages user terminals and disables them in bulk. Modelled on the 2022 KA-SAT attack.",
+    "steps": [
+      {
+        "technique": "MSN-10",
+        "note": "Finds a remote-access appliance belonging to the ground network."
+      },
+      {
+        "technique": "EXP-06",
+        "note": "Identifies a flaw or misconfiguration in that appliance."
+      },
+      {
+        "technique": "POS-02",
+        "note": "Gains a foothold on the appliance."
+      },
+      {
+        "technique": "TRN-01",
+        "note": "Moves into the trusted management segment."
+      },
+      {
+        "technique": "CTL-11",
+        "note": "Obtains the ability to issue management commands to terminals."
+      },
+      {
+        "technique": "SRV-08",
+        "note": "Uses legitimate management functions, which look routine."
+      },
+      {
+        "technique": "EFX-04",
+        "note": "Sends destructive commands to a large share of the fleet."
+      }
+    ],
+    "breakpoints": [
+      "SC-16",
+      "SC-14",
+      "SC-19",
+      "SC-28",
+      "SC-36"
+    ],
+    "incidents": [
+      "INC-10"
+    ]
+  },
+  {
+    "id": "AP-02",
+    "name": "Ground compromise to spacecraft control",
+    "summary": "A phished operator leads to mission control, command keys and finally unauthorised manoeuvring, with telemetry masked and operators locked out.",
+    "steps": [
+      {
+        "technique": "MSN-08",
+        "note": "Identifies operators with command authority."
+      },
+      {
+        "technique": "POS-01",
+        "note": "Compromises an operator workstation through a tailored lure."
+      },
+      {
+        "technique": "CTL-08",
+        "note": "Escalates to administrator in the ground environment."
+      },
+      {
+        "technique": "TRN-01",
+        "note": "Crosses into mission operations."
+      },
+      {
+        "technique": "CTL-09",
+        "note": "Gains use of the command key."
+      },
+      {
+        "technique": "CTL-03",
+        "note": "Issues authenticated commands from the control system."
+      },
+      {
+        "technique": "TRN-02",
+        "note": "Commands reach the spacecraft over the legitimate uplink."
+      },
+      {
+        "technique": "SRV-04",
+        "note": "Telemetry is altered so the ground sees nominal state."
+      },
+      {
+        "technique": "EFX-08",
+        "note": "Attitude or orbit control is taken."
+      },
+      {
+        "technique": "RSL-04",
+        "note": "Keys are changed to lock the operator out."
+      }
+    ],
+    "breakpoints": [
+      "SC-15",
+      "SC-14",
+      "SC-13",
+      "SC-10",
+      "SC-25",
+      "SC-33",
+      "SC-34"
+    ],
+    "incidents": []
+  },
+  {
+    "id": "AP-03",
+    "name": "Rogue uplink against a legacy spacecraft",
+    "summary": "With public parameters, a recorded downlink and affordable radio equipment, an outsider commands an old spacecraft that lacks link authentication.",
+    "steps": [
+      {
+        "technique": "MSN-02",
+        "note": "Recovers frequencies and emissions from filings."
+      },
+      {
+        "technique": "MSN-03",
+        "note": "Predicts passes over a site it controls."
+      },
+      {
+        "technique": "MSN-06",
+        "note": "Records and characterises the downlink."
+      },
+      {
+        "technique": "MSN-07",
+        "note": "Reconstructs command and telemetry formats."
+      },
+      {
+        "technique": "EXP-01",
+        "note": "Acquires a transmit-capable station."
+      },
+      {
+        "technique": "EXP-07",
+        "note": "Confirms commands are unauthenticated in at least one mode."
+      },
+      {
+        "technique": "POS-08",
+        "note": "Transmits to the spacecraft during a pass."
+      },
+      {
+        "technique": "CTL-02",
+        "note": "Injects commands the spacecraft accepts."
+      },
+      {
+        "technique": "SRV-14",
+        "note": "Acts while the operator is out of contact."
+      },
+      {
+        "technique": "EFX-06",
+        "note": "Forces repeated safe-mode entries."
+      },
+      {
+        "technique": "RSL-01",
+        "note": "Uses relaxed protections in safe mode to keep control."
+      }
+    ],
+    "breakpoints": [
+      "SC-07",
+      "SC-09",
+      "SC-32",
+      "SC-27",
+      "SC-25"
+    ],
+    "incidents": [
+      "INC-19"
+    ]
+  },
+  {
+    "id": "AP-04",
+    "name": "Build pipeline to the whole constellation",
+    "summary": "A compromised dependency survives in the build system, reaches flight through a signed update and is rolled out fleet-wide before it activates.",
+    "steps": [
+      {
+        "technique": "MSN-09",
+        "note": "Maps frameworks and suppliers behind the flight software."
+      },
+      {
+        "technique": "EXP-09",
+        "note": "Prepares altered code for an upstream project."
+      },
+      {
+        "technique": "POS-05",
+        "note": "The altered dependency is consumed by the build."
+      },
+      {
+        "technique": "SRV-13",
+        "note": "Persists in the build and update channel."
+      },
+      {
+        "technique": "TRN-11",
+        "note": "Moves from development into operations tooling."
+      },
+      {
+        "technique": "CTL-05",
+        "note": "A malicious image is uploaded through the normal process."
+      },
+      {
+        "technique": "TRN-10",
+        "note": "Fleet automation applies it to every spacecraft."
+      },
+      {
+        "technique": "SRV-11",
+        "note": "The logic stays dormant until a trigger."
+      },
+      {
+        "technique": "EFX-10",
+        "note": "Spacecraft are disabled together."
+      },
+      {
+        "technique": "RSL-02",
+        "note": "Recovery images were built by the same pipeline."
+      }
+    ],
+    "breakpoints": [
+      "SC-17",
+      "SC-02",
+      "SC-11",
+      "SC-34",
+      "SC-36",
+      "SC-26"
+    ],
+    "incidents": []
+  },
+  {
+    "id": "AP-05",
+    "name": "Stolen provider credentials to missed and misused passes",
+    "summary": "A leaked service key lets an intruder change contact schedules and station configuration at a shared ground provider, and undermine the backup path too.",
+    "steps": [
+      {
+        "technique": "MSN-05",
+        "note": "Learns which provider and sites the mission uses."
+      },
+      {
+        "technique": "MSN-13",
+        "note": "Finds a provider API key in a public repository."
+      },
+      {
+        "technique": "POS-04",
+        "note": "Signs in to the operator's provider tenant."
+      },
+      {
+        "technique": "CTL-13",
+        "note": "Changes schedules and station configuration."
+      },
+      {
+        "technique": "TRN-07",
+        "note": "Probes for access to other tenants' resources."
+      },
+      {
+        "technique": "MNP-12",
+        "note": "Alters the pass plan fed back to the operator."
+      },
+      {
+        "technique": "RSL-05",
+        "note": "The backup path uses the same provider and key."
+      }
+    ],
+    "breakpoints": [
+      "SC-21",
+      "SC-03",
+      "SC-15",
+      "SC-33",
+      "SC-28"
+    ],
+    "incidents": []
+  },
+  {
+    "id": "AP-06",
+    "name": "Navigation denial and deception",
+    "summary": "Local jamming forces receivers to reacquire, then counterfeit signals lead them to a false position or time that dependent systems act on.",
+    "steps": [
+      {
+        "technique": "MSN-01",
+        "note": "Identifies users who depend on satellite navigation and timing."
+      },
+      {
+        "technique": "EXP-01",
+        "note": "Acquires jamming and signal-generation equipment."
+      },
+      {
+        "technique": "EFX-03",
+        "note": "Jams genuine signals in the target area."
+      },
+      {
+        "technique": "MNP-09",
+        "note": "Broadcasts counterfeit signals."
+      },
+      {
+        "technique": "EFX-12",
+        "note": "Users act on false position or time."
+      }
+    ],
+    "breakpoints": [
+      "SC-18",
+      "SC-30",
+      "SC-36",
+      "SC-27"
+    ],
+    "incidents": [
+      "INC-24"
+    ]
+  },
+  {
+    "id": "AP-07",
+    "name": "Quiet espionage over clear links",
+    "summary": "Unencrypted traffic on a wide beam yields network details and credentials, which lead to sign-in, data theft and exfiltration hidden in satellite traffic.",
+    "steps": [
+      {
+        "technique": "MSN-11",
+        "note": "Surveys unencrypted traffic on the beam."
+      },
+      {
+        "technique": "MNP-01",
+        "note": "Collects readable user and backhaul data."
+      },
+      {
+        "technique": "MSN-13",
+        "note": "Extracts credentials and internal details from the capture."
+      },
+      {
+        "technique": "POS-03",
+        "note": "Signs in with valid accounts."
+      },
+      {
+        "technique": "MNP-14",
+        "note": "Copies design and engineering data."
+      },
+      {
+        "technique": "MNP-03",
+        "note": "Moves data out over a satellite link."
+      }
+    ],
+    "breakpoints": [
+      "SC-08",
+      "SC-15",
+      "SC-28",
+      "SC-14"
+    ],
+    "incidents": [
+      "INC-06",
+      "INC-08",
+      "INC-32"
+    ]
+  },
+  {
+    "id": "AP-08",
+    "name": "Earth-observation product deception",
+    "summary": "Through the customer portal an intruder reaches planning and processing, alters tasking and products, and leaves the operator unable to say which products are sound.",
+    "steps": [
+      {
+        "technique": "MSN-01",
+        "note": "Identifies customers who act on the products."
+      },
+      {
+        "technique": "POS-14",
+        "note": "Compromises the customer tasking interface."
+      },
+      {
+        "technique": "TRN-01",
+        "note": "Moves into planning and processing systems."
+      },
+      {
+        "technique": "MNP-12",
+        "note": "Alters tasking so key areas are not collected."
+      },
+      {
+        "technique": "MNP-04",
+        "note": "Modifies delivered products."
+      },
+      {
+        "technique": "SRV-05",
+        "note": "Edits logs that would show the changes."
+      },
+      {
+        "technique": "EFX-12",
+        "note": "Customers decide on false information."
+      },
+      {
+        "technique": "RSL-10",
+        "note": "The operator cannot prove which products are trustworthy."
+      }
+    ],
+    "breakpoints": [
+      "SC-22",
+      "SC-14",
+      "SC-21",
+      "SC-25",
+      "SC-28"
+    ],
+    "incidents": [
+      "INC-18"
+    ]
+  },
+  {
+    "id": "AP-09",
+    "name": "Hosted payload crossover",
+    "summary": "A third-party payload becomes a position on board, crosses to the platform over the shared bus and shortens the mission through subtle parameter changes.",
+    "steps": [
+      {
+        "technique": "MSN-09",
+        "note": "Learns which third parties fly equipment on the platform."
+      },
+      {
+        "technique": "POS-11",
+        "note": "Arrives on board through the hosted payload."
+      },
+      {
+        "technique": "CTL-12",
+        "note": "Escalates from the payload domain."
+      },
+      {
+        "technique": "TRN-04",
+        "note": "Sends platform messages over the shared bus."
+      },
+      {
+        "technique": "SRV-12",
+        "note": "Resides in logic the platform never reads back."
+      },
+      {
+        "technique": "MNP-06",
+        "note": "Alters control and power tables slightly."
+      },
+      {
+        "technique": "EFX-07",
+        "note": "Consumables are spent early."
+      },
+      {
+        "technique": "RSL-09",
+        "note": "The redundant chain shares the same weakness."
+      }
+    ],
+    "breakpoints": [
+      "SC-12",
+      "SC-26",
+      "SC-13",
+      "SC-02",
+      "SC-34"
+    ],
+    "incidents": []
+  },
+  {
+    "id": "AP-10",
+    "name": "Extortion of an operator through a supplier account",
+    "summary": "Bought access leads to data theft, destroyed backups and encrypted mission systems, followed by a return through secrets nobody rotated.",
+    "steps": [
+      {
+        "technique": "MSN-13",
+        "note": "Finds supplier credentials in breach data."
+      },
+      {
+        "technique": "EXP-08",
+        "note": "Buys a working session from a broker."
+      },
+      {
+        "technique": "POS-03",
+        "note": "Signs in as a valid user."
+      },
+      {
+        "technique": "CTL-08",
+        "note": "Escalates to administrator."
+      },
+      {
+        "technique": "MNP-14",
+        "note": "Copies engineering and customer data."
+      },
+      {
+        "technique": "RSL-03",
+        "note": "Deletes online backups."
+      },
+      {
+        "technique": "EFX-05",
+        "note": "Encrypts mission and processing systems."
+      },
+      {
+        "technique": "EFX-14",
+        "note": "Demands payment."
+      },
+      {
+        "technique": "RSL-07",
+        "note": "Returns later with a token that was never revoked."
+      }
+    ],
+    "breakpoints": [
+      "SC-15",
+      "SC-35",
+      "SC-31",
+      "SC-28",
+      "SC-14",
+      "SC-03"
+    ],
+    "incidents": [
+      "INC-33",
+      "INC-36"
+    ]
+  }
+]

@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "spectra/technique.schema.json",
+  "title": "SPECTRA technique",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "phase",
+    "name",
+    "description",
+    "segments",
+    "assets",
+    "vectors",
+    "missions",
+    "tier",
+    "basis",
+    "precondition",
+    "effects",
+    "controls",
+    "data_sources",
+    "detection",
+    "assessment"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^(MSN|EXP|POS|CTL|SRV|TRN|MNP|EFX|RSL)-[0-9]{2}$"
+    },
+    "phase": {
+      "enum": [
+        "MSN",
+        "EXP",
+        "POS",
+        "CTL",
+        "SRV",
+        "TRN",
+        "MNP",
+        "EFX",
+        "RSL"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "minLength": 3
+    },
+    "description": {
+      "type": "string",
+      "minLength": 20
+    },
+    "segments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "enum": [
+          "space",
+          "link",
+          "ground",
+          "user",
+          "supply"
+        ]
+      }
+    },
+    "assets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "enum": [
+          "obc",
+          "fsw",
+          "bus",
+          "aocs",
+          "eps",
+          "payload",
+          "crypto",
+          "hosted",
+          "isl",
+          "tc",
+          "tm",
+          "pdl",
+          "gnss",
+          "gs",
+          "moc",
+          "fds",
+          "net",
+          "cloud",
+          "kms",
+          "dataproc",
+          "it",
+          "ut",
+          "rx",
+          "nms",
+          "dev",
+          "cots",
+          "ait",
+          "launch",
+          "people"
+        ]
+      }
+    },
+    "vectors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "enum": [
+          "rf",
+          "net",
+          "cloud",
+          "supply",
+          "phys",
+          "insider",
+          "social"
+        ]
+      }
+    },
+    "missions": {
+      "type": "array",
+      "description": "Empty means every mission type.",
+      "items": {
+        "enum": [
+          "satcom",
+          "eo",
+          "pnt",
+          "sci",
+          "crew",
+          "const"
+        ]
+      }
+    },
+    "tier": {
+      "enum": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "basis": {
+      "enum": [
+        "O",
+        "D",
+        "T"
+      ]
+    },
+    "precondition": {
+      "type": "string"
+    },
+    "effects": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^ME-[0-9]{2}$"
+      }
+    },
+    "controls": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^SC-[0-9]{2}$"
+      }
+    },
+    "data_sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^DS-[0-9]{2}$"
+      }
+    },
+    "detection": {
+      "type": "string"
+    },
+    "assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "question",
+        "environments",
+        "evidence",
+        "recovery_test"
+      ],
+      "properties": {
+        "question": {
+          "type": "string"
+        },
+        "environments": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "osint",
+              "tab",
+              "range",
+              "twin",
+              "hil",
+              "rf",
+              "auth"
+            ]
+          }
+        },
+        "evidence": {
+          "type": "string"
+        },
+        "recovery_test": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,137 @@
+[
+  {
+    "id": "MSN",
+    "n": 1,
+    "name": "Mission",
+    "verb": "Understand the mission",
+    "desc": "The adversary learns what the mission is for, who depends on it and how it is built and operated.",
+    "defender": "Know what you expose about the mission and which dependencies an outsider can map.",
+    "sparta": [
+      "Reconnaissance"
+    ],
+    "attack": [
+      "Reconnaissance"
+    ]
+  },
+  {
+    "id": "EXP",
+    "n": 2,
+    "name": "Exposure",
+    "verb": "Find and prepare the opening",
+    "desc": "The adversary turns knowledge into capability: equipment, replicas, vulnerabilities, access and people.",
+    "defender": "Reduce what can be researched offline and make weaknesses expensive to find.",
+    "sparta": [
+      "Resource Development"
+    ],
+    "attack": [
+      "Resource Development"
+    ]
+  },
+  {
+    "id": "POS",
+    "n": 3,
+    "name": "Positioning",
+    "verb": "Gain a foothold",
+    "desc": "The adversary obtains a first position in any segment from which the mission can be reached.",
+    "defender": "Treat every segment boundary as an entry point, including vendors, terminals and the spectrum.",
+    "sparta": [
+      "Initial Access"
+    ],
+    "attack": [
+      "Initial Access"
+    ]
+  },
+  {
+    "id": "CTL",
+    "n": 4,
+    "name": "Control",
+    "verb": "Take authority",
+    "desc": "The adversary converts a foothold into the ability to execute: commands, code or privileged actions.",
+    "defender": "Make command authority depend on cryptography and independent approval, not on network position.",
+    "sparta": [
+      "Execution"
+    ],
+    "attack": [
+      "Execution",
+      "Privilege Escalation",
+      "Credential Access"
+    ]
+  },
+  {
+    "id": "SRV",
+    "n": 5,
+    "name": "Survival",
+    "verb": "Stay and stay hidden",
+    "desc": "The adversary keeps access across resets, updates and investigations while avoiding notice.",
+    "defender": "Assume telemetry and logs can lie; keep an independent way to establish the truth.",
+    "sparta": [
+      "Persistence",
+      "Defense Evasion"
+    ],
+    "attack": [
+      "Persistence",
+      "Defense Evasion"
+    ]
+  },
+  {
+    "id": "TRN",
+    "n": 6,
+    "name": "Transit",
+    "verb": "Cross segment boundaries",
+    "desc": "The adversary moves between segments, spacecraft, tenants and organisations along trusted paths.",
+    "defender": "Every trusted path is a route. Constrain what each path can carry and verify at both ends.",
+    "sparta": [
+      "Lateral Movement"
+    ],
+    "attack": [
+      "Lateral Movement",
+      "Discovery"
+    ]
+  },
+  {
+    "id": "MNP",
+    "n": 7,
+    "name": "Manipulation",
+    "verb": "Take or alter",
+    "desc": "The adversary collects, removes or changes data, parameters and signals without yet breaking the mission.",
+    "defender": "Protect the integrity and provenance of what the mission produces and consumes.",
+    "sparta": [
+      "Exfiltration"
+    ],
+    "attack": [
+      "Collection",
+      "Exfiltration",
+      "Command and Control"
+    ]
+  },
+  {
+    "id": "EFX",
+    "n": 8,
+    "name": "Mission Effect",
+    "verb": "Break the mission",
+    "desc": "The adversary denies, degrades, deceives or destroys the service the mission exists to deliver.",
+    "defender": "Measure impact in mission terms and design so that a single effect does not end the mission.",
+    "sparta": [
+      "Impact"
+    ],
+    "attack": [
+      "Impact"
+    ]
+  },
+  {
+    "id": "RSL",
+    "n": 9,
+    "name": "Resilience",
+    "verb": "Contest the recovery",
+    "desc": "The adversary attacks detection, response and recovery so the operator cannot return to a trusted state.",
+    "defender": "Prove recovery works while under attack: rehearse it, time it and verify the result is trustworthy.",
+    "sparta": [
+      "Impact",
+      "Persistence"
+    ],
+    "attack": [
+      "Impact",
+      "Inhibit Response (ICS)"
+    ]
+  }
+]

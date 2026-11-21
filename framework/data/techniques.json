@@ -1,0 +1,5528 @@
+[
+  {
+    "id": "MSN-01",
+    "phase": "MSN",
+    "name": "Mission and operator profiling",
+    "description": "Collect public material on what the mission does, who pays for it and who depends on it, to judge which effect would matter most.",
+    "segments": [
+      "ground",
+      "supply"
+    ],
+    "assets": [
+      "people",
+      "it"
+    ],
+    "vectors": [
+      "social",
+      "net"
+    ],
+    "missions": [],
+    "tier": 1,
+    "basis": "O",
+    "precondition": "Mission information is public through press, procurement, customer or academic channels.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-05",
+      "SC-29"
+    ],
+    "data_sources": [
+      "DS-15"
+    ],
+    "detection": "Rarely visible; exposure reviews and unusual interest in staff or documents are the practical signals.",
+    "assessment": {
+      "question": "Could an outsider name our most valuable service and its most dependent customer from public sources alone?",
+      "environments": [
+        "osint",
+        "tab"
+      ],
+      "evidence": "A target pack assembled by an independent reviewer within a fixed time box.",
+      "recovery_test": "Confirm the mission can state which public disclosures were accepted and which were withdrawn."
+    }
+  },
+  {
+    "id": "MSN-02",
+    "phase": "MSN",
+    "name": "Regulatory filing harvest",
+    "description": "Read spectrum, licensing and coordination filings to learn frequencies, emission types, orbits and station locations.",
+    "segments": [
+      "link",
+      "ground"
+    ],
+    "assets": [
+      "tc",
+      "tm",
+      "pdl",
+      "gs"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 1,
+    "basis": "O",
+    "precondition": "The mission has filed with national or international spectrum and licensing bodies.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-05"
+    ],
+    "data_sources": [
+      "DS-15"
+    ],
+    "detection": "Not detectable; treat filed parameters as known to every adversary.",
+    "assessment": {
+      "question": "Which link and station parameters can be recovered from our filings, and does any protection rely on them being secret?",
+      "environments": [
+        "osint"
+      ],
+      "evidence": "A table of parameters recovered from filings against those in the interface documents.",
+      "recovery_test": "Not applicable; verify no control assumes these values are confidential."
+    }
+  },
+  {
+    "id": "MSN-03",
+    "phase": "MSN",
+    "name": "Orbit and pass prediction",
+    "description": "Use published orbital elements to predict when the spacecraft is in view of a given location and when operators are in contact.",
+    "segments": [
+      "space",
+      "link"
+    ],
+    "assets": [
+      "tc",
+      "tm"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 1,
+    "basis": "O",
+    "precondition": "Orbital elements are published or can be derived from observation.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-04",
+      "SC-05"
+    ],
+    "data_sources": [
+      "DS-15",
+      "DS-13"
+    ],
+    "detection": "Not detectable; correlate later radio events with predicted adversary visibility.",
+    "assessment": {
+      "question": "At which points in the orbit is the spacecraft in view of uncontrolled territory but out of our own contact?",
+      "environments": [
+        "osint",
+        "twin"
+      ],
+      "evidence": "A visibility timeline marking operator contact, out-of-contact periods and third-party visibility.",
+      "recovery_test": "Confirm out-of-contact autonomy is safe if commands arrive only from an untrusted source."
+    }
+  },
+  {
+    "id": "MSN-04",
+    "phase": "MSN",
+    "name": "Spacecraft design intelligence gathering",
+    "description": "Assemble design knowledge from papers, theses, vendor datasheets, manuals, conference talks and open-source flight software.",
+    "segments": [
+      "space",
+      "supply"
+    ],
+    "assets": [
+      "obc",
+      "fsw",
+      "bus",
+      "cots"
+    ],
+    "vectors": [
+      "net",
+      "social"
+    ],
+    "missions": [],
+    "tier": 1,
+    "basis": "O",
+    "precondition": "Design details have been published by the operator, its suppliers or academic partners.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-05",
+      "SC-02",
+      "SC-17"
+    ],
+    "data_sources": [
+      "DS-15"
+    ],
+    "detection": "Download and access patterns on documentation portals; otherwise not detectable.",
+    "assessment": {
+      "question": "How complete a picture of the on-board architecture and command set can be built without any insider help?",
+      "environments": [
+        "osint"
+      ],
+      "evidence": "An architecture sketch produced by a reviewer from public material, with sources.",
+      "recovery_test": "Not applicable; feed findings into the exposure register."
+    }
+  },
+  {
+    "id": "MSN-05",
+    "phase": "MSN",
+    "name": "Ground station and teleport mapping",
+    "description": "Locate antennas, teleports and service providers from imagery, filings, provider marketing and network data.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "gs",
+      "net",
+      "cloud"
+    ],
+    "vectors": [
+      "net",
+      "phys"
+    ],
+    "missions": [],
+    "tier": 1,
+    "basis": "O",
+    "precondition": "Stations are fixed, visible and often shared with other operators.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-05",
+      "SC-04",
+      "SC-03"
+    ],
+    "data_sources": [
+      "DS-15",
+      "DS-14"
+    ],
+    "detection": "Physical surveillance indicators at sites; scanning of station address space.",
+    "assessment": {
+      "question": "Which stations and providers carry our commands, and which of them could an outsider identify?",
+      "environments": [
+        "osint"
+      ],
+      "evidence": "A list of sites and providers identified externally versus the real contact plan.",
+      "recovery_test": "Confirm an alternate site exists that does not appear in the same public sources."
+    }
+  },
+  {
+    "id": "MSN-06",
+    "phase": "MSN",
+    "name": "Passive downlink signal survey",
+    "description": "Receive and record the spacecraft's emissions to learn modulation, framing, beacons and operating habits.",
+    "segments": [
+      "link"
+    ],
+    "assets": [
+      "tm",
+      "pdl"
+    ],
+    "vectors": [
+      "rf"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "A receiver within the downlink footprint; nothing more.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-08",
+      "SC-05"
+    ],
+    "data_sources": [
+      "DS-05"
+    ],
+    "detection": "Passive reception cannot be detected.",
+    "assessment": {
+      "question": "What can be learned about spacecraft state and operations from an unkeyed receiver in the footprint?",
+      "environments": [
+        "rf",
+        "osint"
+      ],
+      "evidence": "Decoded frame structure and any readable fields from a lab capture of the mission's own downlink.",
+      "recovery_test": "Confirm encrypted downlinks reveal no state through unprotected headers or beacons."
+    }
+  },
+  {
+    "id": "MSN-07",
+    "phase": "MSN",
+    "name": "Command and telemetry format reconstruction",
+    "description": "Rebuild the meaning of telemetry and command structures from captures, public decoders, leaked databases or shared standards.",
+    "segments": [
+      "link",
+      "space"
+    ],
+    "assets": [
+      "tc",
+      "tm",
+      "fsw"
+    ],
+    "vectors": [
+      "rf",
+      "net"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "D",
+    "precondition": "Captured traffic, a published standard or a leaked or open command database.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-08",
+      "SC-07",
+      "SC-05"
+    ],
+    "data_sources": [
+      "DS-15"
+    ],
+    "detection": "Leak monitoring for mission databases; otherwise not detectable.",
+    "assessment": {
+      "question": "If the command database leaked tomorrow, what would still stop a third party issuing a valid command?",
+      "environments": [
+        "rf",
+        "hil"
+      ],
+      "evidence": "A statement of which protections remain when formats are assumed known.",
+      "recovery_test": "Confirm no safety case depends on format obscurity."
+    }
+  },
+  {
+    "id": "MSN-08",
+    "phase": "MSN",
+    "name": "Workforce and contractor research",
+    "description": "Identify operators, engineers and suppliers, and infer tools and technologies from profiles, adverts and talks.",
+    "segments": [
+      "supply",
+      "ground"
+    ],
+    "assets": [
+      "people",
+      "it"
+    ],
+    "vectors": [
+      "social",
+      "net"
+    ],
+    "missions": [],
+    "tier": 1,
+    "basis": "O",
+    "precondition": "Staff and suppliers describe their work publicly.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-05",
+      "SC-23"
+    ],
+    "data_sources": [
+      "DS-15"
+    ],
+    "detection": "Reports from staff of unusual contact; spikes in profile views are weak signals.",
+    "assessment": {
+      "question": "Which roles with command or release authority can be identified and contacted from public sources?",
+      "environments": [
+        "osint",
+        "tab"
+      ],
+      "evidence": "A list of exposed privileged roles and the technologies their adverts reveal.",
+      "recovery_test": "Confirm exposed roles have stronger sign-in and are covered by targeted awareness."
+    }
+  },
+  {
+    "id": "MSN-09",
+    "phase": "MSN",
+    "name": "Supply chain and component mapping",
+    "description": "Work out which suppliers, components, frameworks and service providers the mission relies on, looking for the weakest.",
+    "segments": [
+      "supply"
+    ],
+    "assets": [
+      "cots",
+      "dev"
+    ],
+    "vectors": [
+      "net",
+      "social"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "Supplier relationships are visible through contracts, press, hardware teardown or software artefacts.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-02",
+      "SC-05"
+    ],
+    "data_sources": [
+      "DS-15",
+      "DS-10"
+    ],
+    "detection": "Supplier-side reports of targeting; otherwise not detectable.",
+    "assessment": {
+      "question": "Which single supplier, if compromised, reaches the most missions or the most privileged function?",
+      "environments": [
+        "osint"
+      ],
+      "evidence": "A dependency map ranking suppliers by reach into flight and operations.",
+      "recovery_test": "Confirm an alternative exists, or a compensating check, for the highest-ranked supplier."
+    }
+  },
+  {
+    "id": "MSN-10",
+    "phase": "MSN",
+    "name": "Exposed infrastructure discovery",
+    "description": "Scan and search for internet-reachable modems, antenna controllers, remote-access appliances, portals and service endpoints.",
+    "segments": [
+      "ground",
+      "user"
+    ],
+    "assets": [
+      "gs",
+      "net",
+      "ut",
+      "nms",
+      "cloud"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 1,
+    "basis": "O",
+    "precondition": "Mission or station equipment is reachable from the internet, deliberately or by mistake.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-16",
+      "SC-05",
+      "SC-06"
+    ],
+    "data_sources": [
+      "DS-06",
+      "DS-15"
+    ],
+    "detection": "Scan traffic at the perimeter; exposure-monitoring services reporting your own assets.",
+    "assessment": {
+      "question": "What mission-related management interfaces can be reached from the internet today?",
+      "environments": [
+        "osint",
+        "auth"
+      ],
+      "evidence": "An inventory of externally reachable services with owner and justification.",
+      "recovery_test": "Confirm each exposed service can be withdrawn quickly without stopping operations."
+    }
+  },
+  {
+    "id": "MSN-11",
+    "phase": "MSN",
+    "name": "Clear-text traffic survey",
+    "description": "Listen to unencrypted user or backhaul traffic on broad satellite beams to learn about the networks and people using them.",
+    "segments": [
+      "link",
+      "user"
+    ],
+    "assets": [
+      "pdl",
+      "ut"
+    ],
+    "vectors": [
+      "rf"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "D",
+    "precondition": "Traffic on the link is not encrypted and the beam covers the listener.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-08"
+    ],
+    "data_sources": [
+      "DS-05"
+    ],
+    "detection": "Not detectable on the link; only an audit of what is sent in clear reveals the exposure.",
+    "assessment": {
+      "question": "What internal addressing, credentials or operational content crosses our space links unencrypted?",
+      "environments": [
+        "rf"
+      ],
+      "evidence": "A classified sample of the mission's own link traffic showing what is readable.",
+      "recovery_test": "Confirm encryption can be enabled per service without breaking legacy users."
+    }
+  },
+  {
+    "id": "MSN-12",
+    "phase": "MSN",
+    "name": "Operational rhythm analysis",
+    "description": "Infer shift patterns, pass schedules, manoeuvre campaigns and critical periods such as early operations or eclipse seasons.",
+    "segments": [
+      "ground",
+      "space"
+    ],
+    "assets": [
+      "moc",
+      "fds",
+      "people",
+      "launch"
+    ],
+    "vectors": [
+      "rf",
+      "net",
+      "social"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "T",
+    "precondition": "Regular operations leave observable patterns in emissions, schedules or announcements.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-05",
+      "SC-31"
+    ],
+    "data_sources": [
+      "DS-15"
+    ],
+    "detection": "Not directly detectable; note which critical periods are announced in advance.",
+    "assessment": {
+      "question": "When is our team thinnest and the spacecraft least forgiving, and could an outsider predict it?",
+      "environments": [
+        "tab",
+        "osint"
+      ],
+      "evidence": "A calendar of critical periods and how each could be predicted externally.",
+      "recovery_test": "Confirm staffing and authority to respond are no weaker in those periods."
+    }
+  },
+  {
+    "id": "MSN-13",
+    "phase": "MSN",
+    "name": "Credential and code leak mining",
+    "description": "Search public repositories, breach collections and criminal markets for mission credentials, tokens, keys and source code.",
+    "segments": [
+      "ground",
+      "supply"
+    ],
+    "assets": [
+      "it",
+      "dev",
+      "cloud"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 1,
+    "basis": "O",
+    "precondition": "Staff or suppliers have leaked secrets or reused credentials exposed elsewhere.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-05",
+      "SC-15",
+      "SC-17",
+      "SC-21"
+    ],
+    "data_sources": [
+      "DS-15",
+      "DS-08"
+    ],
+    "detection": "Secret scanning of repositories; monitoring of breach data for corporate identities.",
+    "assessment": {
+      "question": "Do any live credentials, tokens or keys for mission systems exist outside our control?",
+      "environments": [
+        "osint",
+        "auth"
+      ],
+      "evidence": "Results of a leak search across repositories and breach data, with validity of each finding.",
+      "recovery_test": "Rotate one exposed secret end to end and measure the time and side effects."
+    }
+  },
+  {
+    "id": "EXP-01",
+    "phase": "EXP",
+    "name": "Radio capability acquisition",
+    "description": "Obtain the antennas, amplifiers and software-defined radios needed to receive from, transmit to or interfere with a space link.",
+    "segments": [
+      "link"
+    ],
+    "assets": [
+      "tc",
+      "tm",
+      "gnss",
+      "pdl"
+    ],
+    "vectors": [
+      "rf"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "The required band and power are within reach of commercial equipment.",
+    "effects": [
+      "ME-04"
+    ],
+    "controls": [
+      "SC-07",
+      "SC-18",
+      "SC-27"
+    ],
+    "data_sources": [
+      "DS-05",
+      "DS-15"
+    ],
+    "detection": "Spectrum monitoring sees test emissions; procurement is invisible to the operator.",
+    "assessment": {
+      "question": "What equipment budget buys a credible uplink or interference capability against each of our links?",
+      "environments": [
+        "tab",
+        "rf"
+      ],
+      "evidence": "A link-budget estimate of adversary capability per link, with assumptions.",
+      "recovery_test": "Not applicable; use the result to size margin and authentication requirements."
+    }
+  },
+  {
+    "id": "EXP-02",
+    "phase": "EXP",
+    "name": "Ground-station service acquisition",
+    "description": "Buy, borrow or fraudulently obtain time on commercial ground stations able to reach the target's bands and orbit.",
+    "segments": [
+      "ground",
+      "link"
+    ],
+    "assets": [
+      "cloud",
+      "gs"
+    ],
+    "vectors": [
+      "cloud",
+      "social"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "T",
+    "precondition": "Providers sell antenna time with limited checks on which spacecraft a customer may contact.",
+    "effects": [
+      "ME-01"
+    ],
+    "controls": [
+      "SC-03",
+      "SC-21",
+      "SC-07"
+    ],
+    "data_sources": [
+      "DS-09"
+    ],
+    "detection": "Provider-side licensing checks; operator-side detection of unexpected uplink carriers.",
+    "assessment": {
+      "question": "Would our provider let another customer point at and transmit to our spacecraft?",
+      "environments": [
+        "tab",
+        "range"
+      ],
+      "evidence": "Provider's written controls on licence verification and transmit authorisation.",
+      "recovery_test": "Confirm spacecraft authentication holds even if a compliant station transmits on our frequency."
+    }
+  },
+  {
+    "id": "EXP-03",
+    "phase": "EXP",
+    "name": "Target replica construction",
+    "description": "Build a working copy of the target from commercial components, open flight software and recovered documentation to rehearse against.",
+    "segments": [
+      "space",
+      "supply"
+    ],
+    "assets": [
+      "fsw",
+      "obc",
+      "cots"
+    ],
+    "vectors": [
+      "supply",
+      "net"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "D",
+    "precondition": "Components or software used by the mission are commercially or openly available.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-02",
+      "SC-17",
+      "SC-05"
+    ],
+    "data_sources": [
+      "DS-15",
+      "DS-10"
+    ],
+    "detection": "Unusual purchases reported by vendors; otherwise not detectable.",
+    "assessment": {
+      "question": "How much of our flight stack could a third party run on its own bench?",
+      "environments": [
+        "tab"
+      ],
+      "evidence": "A list of flight components and software an outsider could acquire, with versions.",
+      "recovery_test": "Not applicable; assume rehearsal is possible and rely on keys, not novelty."
+    }
+  },
+  {
+    "id": "EXP-04",
+    "phase": "EXP",
+    "name": "Flight software vulnerability research",
+    "description": "Analyse flight software obtained from updates, development kits, partners or open source for flaws reachable by command or data.",
+    "segments": [
+      "space"
+    ],
+    "assets": [
+      "fsw",
+      "obc"
+    ],
+    "vectors": [
+      "net",
+      "supply"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "D",
+    "precondition": "The adversary has a copy of the flight software or the framework it is built on.",
+    "effects": [
+      "ME-01"
+    ],
+    "controls": [
+      "SC-06",
+      "SC-17",
+      "SC-11",
+      "SC-26"
+    ],
+    "data_sources": [
+      "DS-10"
+    ],
+    "detection": "Not detectable; rely on your own testing finding the same flaws first.",
+    "assessment": {
+      "question": "Has our command and data handling code been tested against malformed input from every external interface?",
+      "environments": [
+        "hil",
+        "twin"
+      ],
+      "evidence": "Fuzzing and review coverage reports for command, file-transfer and payload interfaces.",
+      "recovery_test": "Patch one finding through the normal upload path on a flatsat and time the full cycle."
+    }
+  },
+  {
+    "id": "EXP-05",
+    "phase": "EXP",
+    "name": "User terminal teardown and firmware extraction",
+    "description": "Buy a terminal, open it and read out its firmware, keys and management protocol to study how the wider network trusts it.",
+    "segments": [
+      "user"
+    ],
+    "assets": [
+      "ut"
+    ],
+    "vectors": [
+      "phys"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "D",
+    "precondition": "Terminals are sold to the public or can be acquired second-hand.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-19",
+      "SC-20",
+      "SC-11"
+    ],
+    "data_sources": [
+      "DS-12"
+    ],
+    "detection": "Tamper signals from terminals; anomalous devices on the network.",
+    "assessment": {
+      "question": "What does one purchased terminal reveal about every other terminal and about the gateway?",
+      "environments": [
+        "hil"
+      ],
+      "evidence": "A teardown report listing extractable secrets and whether they are shared across the fleet.",
+      "recovery_test": "Revoke one test terminal's identity and confirm the network refuses it."
+    }
+  },
+  {
+    "id": "EXP-06",
+    "phase": "EXP",
+    "name": "Ground product vulnerability research",
+    "description": "Find or buy flaws in mission-control software, station equipment, modems and remote-access appliances used by the sector.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "moc",
+      "gs",
+      "net"
+    ],
+    "vectors": [
+      "net",
+      "supply"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "Ground products are commercially available or exposed to the internet.",
+    "effects": [
+      "ME-01"
+    ],
+    "controls": [
+      "SC-06",
+      "SC-16",
+      "SC-14"
+    ],
+    "data_sources": [
+      "DS-07",
+      "DS-15"
+    ],
+    "detection": "Vendor advisories and sector reporting; exploitation attempts at the perimeter.",
+    "assessment": {
+      "question": "For each ground product, how quickly do we learn of a flaw and how long are we exposed?",
+      "environments": [
+        "range"
+      ],
+      "evidence": "Patch timelines for the last three relevant advisories.",
+      "recovery_test": "Confirm operations can continue with a vulnerable product isolated."
+    }
+  },
+  {
+    "id": "EXP-07",
+    "phase": "EXP",
+    "name": "Cryptographic weakness identification",
+    "description": "Look for absent, legacy, proprietary or misused cryptography: static keys, missing counters, unauthenticated modes or fallbacks.",
+    "segments": [
+      "link",
+      "space",
+      "ground"
+    ],
+    "assets": [
+      "tc",
+      "tm",
+      "crypto",
+      "kms"
+    ],
+    "vectors": [
+      "rf",
+      "net"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "D",
+    "precondition": "The design predates modern link security or has an unprotected fallback mode.",
+    "effects": [
+      "ME-01",
+      "ME-02"
+    ],
+    "controls": [
+      "SC-07",
+      "SC-08",
+      "SC-10",
+      "SC-09"
+    ],
+    "data_sources": [
+      "DS-05",
+      "DS-10"
+    ],
+    "detection": "Not detectable; found by design review and lab testing.",
+    "assessment": {
+      "question": "Is there any mode, including safe mode and early operations, in which commands are accepted without authentication?",
+      "environments": [
+        "rf",
+        "hil"
+      ],
+      "evidence": "A matrix of spacecraft modes against authentication, encryption and anti-replay state.",
+      "recovery_test": "Confirm keys can be changed if an algorithm or key is found weak."
+    }
+  },
+  {
+    "id": "EXP-08",
+    "phase": "EXP",
+    "name": "Access purchase from brokers",
+    "description": "Buy working remote access, sessions or credentials for a space organisation or its supplier from criminal access brokers.",
+    "segments": [
+      "ground",
+      "supply"
+    ],
+    "assets": [
+      "it",
+      "net",
+      "cloud"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 1,
+    "basis": "O",
+    "precondition": "A device or account in the organisation is already compromised by commodity malware or phishing.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-15",
+      "SC-29",
+      "SC-16"
+    ],
+    "data_sources": [
+      "DS-08",
+      "DS-15"
+    ],
+    "detection": "Threat-intelligence monitoring of access sales; sign-ins from unfamiliar infrastructure.",
+    "assessment": {
+      "question": "If one employee's saved sessions were stolen today, what could the buyer reach?",
+      "environments": [
+        "tab",
+        "auth"
+      ],
+      "evidence": "Session and token inventory for a sample of privileged users, with lifetime and reach.",
+      "recovery_test": "Invalidate all sessions for a test user and confirm access ends everywhere."
+    }
+  },
+  {
+    "id": "EXP-09",
+    "phase": "EXP",
+    "name": "Tainted component or software staging",
+    "description": "Prepare altered hardware, firmware or software to be introduced through a supplier, distributor or open-source project.",
+    "segments": [
+      "supply"
+    ],
+    "assets": [
+      "cots",
+      "dev"
+    ],
+    "vectors": [
+      "supply"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "A supplier or project in the mission's chain accepts contributions or handles components without strong provenance checks.",
+    "effects": [
+      "ME-01",
+      "ME-12"
+    ],
+    "controls": [
+      "SC-02",
+      "SC-17",
+      "SC-11"
+    ],
+    "data_sources": [
+      "DS-10"
+    ],
+    "detection": "Provenance verification, incoming inspection and reproducible-build mismatches.",
+    "assessment": {
+      "question": "Which incoming items are trusted because of who delivered them rather than what was verified?",
+      "environments": [
+        "tab"
+      ],
+      "evidence": "Provenance records for a sample of flight parts and software dependencies.",
+      "recovery_test": "Replace a suspect component in the build and confirm the system can be re-verified."
+    }
+  },
+  {
+    "id": "EXP-10",
+    "phase": "EXP",
+    "name": "Cover identity and infrastructure setup",
+    "description": "Create front companies, customer accounts, academic personas or look-alike domains to approach staff or buy services.",
+    "segments": [
+      "ground",
+      "supply"
+    ],
+    "assets": [
+      "people",
+      "cloud"
+    ],
+    "vectors": [
+      "social",
+      "cloud"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "The organisation or its providers accept new customers and partners with light verification.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-23",
+      "SC-03",
+      "SC-29"
+    ],
+    "data_sources": [
+      "DS-15",
+      "DS-09"
+    ],
+    "detection": "Know-your-customer checks; look-alike domain monitoring; staff reporting.",
+    "assessment": {
+      "question": "How would a fictitious customer or collaborator be vetted before receiving data, access or antenna time?",
+      "environments": [
+        "tab"
+      ],
+      "evidence": "The onboarding record for a recent external party showing checks performed.",
+      "recovery_test": "Not applicable."
+    }
+  },
+  {
+    "id": "EXP-11",
+    "phase": "EXP",
+    "name": "Legacy and unpatchable asset identification",
+    "description": "Single out spacecraft and ground equipment that cannot be updated, lack link security or run end-of-life software.",
+    "segments": [
+      "space",
+      "ground"
+    ],
+    "assets": [
+      "fsw",
+      "crypto",
+      "gs"
+    ],
+    "vectors": [
+      "net",
+      "rf"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "Long-lived assets remain in service beyond the support life of their technology.",
+    "effects": [
+      "ME-01"
+    ],
+    "controls": [
+      "SC-06",
+      "SC-01",
+      "SC-14"
+    ],
+    "data_sources": [
+      "DS-15"
+    ],
+    "detection": "Not detectable; known from your own asset register.",
+    "assessment": {
+      "question": "Which assets cannot be fixed if a flaw is found, and what protects them instead?",
+      "environments": [
+        "tab",
+        "osint"
+      ],
+      "evidence": "A register of unpatchable assets with compensating controls and retirement dates.",
+      "recovery_test": "Exercise loss of the oldest asset and confirm the mission continues."
+    }
+  },
+  {
+    "id": "EXP-12",
+    "phase": "EXP",
+    "name": "Insider recruitment or coercion",
+    "description": "Persuade, pay or pressure someone with legitimate access to provide information, credentials or actions.",
+    "segments": [
+      "supply",
+      "ground"
+    ],
+    "assets": [
+      "people"
+    ],
+    "vectors": [
+      "insider",
+      "social"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "A person with access is identifiable and susceptible to approach.",
+    "effects": [
+      "ME-01",
+      "ME-02"
+    ],
+    "controls": [
+      "SC-23",
+      "SC-13",
+      "SC-15"
+    ],
+    "data_sources": [
+      "DS-08",
+      "DS-14"
+    ],
+    "detection": "Behavioural indicators, access outside role or hours, staff reporting approaches.",
+    "assessment": {
+      "question": "Which single individual could cause the worst mission effect, and what would stop or reveal it?",
+      "environments": [
+        "tab"
+      ],
+      "evidence": "A separation-of-duties review for command, key and release functions.",
+      "recovery_test": "Remove one privileged person's access in an exercise and confirm nothing depends on them alone."
+    }
+  },
+  {
+    "id": "POS-01",
+    "phase": "POS",
+    "name": "Targeted phishing of space-sector staff",
+    "description": "Send tailored lures, often themed on conferences, jobs or partners, to obtain credentials or run code on staff devices.",
+    "segments": [
+      "ground",
+      "supply"
+    ],
+    "assets": [
+      "people",
+      "it"
+    ],
+    "vectors": [
+      "social",
+      "net"
+    ],
+    "missions": [],
+    "tier": 1,
+    "basis": "O",
+    "precondition": "Staff can be contacted and their devices or accounts have a route towards mission systems.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-15",
+      "SC-23",
+      "SC-28",
+      "SC-29"
+    ],
+    "data_sources": [
+      "DS-08",
+      "DS-07"
+    ],
+    "detection": "Mail filtering, sign-in anomalies, endpoint alerts and staff reports.",
+    "assessment": {
+      "question": "If an operator's laptop is compromised by a lure, what stands between it and the command console?",
+      "environments": [
+        "range",
+        "auth",
+        "tab"
+      ],
+      "evidence": "Results of an authorised phishing exercise and the path traced from one compromised user.",
+      "recovery_test": "Rebuild a compromised operator workstation and rotate its credentials within a target time."
+    }
+  },
+  {
+    "id": "POS-02",
+    "phase": "POS",
+    "name": "Exploitation of internet-facing ground infrastructure",
+    "description": "Exploit a flaw or misconfiguration in a remote-access appliance, portal or station device reachable from the internet.",
+    "segments": [
+      "ground",
+      "user"
+    ],
+    "assets": [
+      "net",
+      "gs",
+      "nms"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "A vulnerable or misconfigured device is exposed and leads towards management networks.",
+    "effects": [
+      "ME-02",
+      "ME-01"
+    ],
+    "controls": [
+      "SC-16",
+      "SC-06",
+      "SC-14",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-06",
+      "DS-07"
+    ],
+    "detection": "Perimeter telemetry, appliance integrity checks and unexpected sessions from the device.",
+    "assessment": {
+      "question": "Which internet-facing device, if taken over, gives a route to station or fleet management?",
+      "environments": [
+        "range",
+        "auth"
+      ],
+      "evidence": "Exposure scan plus a network path analysis from each exposed device.",
+      "recovery_test": "Take one remote-access appliance out of service and confirm operations continue on an alternative."
+    }
+  },
+  {
+    "id": "POS-03",
+    "phase": "POS",
+    "name": "Use of valid mission accounts",
+    "description": "Sign in with stolen, guessed, sprayed or shared credentials to remote access, operations tools or cloud consoles.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "moc",
+      "net",
+      "it",
+      "cloud"
+    ],
+    "vectors": [
+      "net",
+      "insider"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "Accounts lack strong multi-factor sign-in or sessions can be reused.",
+    "effects": [
+      "ME-01",
+      "ME-02"
+    ],
+    "controls": [
+      "SC-15",
+      "SC-28",
+      "SC-13"
+    ],
+    "data_sources": [
+      "DS-08"
+    ],
+    "detection": "Impossible travel, new devices, spray patterns and sign-ins outside shift patterns.",
+    "assessment": {
+      "question": "Can any mission role be exercised with a password alone, or with a session copied from another machine?",
+      "environments": [
+        "range",
+        "auth"
+      ],
+      "evidence": "Sign-in policy export and a sample of mission-role authentications.",
+      "recovery_test": "Disable and re-issue credentials for an entire shift team in an exercise."
+    }
+  },
+  {
+    "id": "POS-04",
+    "phase": "POS",
+    "name": "Compromise of a cloud or station-service tenant",
+    "description": "Take over the operator's account with a cloud or ground-station provider using stolen keys, tokens or console access.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "cloud",
+      "gs"
+    ],
+    "vectors": [
+      "cloud"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "T",
+    "precondition": "Service credentials are long-lived, over-scoped or stored where they can be stolen.",
+    "effects": [
+      "ME-01",
+      "ME-02"
+    ],
+    "controls": [
+      "SC-21",
+      "SC-03",
+      "SC-15",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-09"
+    ],
+    "detection": "Provider audit logs showing new keys, unusual scheduling or access from new locations.",
+    "assessment": {
+      "question": "What could someone holding our provider API key schedule, download or change?",
+      "environments": [
+        "range",
+        "auth"
+      ],
+      "evidence": "Scope and age of every provider credential, and an audit-log sample for one week.",
+      "recovery_test": "Rotate provider credentials during an exercise without missing a pass."
+    }
+  },
+  {
+    "id": "POS-05",
+    "phase": "POS",
+    "name": "Software supply chain compromise",
+    "description": "Insert malicious code through a dependency, framework, vendor update or build service that the mission consumes.",
+    "segments": [
+      "supply",
+      "space",
+      "ground"
+    ],
+    "assets": [
+      "dev",
+      "fsw",
+      "moc"
+    ],
+    "vectors": [
+      "supply"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "O",
+    "precondition": "The mission builds on third-party code or accepts vendor updates without independent verification.",
+    "effects": [
+      "ME-01",
+      "ME-12"
+    ],
+    "controls": [
+      "SC-02",
+      "SC-17",
+      "SC-11",
+      "SC-06"
+    ],
+    "data_sources": [
+      "DS-10"
+    ],
+    "detection": "Dependency pinning alerts, build reproducibility checks and behaviour change after updates.",
+    "assessment": {
+      "question": "Could a change in one upstream dependency reach flight or operations without a human reviewing it?",
+      "environments": [
+        "range",
+        "tab"
+      ],
+      "evidence": "Dependency inventory with pinning and review status for flight and ground builds.",
+      "recovery_test": "Roll back a ground product update and rebuild flight software without a suspect dependency."
+    }
+  },
+  {
+    "id": "POS-06",
+    "phase": "POS",
+    "name": "Hardware supply chain implant",
+    "description": "Alter or substitute a component, board or programmable device before integration so it carries hidden function into orbit.",
+    "segments": [
+      "supply",
+      "space"
+    ],
+    "assets": [
+      "cots",
+      "obc",
+      "crypto",
+      "launch"
+    ],
+    "vectors": [
+      "supply",
+      "phys"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "Parts pass through hands or facilities outside the operator's control without tamper evidence.",
+    "effects": [
+      "ME-01",
+      "ME-12",
+      "ME-09"
+    ],
+    "controls": [
+      "SC-02",
+      "SC-20",
+      "SC-12"
+    ],
+    "data_sources": [
+      "DS-10",
+      "DS-14"
+    ],
+    "detection": "Incoming inspection, electrical characterisation and custody records.",
+    "assessment": {
+      "question": "For which flight parts could a substitution go unnoticed between manufacture and integration?",
+      "environments": [
+        "tab"
+      ],
+      "evidence": "Chain-of-custody records for a critical part and the inspection actually performed.",
+      "recovery_test": "Confirm a suspected unit could be isolated on orbit by switching to a redundant chain from a different lot."
+    }
+  },
+  {
+    "id": "POS-07",
+    "phase": "POS",
+    "name": "Compromise of integration and test equipment",
+    "description": "Use test benches, ground support equipment or loading tools that touch the spacecraft before launch as the way in.",
+    "segments": [
+      "supply",
+      "space"
+    ],
+    "assets": [
+      "ait",
+      "fsw",
+      "launch"
+    ],
+    "vectors": [
+      "supply",
+      "phys",
+      "net"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "Test equipment is networked, shared or maintained by third parties and is trusted by the spacecraft.",
+    "effects": [
+      "ME-01",
+      "ME-12"
+    ],
+    "controls": [
+      "SC-02",
+      "SC-17",
+      "SC-11",
+      "SC-20"
+    ],
+    "data_sources": [
+      "DS-10",
+      "DS-14",
+      "DS-07"
+    ],
+    "detection": "Integrity checks of test tools; comparison of loaded images against signed releases.",
+    "assessment": {
+      "question": "Is what was loaded during integration provably the release that was approved?",
+      "environments": [
+        "range",
+        "tab"
+      ],
+      "evidence": "Hash comparison between approved images and those read back from the unit after loading.",
+      "recovery_test": "Re-load and attest flight software after integration using an independent tool."
+    }
+  },
+  {
+    "id": "POS-08",
+    "phase": "POS",
+    "name": "Rogue ground station uplink",
+    "description": "Transmit towards the spacecraft from equipment the operator does not control, placing frames directly at the command receiver.",
+    "segments": [
+      "link",
+      "space"
+    ],
+    "assets": [
+      "tc",
+      "crypto"
+    ],
+    "vectors": [
+      "rf"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "D",
+    "precondition": "The spacecraft is in view and the uplink parameters are known.",
+    "effects": [
+      "ME-01"
+    ],
+    "controls": [
+      "SC-07",
+      "SC-09",
+      "SC-08",
+      "SC-27",
+      "SC-32"
+    ],
+    "data_sources": [
+      "DS-01",
+      "DS-05",
+      "DS-03"
+    ],
+    "detection": "On-board counters of rejected frames, receiver lock outside scheduled passes and spectrum monitoring.",
+    "assessment": {
+      "question": "What does the spacecraft do with a correctly formatted frame from an unknown transmitter?",
+      "environments": [
+        "rf",
+        "hil"
+      ],
+      "evidence": "Lab record of rejected-frame telemetry when an unkeyed transmitter sends valid-format commands.",
+      "recovery_test": "Confirm rejected-frame floods do not block legitimate commanding."
+    }
+  },
+  {
+    "id": "POS-09",
+    "phase": "POS",
+    "name": "User terminal as entry point",
+    "description": "Use a modified or compromised terminal to reach gateway, management or other customers' traffic from inside the network.",
+    "segments": [
+      "user",
+      "ground"
+    ],
+    "assets": [
+      "ut",
+      "nms"
+    ],
+    "vectors": [
+      "phys",
+      "net"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "D",
+    "precondition": "Terminals are trusted by the network beyond what a customer device should be.",
+    "effects": [
+      "ME-02",
+      "ME-01"
+    ],
+    "controls": [
+      "SC-19",
+      "SC-14",
+      "SC-20"
+    ],
+    "data_sources": [
+      "DS-12",
+      "DS-06"
+    ],
+    "detection": "Terminals speaking management protocols or scanning; unexpected firmware versions.",
+    "assessment": {
+      "question": "From a terminal we do not control, what management functions and neighbours are reachable?",
+      "environments": [
+        "hil",
+        "range"
+      ],
+      "evidence": "Reachability test results from a test terminal towards management and peer addresses.",
+      "recovery_test": "Quarantine a misbehaving terminal from the network centre and confirm the action is effective."
+    }
+  },
+  {
+    "id": "POS-10",
+    "phase": "POS",
+    "name": "Abuse of trusted vendor access",
+    "description": "Enter through a supplier's remote-support channel, shared account or managed service that already has a path into operations.",
+    "segments": [
+      "supply",
+      "ground"
+    ],
+    "assets": [
+      "cots",
+      "net",
+      "moc",
+      "gs"
+    ],
+    "vectors": [
+      "supply",
+      "net"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "A third party holds standing access to mission or station systems.",
+    "effects": [
+      "ME-01",
+      "ME-02"
+    ],
+    "controls": [
+      "SC-03",
+      "SC-14",
+      "SC-15",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-08",
+      "DS-06"
+    ],
+    "detection": "Vendor sessions outside change windows or from new origins; actions beyond the support scope.",
+    "assessment": {
+      "question": "Which vendors can reach mission systems right now, and who would notice if they did?",
+      "environments": [
+        "range",
+        "auth"
+      ],
+      "evidence": "A list of standing third-party access paths with last use and approval record.",
+      "recovery_test": "Cut all vendor access in an exercise and confirm operations continue."
+    }
+  },
+  {
+    "id": "POS-11",
+    "phase": "POS",
+    "name": "Hosted payload or third-party application entry",
+    "description": "Arrive on board as, or by compromising, a hosted payload, rideshare interface or customer application running on the spacecraft.",
+    "segments": [
+      "space"
+    ],
+    "assets": [
+      "hosted",
+      "payload",
+      "bus"
+    ],
+    "vectors": [
+      "supply"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "The platform hosts equipment or code from parties other than the operator.",
+    "effects": [
+      "ME-01",
+      "ME-08"
+    ],
+    "controls": [
+      "SC-12",
+      "SC-02",
+      "SC-26",
+      "SC-11"
+    ],
+    "data_sources": [
+      "DS-02",
+      "DS-03"
+    ],
+    "detection": "Bus traffic from the hosted item outside its interface control; resource use beyond allocation.",
+    "assessment": {
+      "question": "What can a hosted item send to the platform beyond its agreed interface?",
+      "environments": [
+        "hil",
+        "twin"
+      ],
+      "evidence": "Bus capture from a flatsat showing what the platform accepts from the hosted interface.",
+      "recovery_test": "Power off or isolate the hosted item and confirm the platform is unaffected."
+    }
+  },
+  {
+    "id": "POS-12",
+    "phase": "POS",
+    "name": "Physical intrusion at a ground site",
+    "description": "Enter a remote or lightly staffed station to connect to equipment, networks or console ports.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "gs",
+      "net"
+    ],
+    "vectors": [
+      "phys"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "T",
+    "precondition": "Sites are remote, shared or unattended and equipment trusts local connections.",
+    "effects": [
+      "ME-01",
+      "ME-04"
+    ],
+    "controls": [
+      "SC-20",
+      "SC-14",
+      "SC-16"
+    ],
+    "data_sources": [
+      "DS-14",
+      "DS-06"
+    ],
+    "detection": "Access control and video records; new devices on station networks.",
+    "assessment": {
+      "question": "What can someone standing in our most remote station do with a laptop and a cable?",
+      "environments": [
+        "tab",
+        "auth"
+      ],
+      "evidence": "A physical assessment report for one remote site including network port behaviour.",
+      "recovery_test": "Remove the site from the network remotely and operate from another."
+    }
+  },
+  {
+    "id": "POS-13",
+    "phase": "POS",
+    "name": "Removable media or engineering device into the mission enclave",
+    "description": "Carry malicious code across an air gap or boundary on media, laptops or instruments used for maintenance and data transfer.",
+    "segments": [
+      "ground",
+      "supply"
+    ],
+    "assets": [
+      "moc",
+      "ait",
+      "dev"
+    ],
+    "vectors": [
+      "phys",
+      "insider"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "T",
+    "precondition": "The enclave depends on manual transfers or visiting equipment.",
+    "effects": [
+      "ME-01"
+    ],
+    "controls": [
+      "SC-14",
+      "SC-20",
+      "SC-23",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-07",
+      "DS-14"
+    ],
+    "detection": "Media scanning stations, device control logs and new executables in the enclave.",
+    "assessment": {
+      "question": "How does software and data enter the mission enclave, and which path has the least inspection?",
+      "environments": [
+        "range",
+        "tab"
+      ],
+      "evidence": "A record of every transfer into the enclave over one month with its inspection result.",
+      "recovery_test": "Not applicable."
+    }
+  },
+  {
+    "id": "POS-14",
+    "phase": "POS",
+    "name": "Compromise of customer and tasking interfaces",
+    "description": "Break into the portals and interfaces through which customers request tasking or collect products, as a route inward.",
+    "segments": [
+      "ground",
+      "user"
+    ],
+    "assets": [
+      "dataproc",
+      "cloud",
+      "fds"
+    ],
+    "vectors": [
+      "net",
+      "cloud"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "T",
+    "precondition": "Customer-facing systems share data or networks with planning and operations.",
+    "effects": [
+      "ME-03",
+      "ME-02"
+    ],
+    "controls": [
+      "SC-21",
+      "SC-15",
+      "SC-14",
+      "SC-22"
+    ],
+    "data_sources": [
+      "DS-09",
+      "DS-07"
+    ],
+    "detection": "Abnormal request patterns, privilege changes and traffic from portal to internal systems.",
+    "assessment": {
+      "question": "Can a request submitted through the customer interface influence planning without validation?",
+      "environments": [
+        "range",
+        "auth"
+      ],
+      "evidence": "A data-flow diagram from portal to planning with validation points marked and tested.",
+      "recovery_test": "Take the customer interface offline and confirm operations and delivery by another route."
+    }
+  },
+  {
+    "id": "POS-15",
+    "phase": "POS",
+    "name": "Crosslink or proximity radio access",
+    "description": "Reach a spacecraft through its inter-satellite or proximity link from another spacecraft the adversary controls or has compromised.",
+    "segments": [
+      "space",
+      "link"
+    ],
+    "assets": [
+      "isl"
+    ],
+    "vectors": [
+      "rf"
+    ],
+    "missions": [
+      "const",
+      "satcom"
+    ],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "The spacecraft accepts traffic on crosslinks and an adversary node can join or imitate the mesh.",
+    "effects": [
+      "ME-01"
+    ],
+    "controls": [
+      "SC-24",
+      "SC-07",
+      "SC-12"
+    ],
+    "data_sources": [
+      "DS-05",
+      "DS-03"
+    ],
+    "detection": "Unexpected link acquisitions; crosslink traffic from unknown identities.",
+    "assessment": {
+      "question": "Does a neighbour on the crosslink have any authority that the ground does not need a key to exercise?",
+      "environments": [
+        "twin",
+        "tab"
+      ],
+      "evidence": "A protocol review and simulator test of crosslink authentication and authorisation.",
+      "recovery_test": "Disable crosslinks on one spacecraft and confirm it can still be operated directly."
+    }
+  },
+  {
+    "id": "CTL-01",
+    "phase": "CTL",
+    "name": "Command replay",
+    "description": "Record legitimate command transmissions and send them again later so the spacecraft repeats an action.",
+    "segments": [
+      "link",
+      "space"
+    ],
+    "assets": [
+      "tc"
+    ],
+    "vectors": [
+      "rf"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "D",
+    "precondition": "Commands are not bound to a counter or time window that the spacecraft enforces.",
+    "effects": [
+      "ME-01",
+      "ME-08"
+    ],
+    "controls": [
+      "SC-09",
+      "SC-07",
+      "SC-25"
+    ],
+    "data_sources": [
+      "DS-01",
+      "DS-03",
+      "DS-05"
+    ],
+    "detection": "Commands executed without a matching ground record; counter anomalies.",
+    "assessment": {
+      "question": "Will the spacecraft act twice on the same captured command frame?",
+      "environments": [
+        "rf",
+        "hil"
+      ],
+      "evidence": "Lab test record of a replayed frame and the resulting telemetry.",
+      "recovery_test": "Confirm counters resynchronise safely after a reboot without opening a replay window."
+    }
+  },
+  {
+    "id": "CTL-02",
+    "phase": "CTL",
+    "name": "Unauthenticated command injection",
+    "description": "Send new, well-formed commands to a spacecraft that does not verify who sent them.",
+    "segments": [
+      "link",
+      "space"
+    ],
+    "assets": [
+      "tc",
+      "fsw"
+    ],
+    "vectors": [
+      "rf"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "D",
+    "precondition": "No command authentication, or a mode in which it is switched off.",
+    "effects": [
+      "ME-01",
+      "ME-08",
+      "ME-09"
+    ],
+    "controls": [
+      "SC-07",
+      "SC-08",
+      "SC-32",
+      "SC-25"
+    ],
+    "data_sources": [
+      "DS-01",
+      "DS-03",
+      "DS-05"
+    ],
+    "detection": "Command counters advancing without ground activity; state changes with no procedure.",
+    "assessment": {
+      "question": "In every mode, does the spacecraft refuse a valid-format command that lacks proof of origin?",
+      "environments": [
+        "rf",
+        "hil"
+      ],
+      "evidence": "Mode-by-mode lab results for unauthenticated commands.",
+      "recovery_test": "Regain exclusive control on a flatsat after a simulated third-party command."
+    }
+  },
+  {
+    "id": "CTL-03",
+    "phase": "CTL",
+    "name": "Command injection from a compromised mission control system",
+    "description": "Issue commands through the operator's own control system so they arrive correctly authenticated.",
+    "segments": [
+      "ground",
+      "space"
+    ],
+    "assets": [
+      "moc",
+      "tc"
+    ],
+    "vectors": [
+      "net",
+      "insider"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "The adversary holds a position in mission operations with rights to send or queue commands.",
+    "effects": [
+      "ME-01",
+      "ME-08",
+      "ME-09"
+    ],
+    "controls": [
+      "SC-13",
+      "SC-14",
+      "SC-15",
+      "SC-25",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-01",
+      "DS-07",
+      "DS-08"
+    ],
+    "detection": "Commands with no approved procedure, unusual operator or unusual time; mismatch with the pass plan.",
+    "assessment": {
+      "question": "If the control system is hostile, which commands still need something the attacker does not have?",
+      "environments": [
+        "range",
+        "twin"
+      ],
+      "evidence": "A list of hazardous commands and the independent approval each requires, tested in the twin.",
+      "recovery_test": "Command the twin from the alternate site while the primary control system is treated as compromised."
+    }
+  },
+  {
+    "id": "CTL-04",
+    "phase": "CTL",
+    "name": "Abuse of stored and scheduled commanding",
+    "description": "Load time-tagged commands, on-board procedures or macros that execute later, out of contact and out of sight.",
+    "segments": [
+      "space",
+      "ground"
+    ],
+    "assets": [
+      "obc",
+      "fsw",
+      "moc"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "The spacecraft supports stored sequences and the adversary can load or edit them.",
+    "effects": [
+      "ME-01",
+      "ME-08"
+    ],
+    "controls": [
+      "SC-13",
+      "SC-25",
+      "SC-26",
+      "SC-32"
+    ],
+    "data_sources": [
+      "DS-01",
+      "DS-03"
+    ],
+    "detection": "Differences between the on-board schedule and the approved plan; unexpected sequence activations.",
+    "assessment": {
+      "question": "Is the on-board schedule read back and compared with the approved plan at every contact?",
+      "environments": [
+        "twin",
+        "hil"
+      ],
+      "evidence": "A schedule read-back comparison procedure and its last results.",
+      "recovery_test": "Clear and reload the on-board schedule from a trusted source on the twin."
+    }
+  },
+  {
+    "id": "CTL-05",
+    "phase": "CTL",
+    "name": "Malicious flight software upload",
+    "description": "Use the legitimate patch or image upload service to place altered software on the spacecraft.",
+    "segments": [
+      "space",
+      "ground"
+    ],
+    "assets": [
+      "fsw",
+      "obc"
+    ],
+    "vectors": [
+      "net",
+      "supply"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "D",
+    "precondition": "Uploads are not verified on board against a signature the adversary cannot produce.",
+    "effects": [
+      "ME-01",
+      "ME-09",
+      "ME-12"
+    ],
+    "controls": [
+      "SC-11",
+      "SC-13",
+      "SC-17",
+      "SC-26",
+      "SC-34"
+    ],
+    "data_sources": [
+      "DS-04",
+      "DS-01",
+      "DS-10"
+    ],
+    "detection": "Image hashes that differ from the approved release; unscheduled upload activity.",
+    "assessment": {
+      "question": "Will the spacecraft activate an image that was not signed by the release authority?",
+      "environments": [
+        "hil",
+        "twin"
+      ],
+      "evidence": "Flatsat record of refused unsigned and wrongly signed images.",
+      "recovery_test": "Restore the protected image on the flatsat and attest it independently."
+    }
+  },
+  {
+    "id": "CTL-06",
+    "phase": "CTL",
+    "name": "Exploitation of on-board input handling",
+    "description": "Send malformed commands, files or data that trigger a flaw in on-board parsing and yield unintended execution.",
+    "segments": [
+      "space",
+      "link"
+    ],
+    "assets": [
+      "fsw",
+      "obc",
+      "payload"
+    ],
+    "vectors": [
+      "rf",
+      "net"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "D",
+    "precondition": "A reachable flaw exists in code that handles external input.",
+    "effects": [
+      "ME-01",
+      "ME-09"
+    ],
+    "controls": [
+      "SC-06",
+      "SC-17",
+      "SC-12",
+      "SC-26",
+      "SC-11"
+    ],
+    "data_sources": [
+      "DS-03",
+      "DS-04"
+    ],
+    "detection": "Unexpected resets, memory faults, watchdog events and rejected-frame patterns.",
+    "assessment": {
+      "question": "Which on-board parsers face external input and how were they tested?",
+      "environments": [
+        "hil",
+        "twin"
+      ],
+      "evidence": "Fuzzing coverage and crash triage for each externally reachable parser.",
+      "recovery_test": "Recover the flatsat from a forced processor fault and verify image integrity."
+    }
+  },
+  {
+    "id": "CTL-07",
+    "phase": "CTL",
+    "name": "Abuse of maintenance, debug or bootloader modes",
+    "description": "Enter low-level service modes that offer memory access or image loading with weaker protection than normal operations.",
+    "segments": [
+      "space",
+      "supply"
+    ],
+    "assets": [
+      "fsw",
+      "obc"
+    ],
+    "vectors": [
+      "rf",
+      "phys",
+      "net"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "D",
+    "precondition": "Service modes remain reachable after launch or in safe mode.",
+    "effects": [
+      "ME-01",
+      "ME-09"
+    ],
+    "controls": [
+      "SC-11",
+      "SC-07",
+      "SC-20",
+      "SC-32"
+    ],
+    "data_sources": [
+      "DS-03",
+      "DS-01"
+    ],
+    "detection": "Mode transitions without a procedure; memory load or dump commands.",
+    "assessment": {
+      "question": "What can be done in bootloader or maintenance mode, and what proves the requester is entitled?",
+      "environments": [
+        "hil"
+      ],
+      "evidence": "A list of service-mode functions with the authentication each demands, tested on the flatsat.",
+      "recovery_test": "Exit service mode to a verified image using only the documented recovery procedure."
+    }
+  },
+  {
+    "id": "CTL-08",
+    "phase": "CTL",
+    "name": "Privilege escalation in the ground environment",
+    "description": "Move from an ordinary foothold to directory, virtualisation or operations administrator rights.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "it",
+      "moc",
+      "net",
+      "kms"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "Enterprise and mission administration share identities, hosts or management tools.",
+    "effects": [
+      "ME-01",
+      "ME-02"
+    ],
+    "controls": [
+      "SC-14",
+      "SC-15",
+      "SC-16",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-07",
+      "DS-08"
+    ],
+    "detection": "Directory change alerts, credential-theft tooling and new privileged group members.",
+    "assessment": {
+      "question": "Does compromise of the corporate directory grant any right inside the mission enclave?",
+      "environments": [
+        "range",
+        "auth"
+      ],
+      "evidence": "An identity trust map between enterprise and mission, with an authorised test of one path.",
+      "recovery_test": "Rebuild mission identity services from a trusted backup in the range."
+    }
+  },
+  {
+    "id": "CTL-09",
+    "phase": "CTL",
+    "name": "Command key or crypto-state compromise",
+    "description": "Obtain command keys, or the ability to use them, from ground key stores, operations tools or poorly protected backups.",
+    "segments": [
+      "ground",
+      "space"
+    ],
+    "assets": [
+      "kms",
+      "crypto"
+    ],
+    "vectors": [
+      "net",
+      "insider"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "Keys are reachable in software, exported for convenience or usable by a single administrator.",
+    "effects": [
+      "ME-01",
+      "ME-12"
+    ],
+    "controls": [
+      "SC-10",
+      "SC-13",
+      "SC-15",
+      "SC-23",
+      "SC-14"
+    ],
+    "data_sources": [
+      "DS-08",
+      "DS-07",
+      "DS-10"
+    ],
+    "detection": "Key-use records outside passes; key export or backup events; administrator actions on key stores.",
+    "assessment": {
+      "question": "Can any one person or one compromised host use or copy the command key?",
+      "environments": [
+        "range",
+        "tab"
+      ],
+      "evidence": "Key-ceremony records and a test showing key use requires hardware and dual control.",
+      "recovery_test": "Rehearse an on-orbit rekey on the flatsat from a declared key compromise."
+    }
+  },
+  {
+    "id": "CTL-10",
+    "phase": "CTL",
+    "name": "Payload tasking hijack",
+    "description": "Direct the payload without authority: retask a sensor, reconfigure a transponder or redirect capacity.",
+    "segments": [
+      "space",
+      "ground"
+    ],
+    "assets": [
+      "payload",
+      "fds",
+      "dataproc"
+    ],
+    "vectors": [
+      "net",
+      "cloud"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "Payload control is reachable separately from, or with less protection than, platform commanding.",
+    "effects": [
+      "ME-03",
+      "ME-05",
+      "ME-02"
+    ],
+    "controls": [
+      "SC-13",
+      "SC-14",
+      "SC-21",
+      "SC-22",
+      "SC-25"
+    ],
+    "data_sources": [
+      "DS-01",
+      "DS-16",
+      "DS-09"
+    ],
+    "detection": "Tasking that matches no customer order; payload configuration drift.",
+    "assessment": {
+      "question": "Is payload commanding protected to the same standard as platform commanding?",
+      "environments": [
+        "twin",
+        "range"
+      ],
+      "evidence": "A comparison of authentication and approval for platform and payload command paths.",
+      "recovery_test": "Restore payload configuration from a trusted baseline and reconcile outstanding orders."
+    }
+  },
+  {
+    "id": "CTL-11",
+    "phase": "CTL",
+    "name": "Management-plane takeover of a terminal fleet",
+    "description": "Gain control of the systems that configure and update user terminals, and so the ability to act on every terminal at once.",
+    "segments": [
+      "user",
+      "ground"
+    ],
+    "assets": [
+      "nms",
+      "ut"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [
+      "satcom",
+      "const"
+    ],
+    "tier": 3,
+    "basis": "O",
+    "precondition": "The management network is reachable from a compromised position and can issue fleet-wide actions.",
+    "effects": [
+      "ME-04",
+      "ME-09",
+      "ME-11"
+    ],
+    "controls": [
+      "SC-19",
+      "SC-14",
+      "SC-16",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-12",
+      "DS-06",
+      "DS-07"
+    ],
+    "detection": "Bulk management commands, unusual update jobs and mass terminal state changes.",
+    "assessment": {
+      "question": "What is the largest number of terminals one management action can change, and what slows it down?",
+      "environments": [
+        "range",
+        "hil"
+      ],
+      "evidence": "Evidence of rate limits and approvals for fleet-wide actions, tested on lab terminals.",
+      "recovery_test": "Restore a batch of test terminals to service after a bad configuration push, without a site visit."
+    }
+  },
+  {
+    "id": "CTL-12",
+    "phase": "CTL",
+    "name": "On-board privilege escalation",
+    "description": "Move from a confined position on board, such as a payload or application, to control of platform functions.",
+    "segments": [
+      "space"
+    ],
+    "assets": [
+      "obc",
+      "bus",
+      "hosted",
+      "payload"
+    ],
+    "vectors": [
+      "net",
+      "supply"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "Partitioning between on-board functions is weak or the data bus trusts every node.",
+    "effects": [
+      "ME-01",
+      "ME-08"
+    ],
+    "controls": [
+      "SC-12",
+      "SC-26",
+      "SC-11"
+    ],
+    "data_sources": [
+      "DS-03",
+      "DS-04",
+      "DS-02"
+    ],
+    "detection": "Bus messages from unexpected sources; tasks or resource use outside allocation.",
+    "assessment": {
+      "question": "Can a compromised payload issue platform commands over the on-board bus?",
+      "environments": [
+        "hil",
+        "twin"
+      ],
+      "evidence": "Flatsat bus-injection test results from the payload interface.",
+      "recovery_test": "Isolate the payload and return the platform to a verified configuration."
+    }
+  },
+  {
+    "id": "CTL-13",
+    "phase": "CTL",
+    "name": "Takeover of antenna control and station automation",
+    "description": "Control the systems that point antennas, configure modems and run pass schedules, to deny, redirect or enable contacts.",
+    "segments": [
+      "ground",
+      "link"
+    ],
+    "assets": [
+      "gs",
+      "cloud"
+    ],
+    "vectors": [
+      "net",
+      "cloud"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "D",
+    "precondition": "Station automation is reachable on shared networks or through provider interfaces.",
+    "effects": [
+      "ME-04",
+      "ME-01",
+      "ME-06"
+    ],
+    "controls": [
+      "SC-16",
+      "SC-14",
+      "SC-21",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-07",
+      "DS-09",
+      "DS-05"
+    ],
+    "detection": "Pointing, power or schedule changes that match no plan; missed passes.",
+    "assessment": {
+      "question": "Who can change what the antenna points at and transmits, and how is each change authorised?",
+      "environments": [
+        "range",
+        "auth"
+      ],
+      "evidence": "Access-control review of station automation and a tested unauthorised schedule change in the range.",
+      "recovery_test": "Run a pass manually with automation disabled."
+    }
+  },
+  {
+    "id": "CTL-14",
+    "phase": "CTL",
+    "name": "Operator deception into harmful commanding",
+    "description": "Lead operators to send damaging commands themselves by altering procedures, displays or planning inputs, or by impersonation.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "moc",
+      "people",
+      "fds"
+    ],
+    "vectors": [
+      "social",
+      "insider",
+      "net"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "Operators rely on documents, displays or requests whose integrity is not independently checked.",
+    "effects": [
+      "ME-01",
+      "ME-08",
+      "ME-03"
+    ],
+    "controls": [
+      "SC-13",
+      "SC-23",
+      "SC-25",
+      "SC-22"
+    ],
+    "data_sources": [
+      "DS-01",
+      "DS-07"
+    ],
+    "detection": "Procedure changes outside configuration control; discrepancies between displays and raw telemetry.",
+    "assessment": {
+      "question": "Would an operator following a tampered procedure be stopped by anything before a hazardous command?",
+      "environments": [
+        "tab",
+        "twin"
+      ],
+      "evidence": "Configuration-control records for procedures and a twin exercise using an altered procedure.",
+      "recovery_test": "Restore procedures and display definitions from a signed baseline."
+    }
+  },
+  {
+    "id": "SRV-01",
+    "phase": "SRV",
+    "name": "Persistent flight software modification",
+    "description": "Alter stored flight software or tables so the change survives resets and remains across operations.",
+    "segments": [
+      "space"
+    ],
+    "assets": [
+      "fsw",
+      "obc"
+    ],
+    "vectors": [
+      "net",
+      "supply"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "D",
+    "precondition": "Stored images or tables can be written without verification at next boot.",
+    "effects": [
+      "ME-12",
+      "ME-01"
+    ],
+    "controls": [
+      "SC-11",
+      "SC-26",
+      "SC-34",
+      "SC-17"
+    ],
+    "data_sources": [
+      "DS-04",
+      "DS-03"
+    ],
+    "detection": "Periodic memory checksums and attestation against the released image.",
+    "assessment": {
+      "question": "How often, and by what independent means, is on-board software compared with the release?",
+      "environments": [
+        "hil"
+      ],
+      "evidence": "Latest on-board checksum results reconciled with release hashes.",
+      "recovery_test": "Restore and attest a modified image on the flatsat."
+    }
+  },
+  {
+    "id": "SRV-02",
+    "phase": "SRV",
+    "name": "Bootloader or recovery image tampering",
+    "description": "Modify the first-stage loader or the fallback image so that even recovery starts from compromised code.",
+    "segments": [
+      "space"
+    ],
+    "assets": [
+      "fsw",
+      "obc"
+    ],
+    "vectors": [
+      "net",
+      "supply",
+      "phys"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "The root of trust is writable in flight or was compromised before launch.",
+    "effects": [
+      "ME-12",
+      "ME-09"
+    ],
+    "controls": [
+      "SC-11",
+      "SC-34",
+      "SC-20",
+      "SC-17"
+    ],
+    "data_sources": [
+      "DS-04"
+    ],
+    "detection": "Attestation rooted in immutable hardware; pre-launch image verification.",
+    "assessment": {
+      "question": "Is there any software on board that cannot be altered by any command, and does recovery start from it?",
+      "environments": [
+        "hil",
+        "tab"
+      ],
+      "evidence": "Design evidence of an immutable root and a test attempting to rewrite it.",
+      "recovery_test": "Demonstrate recovery from the immutable root with every writable image assumed hostile."
+    }
+  },
+  {
+    "id": "SRV-03",
+    "phase": "SRV",
+    "name": "Persistence in ground mission systems",
+    "description": "Install services, tasks, accounts or implants on operations hosts so access outlasts reboots and password changes.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "moc",
+      "gs",
+      "it"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "The adversary holds administrative rights on ground hosts.",
+    "effects": [
+      "ME-12",
+      "ME-01"
+    ],
+    "controls": [
+      "SC-14",
+      "SC-28",
+      "SC-35",
+      "SC-15"
+    ],
+    "data_sources": [
+      "DS-07",
+      "DS-08"
+    ],
+    "detection": "Endpoint detection, baseline drift, new services and scheduled tasks.",
+    "assessment": {
+      "question": "How would we know a mission-control server carries software that is not in its baseline?",
+      "environments": [
+        "range",
+        "auth"
+      ],
+      "evidence": "Baseline comparison of one operations host against its approved build.",
+      "recovery_test": "Rebuild the host from trusted media and return it to operations."
+    }
+  },
+  {
+    "id": "SRV-04",
+    "phase": "SRV",
+    "name": "Telemetry masking",
+    "description": "Alter telemetry on board or on the ground so operators see nominal values while the real state differs.",
+    "segments": [
+      "space",
+      "ground",
+      "link"
+    ],
+    "assets": [
+      "tm",
+      "moc",
+      "fsw"
+    ],
+    "vectors": [
+      "net",
+      "rf"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "The adversary controls a point in the telemetry chain and telemetry is not independently verifiable.",
+    "effects": [
+      "ME-06",
+      "ME-12"
+    ],
+    "controls": [
+      "SC-25",
+      "SC-26",
+      "SC-22",
+      "SC-08"
+    ],
+    "data_sources": [
+      "DS-02",
+      "DS-04",
+      "DS-13",
+      "DS-05"
+    ],
+    "detection": "Cross-checks between independent sensors, physics models, external tracking and raw link metrics.",
+    "assessment": {
+      "question": "Which telemetry values could be false without any independent measurement contradicting them?",
+      "environments": [
+        "twin",
+        "hil"
+      ],
+      "evidence": "A table of critical parameters with their independent cross-check, exercised in the twin.",
+      "recovery_test": "Establish true state using only independent sources in an exercise."
+    }
+  },
+  {
+    "id": "SRV-05",
+    "phase": "SRV",
+    "name": "Ground command log and audit tampering",
+    "description": "Delete or edit command histories, operator logs and security records to hide what was sent and by whom.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "moc",
+      "it"
+    ],
+    "vectors": [
+      "net",
+      "insider"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "Logs are stored where operations administrators can change them.",
+    "effects": [
+      "ME-12",
+      "ME-06"
+    ],
+    "controls": [
+      "SC-28",
+      "SC-14",
+      "SC-15",
+      "SC-35"
+    ],
+    "data_sources": [
+      "DS-07",
+      "DS-01",
+      "DS-08"
+    ],
+    "detection": "Gaps or hash-chain breaks in logs; disagreement between ground history and on-board counters.",
+    "assessment": {
+      "question": "Can an operations administrator alter the command history without leaving evidence elsewhere?",
+      "environments": [
+        "range"
+      ],
+      "evidence": "Evidence that logs are forwarded to a store operations staff cannot modify.",
+      "recovery_test": "Reconstruct one pass's commanding from independent sources only."
+    }
+  },
+  {
+    "id": "SRV-06",
+    "phase": "SRV",
+    "name": "On-board event and counter suppression",
+    "description": "Disable event reporting, clear error logs or reset counters on board so intrusion leaves no trace in telemetry.",
+    "segments": [
+      "space"
+    ],
+    "assets": [
+      "fsw",
+      "obc"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "Event reporting and counters can be reconfigured by command.",
+    "effects": [
+      "ME-06",
+      "ME-12"
+    ],
+    "controls": [
+      "SC-26",
+      "SC-25",
+      "SC-11"
+    ],
+    "data_sources": [
+      "DS-03",
+      "DS-01"
+    ],
+    "detection": "Event filters or counters changed outside procedure; counters that fail to advance.",
+    "assessment": {
+      "question": "Which commands can silence on-board reporting, and are they treated as hazardous?",
+      "environments": [
+        "hil",
+        "twin"
+      ],
+      "evidence": "List of reporting-control commands and their classification.",
+      "recovery_test": "Reset reporting configuration to baseline on the flatsat and verify by test event."
+    }
+  },
+  {
+    "id": "SRV-07",
+    "phase": "SRV",
+    "name": "Fault protection manipulation",
+    "description": "Disable or retune on-board fault detection and response so abnormal conditions are tolerated or responses are harmful.",
+    "segments": [
+      "space"
+    ],
+    "assets": [
+      "fsw",
+      "aocs",
+      "eps"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "Fault-protection thresholds and enables are changeable by command or table load.",
+    "effects": [
+      "ME-08",
+      "ME-06",
+      "ME-10"
+    ],
+    "controls": [
+      "SC-13",
+      "SC-26",
+      "SC-25",
+      "SC-32"
+    ],
+    "data_sources": [
+      "DS-03",
+      "DS-02",
+      "DS-01"
+    ],
+    "detection": "Table read-back differences; fault monitors disabled without an approved waiver.",
+    "assessment": {
+      "question": "Could fault protection be switched off, or its limits widened, without a second approval?",
+      "environments": [
+        "hil",
+        "twin"
+      ],
+      "evidence": "Fault-protection table comparison against baseline and the approval record for each change.",
+      "recovery_test": "Reload baseline fault-protection tables on the flatsat and inject a test fault."
+    }
+  },
+  {
+    "id": "SRV-08",
+    "phase": "SRV",
+    "name": "Living off mission tooling",
+    "description": "Use the operator's own administration tools, scripts and procedures so activity looks like routine work.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "moc",
+      "gs",
+      "fds",
+      "it"
+    ],
+    "vectors": [
+      "net",
+      "insider"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "O",
+    "precondition": "The adversary has valid access and the environment has rich built-in tooling.",
+    "effects": [
+      "ME-12"
+    ],
+    "controls": [
+      "SC-28",
+      "SC-15",
+      "SC-13",
+      "SC-14"
+    ],
+    "data_sources": [
+      "DS-07",
+      "DS-08",
+      "DS-01"
+    ],
+    "detection": "Behavioural baselines per role and shift; use of tools by accounts that never use them.",
+    "assessment": {
+      "question": "Would we notice legitimate tools being used by the wrong person or at the wrong time?",
+      "environments": [
+        "range",
+        "auth"
+      ],
+      "evidence": "An analytic that flags out-of-role tool use, tested with a benign simulation.",
+      "recovery_test": "Not applicable."
+    }
+  },
+  {
+    "id": "SRV-09",
+    "phase": "SRV",
+    "name": "Rogue keys, accounts or stations",
+    "description": "Add an operator account, authorise an extra station or load an additional key so access continues after a clean-up.",
+    "segments": [
+      "ground",
+      "space"
+    ],
+    "assets": [
+      "kms",
+      "crypto",
+      "it",
+      "gs"
+    ],
+    "vectors": [
+      "net",
+      "insider"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "Key slots, station lists or account stores can be extended without independent review.",
+    "effects": [
+      "ME-01",
+      "ME-12"
+    ],
+    "controls": [
+      "SC-10",
+      "SC-15",
+      "SC-28",
+      "SC-13"
+    ],
+    "data_sources": [
+      "DS-08",
+      "DS-01",
+      "DS-10"
+    ],
+    "detection": "Inventory checks of on-board key slots, station authorisations and privileged accounts.",
+    "assessment": {
+      "question": "Do we know exactly which keys, stations and accounts are authorised, and when that last changed?",
+      "environments": [
+        "range",
+        "hil"
+      ],
+      "evidence": "A reconciled inventory of keys, authorised stations and privileged accounts.",
+      "recovery_test": "Revoke an unrecognised key on the flatsat and confirm it no longer authenticates."
+    }
+  },
+  {
+    "id": "SRV-10",
+    "phase": "SRV",
+    "name": "Persistence in terminal firmware",
+    "description": "Modify terminal firmware or bootloaders so compromise survives factory reset and operator updates.",
+    "segments": [
+      "user"
+    ],
+    "assets": [
+      "ut"
+    ],
+    "vectors": [
+      "net",
+      "phys",
+      "supply"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "D",
+    "precondition": "Terminal firmware is not verified at boot or signing keys are exposed.",
+    "effects": [
+      "ME-12",
+      "ME-05"
+    ],
+    "controls": [
+      "SC-19",
+      "SC-11",
+      "SC-20"
+    ],
+    "data_sources": [
+      "DS-12"
+    ],
+    "detection": "Firmware version and hash reporting from the fleet; terminals refusing updates.",
+    "assessment": {
+      "question": "Can we prove what firmware each terminal is running without trusting the terminal?",
+      "environments": [
+        "hil"
+      ],
+      "evidence": "Remote attestation or hash-reporting evidence for a sample of terminals.",
+      "recovery_test": "Recover a lab terminal with modified firmware to a verified state remotely."
+    }
+  },
+  {
+    "id": "SRV-11",
+    "phase": "SRV",
+    "name": "Dormant, condition-triggered logic",
+    "description": "Place code that waits for a date, orbital position, command pattern or mission phase before acting.",
+    "segments": [
+      "space",
+      "supply"
+    ],
+    "assets": [
+      "fsw",
+      "obc",
+      "payload"
+    ],
+    "vectors": [
+      "supply",
+      "net"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "Code can be introduced before launch or by update and is not fully reviewed or exercised.",
+    "effects": [
+      "ME-12",
+      "ME-09"
+    ],
+    "controls": [
+      "SC-17",
+      "SC-26",
+      "SC-02",
+      "SC-11"
+    ],
+    "data_sources": [
+      "DS-04",
+      "DS-10"
+    ],
+    "detection": "Code review, coverage analysis and comparison of flown images with reproducible builds.",
+    "assessment": {
+      "question": "How much flown code has never been executed in test, and who reviewed it?",
+      "environments": [
+        "tab",
+        "hil"
+      ],
+      "evidence": "Coverage figures for flight software and a list of unexercised regions.",
+      "recovery_test": "Not applicable; address through build integrity and trusted recovery."
+    }
+  },
+  {
+    "id": "SRV-12",
+    "phase": "SRV",
+    "name": "Hiding in payloads and unmonitored subsystems",
+    "description": "Reside in programmable logic, radio payloads or processors that the platform does not inspect and operators rarely read back.",
+    "segments": [
+      "space"
+    ],
+    "assets": [
+      "payload",
+      "hosted",
+      "obc"
+    ],
+    "vectors": [
+      "supply",
+      "net"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "Reconfigurable devices on board lack integrity monitoring.",
+    "effects": [
+      "ME-12"
+    ],
+    "controls": [
+      "SC-12",
+      "SC-26",
+      "SC-11",
+      "SC-02"
+    ],
+    "data_sources": [
+      "DS-04",
+      "DS-02"
+    ],
+    "detection": "Configuration read-back and comparison; unexpected resource use or emissions.",
+    "assessment": {
+      "question": "Which programmable devices on board have never had their configuration read back in orbit?",
+      "environments": [
+        "hil",
+        "tab"
+      ],
+      "evidence": "Inventory of reconfigurable devices with read-back capability and last verification date.",
+      "recovery_test": "Reload a payload configuration from the trusted baseline and verify it."
+    }
+  },
+  {
+    "id": "SRV-13",
+    "phase": "SRV",
+    "name": "Persistence in the build and update channel",
+    "description": "Stay inside source control, build servers or update distribution so every new release is compromised again.",
+    "segments": [
+      "supply",
+      "ground"
+    ],
+    "assets": [
+      "dev",
+      "cots"
+    ],
+    "vectors": [
+      "supply",
+      "net"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "O",
+    "precondition": "Build infrastructure is reachable from compromised networks and signs what it builds.",
+    "effects": [
+      "ME-12",
+      "ME-01"
+    ],
+    "controls": [
+      "SC-17",
+      "SC-02",
+      "SC-11",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-10",
+      "DS-07"
+    ],
+    "detection": "Build provenance, reproducibility checks and monitoring of build-system changes.",
+    "assessment": {
+      "question": "If the build server were compromised, would the signature on the next release still be valid?",
+      "environments": [
+        "range"
+      ],
+      "evidence": "Evidence that signing is separated from building and that releases are reproducible.",
+      "recovery_test": "Rebuild the pipeline from scratch in an exercise and re-issue a release."
+    }
+  },
+  {
+    "id": "SRV-14",
+    "phase": "SRV",
+    "name": "Operating in visibility gaps",
+    "description": "Act while the spacecraft is out of contact, during handovers or when monitoring is known to be reduced.",
+    "segments": [
+      "space",
+      "link",
+      "ground"
+    ],
+    "assets": [
+      "tc",
+      "tm",
+      "moc"
+    ],
+    "vectors": [
+      "rf",
+      "net"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "There are predictable periods with no ground visibility or reduced staffing.",
+    "effects": [
+      "ME-06",
+      "ME-12"
+    ],
+    "controls": [
+      "SC-25",
+      "SC-26",
+      "SC-27",
+      "SC-33"
+    ],
+    "data_sources": [
+      "DS-01",
+      "DS-03",
+      "DS-05",
+      "DS-13"
+    ],
+    "detection": "On-board logging of all command sources; store-and-forward event records reviewed at next contact.",
+    "assessment": {
+      "question": "Is anything the spacecraft does while out of contact recorded on board and reviewed afterwards?",
+      "environments": [
+        "twin",
+        "tab"
+      ],
+      "evidence": "A sample of out-of-contact event logs and the review record.",
+      "recovery_test": "Not applicable."
+    }
+  },
+  {
+    "id": "TRN-01",
+    "phase": "TRN",
+    "name": "Enterprise to mission operations pivot",
+    "description": "Move from corporate IT into mission operations through shared services, jump hosts, file transfers or administrator habits.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "it",
+      "moc",
+      "net"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "There is at least one network, identity or data path between enterprise and mission environments.",
+    "effects": [
+      "ME-01",
+      "ME-02"
+    ],
+    "controls": [
+      "SC-14",
+      "SC-15",
+      "SC-28",
+      "SC-16"
+    ],
+    "data_sources": [
+      "DS-06",
+      "DS-08",
+      "DS-07"
+    ],
+    "detection": "Boundary traffic outside the approved list; enterprise identities appearing in mission logs.",
+    "assessment": {
+      "question": "List every path from enterprise to mission. Which one would an intruder use?",
+      "environments": [
+        "range",
+        "auth"
+      ],
+      "evidence": "Boundary rule review and an authorised attempt to cross from enterprise to mission.",
+      "recovery_test": "Sever all enterprise connections and operate the mission in isolation for a set period."
+    }
+  },
+  {
+    "id": "TRN-02",
+    "phase": "TRN",
+    "name": "Ground to space through the legitimate uplink",
+    "description": "Use the operator's command chain as the bridge to the spacecraft once ground operations are compromised.",
+    "segments": [
+      "ground",
+      "link",
+      "space"
+    ],
+    "assets": [
+      "moc",
+      "gs",
+      "tc"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "Ground compromise reaches a system able to release commands or uploads.",
+    "effects": [
+      "ME-01",
+      "ME-12"
+    ],
+    "controls": [
+      "SC-13",
+      "SC-07",
+      "SC-25",
+      "SC-11",
+      "SC-14"
+    ],
+    "data_sources": [
+      "DS-01",
+      "DS-07"
+    ],
+    "detection": "Independent reconciliation of released commands against approvals.",
+    "assessment": {
+      "question": "After ground compromise, what further barrier exists before the spacecraft is affected?",
+      "environments": [
+        "twin",
+        "hil"
+      ],
+      "evidence": "Description and test of controls that sit between a compromised console and the transmitter.",
+      "recovery_test": "Hold all commanding, then resume from the alternate site with verified procedures."
+    }
+  },
+  {
+    "id": "TRN-03",
+    "phase": "TRN",
+    "name": "Space to ground through hostile downlinked data",
+    "description": "Send crafted telemetry or payload data that exploits the ground software which parses it, turning the downlink into an attack path.",
+    "segments": [
+      "space",
+      "link",
+      "ground"
+    ],
+    "assets": [
+      "tm",
+      "pdl",
+      "moc",
+      "dataproc"
+    ],
+    "vectors": [
+      "rf",
+      "net"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "D",
+    "precondition": "Ground software trusts downlinked data and the adversary controls a spacecraft, a signal or the data.",
+    "effects": [
+      "ME-01",
+      "ME-03"
+    ],
+    "controls": [
+      "SC-14",
+      "SC-06",
+      "SC-17",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-07",
+      "DS-06"
+    ],
+    "detection": "Parser crashes, malformed-frame counts and unexpected processes on ingest hosts.",
+    "assessment": {
+      "question": "Is data from space treated as untrusted input by every ground component that parses it?",
+      "environments": [
+        "range",
+        "twin"
+      ],
+      "evidence": "Fuzzing results for telemetry and payload ingest, and the isolation of ingest hosts.",
+      "recovery_test": "Rebuild an ingest host and replay stored data through a hardened parser."
+    }
+  },
+  {
+    "id": "TRN-04",
+    "phase": "TRN",
+    "name": "Payload and platform crossover on the data bus",
+    "description": "Cross between payload and platform domains using the shared on-board bus, shared memory or shared processors.",
+    "segments": [
+      "space"
+    ],
+    "assets": [
+      "bus",
+      "payload",
+      "obc",
+      "hosted"
+    ],
+    "vectors": [
+      "net",
+      "supply"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "Domains share a bus or computing resource without enforced separation.",
+    "effects": [
+      "ME-01",
+      "ME-08"
+    ],
+    "controls": [
+      "SC-12",
+      "SC-26"
+    ],
+    "data_sources": [
+      "DS-03",
+      "DS-02"
+    ],
+    "detection": "Bus monitors reporting unexpected message sources or types.",
+    "assessment": {
+      "question": "What enforces the boundary between payload and platform, and has it been tested by injection?",
+      "environments": [
+        "hil"
+      ],
+      "evidence": "Bus-level test results for cross-domain message injection on the flatsat.",
+      "recovery_test": "Isolate one domain and operate the other."
+    }
+  },
+  {
+    "id": "TRN-05",
+    "phase": "TRN",
+    "name": "Spacecraft to spacecraft across the constellation",
+    "description": "Spread from one spacecraft to others over crosslinks, shared routing or peer software distribution.",
+    "segments": [
+      "space",
+      "link"
+    ],
+    "assets": [
+      "isl",
+      "obc"
+    ],
+    "vectors": [
+      "rf",
+      "net"
+    ],
+    "missions": [
+      "const",
+      "satcom"
+    ],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "Spacecraft trust traffic or software from their neighbours.",
+    "effects": [
+      "ME-01",
+      "ME-09",
+      "ME-11"
+    ],
+    "controls": [
+      "SC-24",
+      "SC-12",
+      "SC-26",
+      "SC-36"
+    ],
+    "data_sources": [
+      "DS-03",
+      "DS-02",
+      "DS-05"
+    ],
+    "detection": "Anomalies appearing in sequence along the mesh; unexpected peer-to-peer control traffic.",
+    "assessment": {
+      "question": "If one spacecraft is hostile, what can it make its neighbours do?",
+      "environments": [
+        "twin",
+        "tab"
+      ],
+      "evidence": "Simulator results for a misbehaving node, including routing and control-plane effects.",
+      "recovery_test": "Eject a node from the mesh and confirm the remainder keeps serving."
+    }
+  },
+  {
+    "id": "TRN-06",
+    "phase": "TRN",
+    "name": "Station to station across shared networks",
+    "description": "Move between ground stations, or from one operator's equipment to another's, over provider or wide-area networks.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "gs",
+      "net",
+      "cloud"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "T",
+    "precondition": "Stations share management networks, credentials or a provider backbone.",
+    "effects": [
+      "ME-01",
+      "ME-04"
+    ],
+    "controls": [
+      "SC-14",
+      "SC-03",
+      "SC-16",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-06",
+      "DS-07"
+    ],
+    "detection": "East-west traffic between sites outside the approved pattern.",
+    "assessment": {
+      "question": "Can a compromised station reach the others, or other tenants' equipment at the same site?",
+      "environments": [
+        "range",
+        "auth"
+      ],
+      "evidence": "Inter-site firewall review and an authorised lateral-movement test.",
+      "recovery_test": "Remove one station from the network and continue operations."
+    }
+  },
+  {
+    "id": "TRN-07",
+    "phase": "TRN",
+    "name": "Tenant to tenant in shared ground services",
+    "description": "Cross from one customer's environment to another's inside a shared cloud or ground-station service.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "cloud",
+      "gs"
+    ],
+    "vectors": [
+      "cloud"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "The provider's isolation between customers has a flaw or a shared component.",
+    "effects": [
+      "ME-01",
+      "ME-02"
+    ],
+    "controls": [
+      "SC-21",
+      "SC-03",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-09"
+    ],
+    "detection": "Provider-reported isolation events; your resources appearing in another context.",
+    "assessment": {
+      "question": "What evidence does the provider give that another customer cannot see or act on our contacts and data?",
+      "environments": [
+        "tab",
+        "auth"
+      ],
+      "evidence": "Provider isolation attestations and results of any permitted customer-side test.",
+      "recovery_test": "Fail over to a second provider or own station for a set of passes."
+    }
+  },
+  {
+    "id": "TRN-08",
+    "phase": "TRN",
+    "name": "User terminal to gateway and core",
+    "description": "Travel from the customer edge inward to gateway, management and core network systems.",
+    "segments": [
+      "user",
+      "ground"
+    ],
+    "assets": [
+      "ut",
+      "nms",
+      "net"
+    ],
+    "vectors": [
+      "net",
+      "phys"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "D",
+    "precondition": "The return path from terminals is not filtered as untrusted customer traffic.",
+    "effects": [
+      "ME-01",
+      "ME-04"
+    ],
+    "controls": [
+      "SC-19",
+      "SC-14",
+      "SC-16"
+    ],
+    "data_sources": [
+      "DS-12",
+      "DS-06"
+    ],
+    "detection": "Terminal-originated traffic to management addresses; protocol misuse at the gateway.",
+    "assessment": {
+      "question": "Is traffic arriving from terminals filtered as hostile before it reaches management systems?",
+      "environments": [
+        "hil",
+        "range"
+      ],
+      "evidence": "Gateway filtering rules and a test from a lab terminal.",
+      "recovery_test": "Block a terminal population at the gateway without affecting others."
+    }
+  },
+  {
+    "id": "TRN-09",
+    "phase": "TRN",
+    "name": "Vendor to customers through trusted distribution",
+    "description": "Use one supplier's update, support or management channel to reach many operators at once.",
+    "segments": [
+      "supply",
+      "ground",
+      "user"
+    ],
+    "assets": [
+      "cots",
+      "dev",
+      "nms"
+    ],
+    "vectors": [
+      "supply"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "O",
+    "precondition": "Many operators accept the same vendor's updates or remote management.",
+    "effects": [
+      "ME-01",
+      "ME-11"
+    ],
+    "controls": [
+      "SC-02",
+      "SC-03",
+      "SC-11",
+      "SC-06"
+    ],
+    "data_sources": [
+      "DS-10",
+      "DS-07"
+    ],
+    "detection": "Staged roll-out telemetry; behaviour change after vendor updates; sector alerts.",
+    "assessment": {
+      "question": "Would a malicious vendor update reach production before anyone outside the vendor had examined it?",
+      "environments": [
+        "tab",
+        "range"
+      ],
+      "evidence": "The update acceptance procedure and evidence of staged deployment.",
+      "recovery_test": "Roll back a vendor update across a test population."
+    }
+  },
+  {
+    "id": "TRN-10",
+    "phase": "TRN",
+    "name": "Fleet-wide propagation through constellation operations",
+    "description": "Use automation that manages many spacecraft to push the same harmful change to the whole constellation.",
+    "segments": [
+      "ground",
+      "space"
+    ],
+    "assets": [
+      "moc",
+      "fsw",
+      "obc"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [
+      "const",
+      "satcom",
+      "eo"
+    ],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "Operations tooling can apply a change to all spacecraft without staging.",
+    "effects": [
+      "ME-09",
+      "ME-11",
+      "ME-01"
+    ],
+    "controls": [
+      "SC-13",
+      "SC-11",
+      "SC-36",
+      "SC-25"
+    ],
+    "data_sources": [
+      "DS-01",
+      "DS-04"
+    ],
+    "detection": "Change-rate monitoring; canary spacecraft diverging after an update.",
+    "assessment": {
+      "question": "What is the minimum time and number of approvals to change software on every spacecraft?",
+      "environments": [
+        "twin",
+        "tab"
+      ],
+      "evidence": "Roll-out policy showing staging, canaries and halt criteria, exercised in the twin.",
+      "recovery_test": "Halt a roll-out part-way and return affected spacecraft to the previous image."
+    }
+  },
+  {
+    "id": "TRN-11",
+    "phase": "TRN",
+    "name": "Development and test to operations bridge",
+    "description": "Cross from simulators, test benches or development networks into operations through shared tools, data or connections.",
+    "segments": [
+      "supply",
+      "ground"
+    ],
+    "assets": [
+      "dev",
+      "ait",
+      "moc"
+    ],
+    "vectors": [
+      "net",
+      "supply"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "Test environments connect to operations for data, licences or convenience.",
+    "effects": [
+      "ME-01",
+      "ME-12"
+    ],
+    "controls": [
+      "SC-14",
+      "SC-17",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-06",
+      "DS-10",
+      "DS-07"
+    ],
+    "detection": "Traffic between test and operations networks; test credentials seen in operations.",
+    "assessment": {
+      "question": "Is there any standing connection or shared credential between test and operations?",
+      "environments": [
+        "range"
+      ],
+      "evidence": "Network and identity review between test and operations environments.",
+      "recovery_test": "Disconnect test from operations and confirm both still function."
+    }
+  },
+  {
+    "id": "TRN-12",
+    "phase": "TRN",
+    "name": "Cross-mission pivot through shared services",
+    "description": "Move from one mission to another through shared key management, flight dynamics, networks or operations teams.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "kms",
+      "fds",
+      "net",
+      "gs"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "Several missions depend on a common service that trusts all of them.",
+    "effects": [
+      "ME-01",
+      "ME-02",
+      "ME-11"
+    ],
+    "controls": [
+      "SC-14",
+      "SC-10",
+      "SC-04",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-06",
+      "DS-08"
+    ],
+    "detection": "Service access by one mission's identities to another mission's resources.",
+    "assessment": {
+      "question": "Which shared services, if compromised through one mission, expose the others?",
+      "environments": [
+        "range",
+        "tab"
+      ],
+      "evidence": "A shared-service inventory with per-mission isolation evidence.",
+      "recovery_test": "Operate one mission with a shared service unavailable."
+    }
+  },
+  {
+    "id": "TRN-13",
+    "phase": "TRN",
+    "name": "Hosted payload to host operator ground",
+    "description": "Use the ground interfaces that serve a hosted payload's owner as a route into the host operator's systems, or the reverse.",
+    "segments": [
+      "space",
+      "ground"
+    ],
+    "assets": [
+      "hosted",
+      "dataproc",
+      "net"
+    ],
+    "vectors": [
+      "net",
+      "supply"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "Hosted-payload operations centres connect into the host's ground segment.",
+    "effects": [
+      "ME-01",
+      "ME-02"
+    ],
+    "controls": [
+      "SC-12",
+      "SC-14",
+      "SC-03"
+    ],
+    "data_sources": [
+      "DS-06",
+      "DS-07"
+    ],
+    "detection": "Traffic from the hosted-payload interface beyond its agreed services.",
+    "assessment": {
+      "question": "What can the hosted-payload owner's network reach inside ours?",
+      "environments": [
+        "tab",
+        "range"
+      ],
+      "evidence": "Interface control review and firewall evidence for the hosted-payload connection.",
+      "recovery_test": "Suspend the hosted-payload interface and confirm host operations are unaffected."
+    }
+  },
+  {
+    "id": "MNP-01",
+    "phase": "MNP",
+    "name": "Downlink eavesdropping",
+    "description": "Receive and read mission data, user traffic or telemetry that is sent without effective encryption.",
+    "segments": [
+      "link",
+      "user"
+    ],
+    "assets": [
+      "pdl",
+      "tm",
+      "ut"
+    ],
+    "vectors": [
+      "rf"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "D",
+    "precondition": "The listener is in the footprint and the traffic is readable.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-08"
+    ],
+    "data_sources": [
+      "DS-05"
+    ],
+    "detection": "Not detectable on the link; audit what is sent in clear.",
+    "assessment": {
+      "question": "Which data on our links could a third party read today?",
+      "environments": [
+        "rf"
+      ],
+      "evidence": "Per-link statement of encryption state, verified by lab capture.",
+      "recovery_test": "Not applicable."
+    }
+  },
+  {
+    "id": "MNP-02",
+    "phase": "MNP",
+    "name": "Mission data theft from ground processing",
+    "description": "Copy payload data, products or customer information from processing systems, archives and distribution platforms.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "dataproc",
+      "cloud",
+      "it"
+    ],
+    "vectors": [
+      "net",
+      "cloud"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "The adversary has access to systems where mission data is stored or processed.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-14",
+      "SC-21",
+      "SC-15",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-09",
+      "DS-06",
+      "DS-07"
+    ],
+    "detection": "Large or unusual reads from archives; new access keys; egress volume anomalies.",
+    "assessment": {
+      "question": "Would bulk copying of our archive be noticed, and how quickly?",
+      "environments": [
+        "range",
+        "auth"
+      ],
+      "evidence": "A data-egress detection test using a benign bulk download.",
+      "recovery_test": "Not applicable; confirm notification obligations and customer communication plan."
+    }
+  },
+  {
+    "id": "MNP-03",
+    "phase": "MNP",
+    "name": "Exfiltration or control over satellite links",
+    "description": "Use satellite connectivity, including other parties' unencrypted downlinks, to carry stolen data or hide control traffic.",
+    "segments": [
+      "link",
+      "user"
+    ],
+    "assets": [
+      "pdl",
+      "ut"
+    ],
+    "vectors": [
+      "rf",
+      "net"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "O",
+    "precondition": "Broad beams allow receive-only collection of traffic addressed to someone else.",
+    "effects": [
+      "ME-02"
+    ],
+    "controls": [
+      "SC-08",
+      "SC-27",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-05",
+      "DS-06"
+    ],
+    "detection": "Unexpected destinations within satellite address ranges; unsolicited traffic towards idle users.",
+    "assessment": {
+      "question": "Could our link capacity or address space be carrying someone else's hidden traffic?",
+      "environments": [
+        "tab",
+        "rf"
+      ],
+      "evidence": "Traffic analysis for flows towards addresses with no active customer.",
+      "recovery_test": "Not applicable."
+    }
+  },
+  {
+    "id": "MNP-04",
+    "phase": "MNP",
+    "name": "Payload data tampering",
+    "description": "Alter imagery, measurements or other products in processing or on board so that users receive false information.",
+    "segments": [
+      "ground",
+      "space"
+    ],
+    "assets": [
+      "dataproc",
+      "payload"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [
+      "eo",
+      "sci",
+      "pnt"
+    ],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "Products are not sealed at source and can be changed before delivery.",
+    "effects": [
+      "ME-03",
+      "ME-11"
+    ],
+    "controls": [
+      "SC-22",
+      "SC-14",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-16",
+      "DS-07"
+    ],
+    "detection": "Signature or hash failures; statistical checks against independent sources.",
+    "assessment": {
+      "question": "Could a product be changed between sensor and customer without any check failing?",
+      "environments": [
+        "range",
+        "twin"
+      ],
+      "evidence": "End-to-end integrity test with a deliberately altered product in staging.",
+      "recovery_test": "Reprocess a product from raw data held in a protected archive."
+    }
+  },
+  {
+    "id": "MNP-05",
+    "phase": "MNP",
+    "name": "Orbit and conjunction data manipulation",
+    "description": "Change ephemerides, tracking inputs or conjunction warnings so that operators plan manoeuvres on false data or miss real ones.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "fds"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "Flight dynamics relies on inputs or files whose integrity is not verified.",
+    "effects": [
+      "ME-03",
+      "ME-10",
+      "ME-08"
+    ],
+    "controls": [
+      "SC-22",
+      "SC-14",
+      "SC-25",
+      "SC-04"
+    ],
+    "data_sources": [
+      "DS-13",
+      "DS-07"
+    ],
+    "detection": "Comparison with independent tracking; unexplained residuals in orbit determination.",
+    "assessment": {
+      "question": "Do we verify orbit and conjunction data against a second source before manoeuvring?",
+      "environments": [
+        "range",
+        "twin",
+        "tab"
+      ],
+      "evidence": "Procedure and records showing independent verification before the last manoeuvre.",
+      "recovery_test": "Recompute an orbit solution from raw tracking on a clean system."
+    }
+  },
+  {
+    "id": "MNP-06",
+    "phase": "MNP",
+    "name": "On-board parameter and table tampering",
+    "description": "Change control gains, limits, calibration or configuration tables to degrade performance subtly over time.",
+    "segments": [
+      "space"
+    ],
+    "assets": [
+      "fsw",
+      "aocs",
+      "eps"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "Tables can be loaded by command and are not regularly compared with baseline.",
+    "effects": [
+      "ME-03",
+      "ME-08",
+      "ME-05"
+    ],
+    "controls": [
+      "SC-13",
+      "SC-26",
+      "SC-25",
+      "SC-34"
+    ],
+    "data_sources": [
+      "DS-04",
+      "DS-02",
+      "DS-01"
+    ],
+    "detection": "Table checksums and read-back; performance trending.",
+    "assessment": {
+      "question": "How long could a small unauthorised change to a control table go unnoticed?",
+      "environments": [
+        "hil",
+        "twin"
+      ],
+      "evidence": "Table read-back schedule and last comparison results.",
+      "recovery_test": "Restore baseline tables on the flatsat and confirm performance recovers."
+    }
+  },
+  {
+    "id": "MNP-07",
+    "phase": "MNP",
+    "name": "Time and clock manipulation",
+    "description": "Shift on-board or ground time so schedules, counters, key validity or data time-tags behave incorrectly.",
+    "segments": [
+      "space",
+      "ground"
+    ],
+    "assets": [
+      "obc",
+      "fds",
+      "moc"
+    ],
+    "vectors": [
+      "net",
+      "rf"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "Time is set by command or taken from a single external source.",
+    "effects": [
+      "ME-03",
+      "ME-07",
+      "ME-01"
+    ],
+    "controls": [
+      "SC-30",
+      "SC-25",
+      "SC-09",
+      "SC-22"
+    ],
+    "data_sources": [
+      "DS-11",
+      "DS-02",
+      "DS-01"
+    ],
+    "detection": "Divergence between independent clocks; time-tagged commands executing early or late.",
+    "assessment": {
+      "question": "What breaks if spacecraft or ground time is wrong by a minute, an hour or a year?",
+      "environments": [
+        "twin",
+        "hil"
+      ],
+      "evidence": "Twin results for stepped time offsets, including anti-replay and schedule behaviour.",
+      "recovery_test": "Resynchronise time from a trusted source and confirm counters and schedules recover."
+    }
+  },
+  {
+    "id": "MNP-08",
+    "phase": "MNP",
+    "name": "Sensor deception on board",
+    "description": "Present false stimuli to on-board sensors such as navigation receivers so the spacecraft's own estimate of its state is wrong.",
+    "segments": [
+      "space",
+      "link"
+    ],
+    "assets": [
+      "aocs",
+      "payload"
+    ],
+    "vectors": [
+      "rf"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "The spacecraft relies on an external signal or scene that can be imitated.",
+    "effects": [
+      "ME-03",
+      "ME-08",
+      "ME-05"
+    ],
+    "controls": [
+      "SC-18",
+      "SC-26",
+      "SC-25"
+    ],
+    "data_sources": [
+      "DS-02",
+      "DS-11"
+    ],
+    "detection": "Disagreement between redundant or dissimilar sensors; innovation checks in estimators.",
+    "assessment": {
+      "question": "Which on-board sensors can be influenced from outside, and what cross-checks them?",
+      "environments": [
+        "hil",
+        "twin"
+      ],
+      "evidence": "Simulation of a false navigation input and the estimator's response.",
+      "recovery_test": "Reject the affected sensor and continue on dissimilar sensing."
+    }
+  },
+  {
+    "id": "MNP-09",
+    "phase": "MNP",
+    "name": "Navigation signal spoofing against users",
+    "description": "Broadcast counterfeit navigation signals so receivers report a false position or time.",
+    "segments": [
+      "link",
+      "user"
+    ],
+    "assets": [
+      "gnss",
+      "rx"
+    ],
+    "vectors": [
+      "rf"
+    ],
+    "missions": [
+      "pnt",
+      "satcom",
+      "eo",
+      "crew"
+    ],
+    "tier": 3,
+    "basis": "O",
+    "precondition": "Receivers accept unauthenticated signals and the adversary can overpower the genuine ones locally.",
+    "effects": [
+      "ME-07",
+      "ME-03",
+      "ME-10",
+      "ME-11"
+    ],
+    "controls": [
+      "SC-18",
+      "SC-30",
+      "SC-36"
+    ],
+    "data_sources": [
+      "DS-11",
+      "DS-05"
+    ],
+    "detection": "Position or time jumps, signal-power anomalies and disagreement with inertial or other sources.",
+    "assessment": {
+      "question": "Which of our services or users would accept a false position or time, and what would it cause?",
+      "environments": [
+        "rf",
+        "tab"
+      ],
+      "evidence": "Cabled spoofing test results for representative receivers.",
+      "recovery_test": "Operate the service on an alternative position or time source for a set period."
+    }
+  },
+  {
+    "id": "MNP-10",
+    "phase": "MNP",
+    "name": "Key and crypto-configuration theft",
+    "description": "Copy keys, key-loading files or crypto configuration from ground stores, backups, test equipment or suppliers.",
+    "segments": [
+      "ground",
+      "supply"
+    ],
+    "assets": [
+      "kms",
+      "crypto",
+      "dev"
+    ],
+    "vectors": [
+      "net",
+      "insider"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "Key material exists outside hardware protection at some point in its life.",
+    "effects": [
+      "ME-02",
+      "ME-01",
+      "ME-12"
+    ],
+    "controls": [
+      "SC-10",
+      "SC-15",
+      "SC-23",
+      "SC-14"
+    ],
+    "data_sources": [
+      "DS-08",
+      "DS-07"
+    ],
+    "detection": "Access records for key stores and backups; discovery of key material in unexpected places.",
+    "assessment": {
+      "question": "Trace one key from generation to spacecraft. Where is it ever in a form that can be copied?",
+      "environments": [
+        "range",
+        "tab"
+      ],
+      "evidence": "A key life-cycle walk-through with evidence at each step.",
+      "recovery_test": "Rehearse rekey of ground and space after a declared theft."
+    }
+  },
+  {
+    "id": "MNP-11",
+    "phase": "MNP",
+    "name": "Unauthorised use of transponder capacity",
+    "description": "Transmit through a bent-pipe transponder without permission, consuming power and bandwidth for the adversary's own traffic.",
+    "segments": [
+      "link",
+      "space"
+    ],
+    "assets": [
+      "pdl",
+      "payload"
+    ],
+    "vectors": [
+      "rf"
+    ],
+    "missions": [
+      "satcom"
+    ],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "The transponder relays whatever it receives in band.",
+    "effects": [
+      "ME-05",
+      "ME-04"
+    ],
+    "controls": [
+      "SC-27",
+      "SC-18",
+      "SC-07"
+    ],
+    "data_sources": [
+      "DS-05"
+    ],
+    "detection": "Carrier monitoring showing unassigned carriers; geolocation of the uplink source.",
+    "assessment": {
+      "question": "How quickly would we detect and locate a carrier we did not assign?",
+      "environments": [
+        "tab",
+        "rf"
+      ],
+      "evidence": "Carrier-monitoring detection time for a test carrier.",
+      "recovery_test": "Reassign affected customers and reconfigure the transponder plan."
+    }
+  },
+  {
+    "id": "MNP-12",
+    "phase": "MNP",
+    "name": "Mission planning and tasking data manipulation",
+    "description": "Alter schedules, pass plans or tasking queues so the mission does the wrong thing at the wrong time without any hostile command.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "fds",
+      "moc",
+      "dataproc"
+    ],
+    "vectors": [
+      "net",
+      "cloud"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "Planning products move between systems without integrity protection or review.",
+    "effects": [
+      "ME-03",
+      "ME-05"
+    ],
+    "controls": [
+      "SC-22",
+      "SC-14",
+      "SC-13",
+      "SC-25"
+    ],
+    "data_sources": [
+      "DS-07",
+      "DS-09",
+      "DS-16"
+    ],
+    "detection": "Plan-versus-execution reconciliation; unexplained plan changes.",
+    "assessment": {
+      "question": "Could someone change tomorrow's plan without the planner or operator noticing?",
+      "environments": [
+        "range",
+        "twin"
+      ],
+      "evidence": "Integrity and approval evidence for planning products, tested with an altered plan in staging.",
+      "recovery_test": "Regenerate plans from validated inputs on a clean system."
+    }
+  },
+  {
+    "id": "MNP-13",
+    "phase": "MNP",
+    "name": "Traffic interception at gateways and operator networks",
+    "description": "Collect or alter customer traffic where it leaves the satellite network, from a position inside operator or gateway systems.",
+    "segments": [
+      "ground",
+      "user"
+    ],
+    "assets": [
+      "nms",
+      "net"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [
+      "satcom",
+      "const"
+    ],
+    "tier": 3,
+    "basis": "O",
+    "precondition": "The adversary has access to gateway, core or lawful-intercept-like functions.",
+    "effects": [
+      "ME-02",
+      "ME-03"
+    ],
+    "controls": [
+      "SC-14",
+      "SC-16",
+      "SC-28",
+      "SC-08"
+    ],
+    "data_sources": [
+      "DS-06",
+      "DS-07"
+    ],
+    "detection": "Configuration changes on core devices; unexpected mirroring or tunnels.",
+    "assessment": {
+      "question": "Who can configure traffic mirroring or routing at our gateways, and is every change reviewed?",
+      "environments": [
+        "range",
+        "auth"
+      ],
+      "evidence": "Configuration audit of gateway devices against baseline.",
+      "recovery_test": "Restore gateway configuration from baseline and rotate device credentials."
+    }
+  },
+  {
+    "id": "MNP-14",
+    "phase": "MNP",
+    "name": "Design and intellectual property exfiltration",
+    "description": "Steal designs, source code, interface documents and test data that make later attacks on the mission easier.",
+    "segments": [
+      "ground",
+      "supply"
+    ],
+    "assets": [
+      "it",
+      "dev",
+      "cots"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "Engineering data sits on enterprise or supplier systems reachable from a foothold.",
+    "effects": [
+      "ME-02",
+      "ME-12"
+    ],
+    "controls": [
+      "SC-14",
+      "SC-15",
+      "SC-28",
+      "SC-17",
+      "SC-29"
+    ],
+    "data_sources": [
+      "DS-06",
+      "DS-08",
+      "DS-07"
+    ],
+    "detection": "Data-loss monitoring; unusual repository cloning; archive creation on engineering hosts.",
+    "assessment": {
+      "question": "If our design repository were copied, which protections would lose their value?",
+      "environments": [
+        "range",
+        "auth"
+      ],
+      "evidence": "A list of controls that depend on design secrecy, and repository access analytics.",
+      "recovery_test": "Not applicable; reassess the threat model assuming the adversary holds the design."
+    }
+  },
+  {
+    "id": "EFX-01",
+    "phase": "EFX",
+    "name": "Uplink jamming",
+    "description": "Transmit interference at the spacecraft's receiver so commands or user uplinks cannot be received.",
+    "segments": [
+      "link",
+      "space"
+    ],
+    "assets": [
+      "tc",
+      "pdl"
+    ],
+    "vectors": [
+      "rf"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "The adversary is in the receive beam with sufficient power.",
+    "effects": [
+      "ME-04",
+      "ME-01",
+      "ME-05"
+    ],
+    "controls": [
+      "SC-18",
+      "SC-27",
+      "SC-33",
+      "SC-36"
+    ],
+    "data_sources": [
+      "DS-05",
+      "DS-01"
+    ],
+    "detection": "Receiver noise-floor and lock telemetry; failed command verification; spectrum monitoring.",
+    "assessment": {
+      "question": "How long can the spacecraft operate safely without commands, and can we command from elsewhere?",
+      "environments": [
+        "rf",
+        "tab"
+      ],
+      "evidence": "Autonomy duration analysis and a cabled interference test.",
+      "recovery_test": "Command through a different station, band or beam in an exercise."
+    }
+  },
+  {
+    "id": "EFX-02",
+    "phase": "EFX",
+    "name": "Downlink jamming",
+    "description": "Interfere with reception at ground stations or user terminals so telemetry or service is lost locally.",
+    "segments": [
+      "link",
+      "user",
+      "ground"
+    ],
+    "assets": [
+      "tm",
+      "pdl",
+      "ut",
+      "gs"
+    ],
+    "vectors": [
+      "rf"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "The adversary is near the receiver.",
+    "effects": [
+      "ME-04",
+      "ME-05",
+      "ME-06"
+    ],
+    "controls": [
+      "SC-18",
+      "SC-27",
+      "SC-36"
+    ],
+    "data_sources": [
+      "DS-05",
+      "DS-12"
+    ],
+    "detection": "Signal-to-noise drops across terminals in an area; station receiver alarms.",
+    "assessment": {
+      "question": "Which stations and user areas can be denied by a local emitter, and what is the fallback?",
+      "environments": [
+        "rf",
+        "tab"
+      ],
+      "evidence": "Interference margin per receive site and a tested fallback.",
+      "recovery_test": "Shift reception to another site or beam."
+    }
+  },
+  {
+    "id": "EFX-03",
+    "phase": "EFX",
+    "name": "Navigation signal jamming",
+    "description": "Overpower navigation signals so receivers lose position and time.",
+    "segments": [
+      "link",
+      "user"
+    ],
+    "assets": [
+      "gnss",
+      "rx"
+    ],
+    "vectors": [
+      "rf"
+    ],
+    "missions": [
+      "pnt",
+      "satcom",
+      "eo",
+      "crew"
+    ],
+    "tier": 1,
+    "basis": "O",
+    "precondition": "Navigation signals are weak at the receiver and cheap emitters exist.",
+    "effects": [
+      "ME-07",
+      "ME-04",
+      "ME-10",
+      "ME-11"
+    ],
+    "controls": [
+      "SC-18",
+      "SC-30",
+      "SC-36"
+    ],
+    "data_sources": [
+      "DS-11",
+      "DS-05"
+    ],
+    "detection": "Loss of lock across receivers; carrier-to-noise drops; interference reports.",
+    "assessment": {
+      "question": "Which of our systems fail, and how, when satellite navigation is unavailable for a day?",
+      "environments": [
+        "rf",
+        "tab"
+      ],
+      "evidence": "Hold-over test results for timing and navigation-dependent systems.",
+      "recovery_test": "Run on alternative timing and navigation for the tested period."
+    }
+  },
+  {
+    "id": "EFX-04",
+    "phase": "EFX",
+    "name": "Terminal fleet wipe or disablement",
+    "description": "Send destructive commands or software to user terminals at scale so they stop working and cannot be recovered remotely.",
+    "segments": [
+      "user"
+    ],
+    "assets": [
+      "ut",
+      "nms"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [
+      "satcom",
+      "const"
+    ],
+    "tier": 3,
+    "basis": "O",
+    "precondition": "The adversary controls a channel that can reach many terminals with privileged actions.",
+    "effects": [
+      "ME-04",
+      "ME-09",
+      "ME-11"
+    ],
+    "controls": [
+      "SC-19",
+      "SC-11",
+      "SC-14",
+      "SC-36",
+      "SC-35"
+    ],
+    "data_sources": [
+      "DS-12",
+      "DS-07"
+    ],
+    "detection": "Mass terminal drop-off; destructive commands on the management plane.",
+    "assessment": {
+      "question": "If a large share of terminals were disabled tonight, how would service be restored and how fast?",
+      "environments": [
+        "hil",
+        "range"
+      ],
+      "evidence": "A recovery plan with stock, logistics and re-provisioning time, tested on lab terminals.",
+      "recovery_test": "Recover wiped lab terminals and measure time per unit and what needs a site visit."
+    }
+  },
+  {
+    "id": "EFX-05",
+    "phase": "EFX",
+    "name": "Destruction or encryption of ground systems",
+    "description": "Wipe or encrypt mission-control, station or processing systems so the operator cannot fly or deliver.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "moc",
+      "gs",
+      "it",
+      "dataproc"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "The adversary holds broad administrative access in the ground environment.",
+    "effects": [
+      "ME-04",
+      "ME-06",
+      "ME-11",
+      "ME-05"
+    ],
+    "controls": [
+      "SC-35",
+      "SC-14",
+      "SC-28",
+      "SC-33",
+      "SC-31"
+    ],
+    "data_sources": [
+      "DS-07",
+      "DS-06"
+    ],
+    "detection": "Mass file changes, backup deletion and security tooling being disabled.",
+    "assessment": {
+      "question": "With every ground server in the primary site unusable, how long until we can command again?",
+      "environments": [
+        "range"
+      ],
+      "evidence": "Timed rebuild of mission control from offline backups.",
+      "recovery_test": "Command a simulator from rebuilt systems or the alternate site."
+    }
+  },
+  {
+    "id": "EFX-06",
+    "phase": "EFX",
+    "name": "Spacecraft denial of service",
+    "description": "Drive the spacecraft into repeated resets, safe mode or receiver saturation so it cannot perform its mission.",
+    "segments": [
+      "space",
+      "link"
+    ],
+    "assets": [
+      "obc",
+      "fsw",
+      "tc"
+    ],
+    "vectors": [
+      "rf",
+      "net"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "D",
+    "precondition": "The spacecraft reacts to hostile input or commands with protective shutdown.",
+    "effects": [
+      "ME-04",
+      "ME-08",
+      "ME-06"
+    ],
+    "controls": [
+      "SC-07",
+      "SC-32",
+      "SC-25",
+      "SC-33"
+    ],
+    "data_sources": [
+      "DS-03",
+      "DS-01",
+      "DS-02"
+    ],
+    "detection": "Reset counters, safe-mode entries and rejected-frame rates.",
+    "assessment": {
+      "question": "Can an outsider keep the spacecraft in safe mode indefinitely?",
+      "environments": [
+        "hil",
+        "twin"
+      ],
+      "evidence": "Flatsat test of behaviour under sustained invalid commanding.",
+      "recovery_test": "Recover from safe mode under continued interference in the twin."
+    }
+  },
+  {
+    "id": "EFX-07",
+    "phase": "EFX",
+    "name": "Consumable and resource exhaustion",
+    "description": "Spend propellant, battery cycles, storage or thermal margin through commanded activity that shortens or ends the mission.",
+    "segments": [
+      "space"
+    ],
+    "assets": [
+      "eps",
+      "aocs",
+      "obc",
+      "payload"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "Resource-consuming commands are not limited or independently approved.",
+    "effects": [
+      "ME-08",
+      "ME-05",
+      "ME-09"
+    ],
+    "controls": [
+      "SC-13",
+      "SC-25",
+      "SC-26",
+      "SC-32"
+    ],
+    "data_sources": [
+      "DS-02",
+      "DS-01"
+    ],
+    "detection": "Resource trend alarms; activity with no corresponding plan.",
+    "assessment": {
+      "question": "What is the fastest way to waste a year of mission life by command, and what would stop it?",
+      "environments": [
+        "twin",
+        "hil"
+      ],
+      "evidence": "Analysis of hazardous resource commands and their on-board limits.",
+      "recovery_test": "Not recoverable once spent; verify limits and approvals prevent it in the twin."
+    }
+  },
+  {
+    "id": "EFX-08",
+    "phase": "EFX",
+    "name": "Attitude or orbit control hijack",
+    "description": "Command thrusters or attitude actuators to tumble the spacecraft, change its orbit or point it harmfully.",
+    "segments": [
+      "space"
+    ],
+    "assets": [
+      "aocs",
+      "fsw"
+    ],
+    "vectors": [
+      "net",
+      "rf"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "The adversary can issue control commands that the spacecraft accepts.",
+    "effects": [
+      "ME-01",
+      "ME-10",
+      "ME-09",
+      "ME-04"
+    ],
+    "controls": [
+      "SC-13",
+      "SC-07",
+      "SC-32",
+      "SC-25",
+      "SC-26"
+    ],
+    "data_sources": [
+      "DS-02",
+      "DS-13",
+      "DS-01"
+    ],
+    "detection": "Attitude and orbit deviations; actuator activity without a plan; independent tracking.",
+    "assessment": {
+      "question": "Which protections remain between a valid manoeuvre command and thruster firing?",
+      "environments": [
+        "twin",
+        "hil"
+      ],
+      "evidence": "List of arming steps and on-board limits for propulsion, tested in the twin.",
+      "recovery_test": "Recover attitude from a tumbling state in the twin using safe-mode procedures."
+    }
+  },
+  {
+    "id": "EFX-09",
+    "phase": "EFX",
+    "name": "Payload damage or misuse",
+    "description": "Operate the payload outside safe limits or against its purpose, for example exposing a sensor or overdriving an amplifier.",
+    "segments": [
+      "space"
+    ],
+    "assets": [
+      "payload",
+      "eps"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "Payload safety relies on correct commanding rather than on-board interlocks.",
+    "effects": [
+      "ME-09",
+      "ME-05",
+      "ME-04"
+    ],
+    "controls": [
+      "SC-13",
+      "SC-26",
+      "SC-25",
+      "SC-12"
+    ],
+    "data_sources": [
+      "DS-02",
+      "DS-16"
+    ],
+    "detection": "Payload health limits; operations outside the plan.",
+    "assessment": {
+      "question": "Which payload-damaging actions are prevented on board rather than by procedure?",
+      "environments": [
+        "twin",
+        "tab"
+      ],
+      "evidence": "Interlock inventory for payload hazards.",
+      "recovery_test": "Not recoverable if hardware is damaged; verify interlocks in the twin."
+    }
+  },
+  {
+    "id": "EFX-10",
+    "phase": "EFX",
+    "name": "Permanent spacecraft disablement",
+    "description": "Leave the spacecraft unusable by corrupting software beyond recovery or locking the operator out.",
+    "segments": [
+      "space"
+    ],
+    "assets": [
+      "fsw",
+      "obc",
+      "crypto"
+    ],
+    "vectors": [
+      "net",
+      "rf"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "D",
+    "precondition": "The adversary can write boot-critical software or change command keys.",
+    "effects": [
+      "ME-09",
+      "ME-01",
+      "ME-11"
+    ],
+    "controls": [
+      "SC-11",
+      "SC-34",
+      "SC-10",
+      "SC-13",
+      "SC-32"
+    ],
+    "data_sources": [
+      "DS-04",
+      "DS-03",
+      "DS-01"
+    ],
+    "detection": "Loss of contact following image or key operations; attestation failures.",
+    "assessment": {
+      "question": "Is there any sequence of commands after which we could never regain the spacecraft?",
+      "environments": [
+        "hil"
+      ],
+      "evidence": "Analysis of unrecoverable states and the protections around each.",
+      "recovery_test": "Demonstrate recovery from the worst reachable state on the flatsat."
+    }
+  },
+  {
+    "id": "EFX-11",
+    "phase": "EFX",
+    "name": "Broadcast or service hijack",
+    "description": "Replace or override legitimate content or service on a transponder or distribution chain with the adversary's own.",
+    "segments": [
+      "link",
+      "user"
+    ],
+    "assets": [
+      "pdl",
+      "ut"
+    ],
+    "vectors": [
+      "rf",
+      "net"
+    ],
+    "missions": [
+      "satcom"
+    ],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "The uplink can be overpowered or the distribution chain upstream is compromised.",
+    "effects": [
+      "ME-03",
+      "ME-11",
+      "ME-04"
+    ],
+    "controls": [
+      "SC-27",
+      "SC-18",
+      "SC-16",
+      "SC-07"
+    ],
+    "data_sources": [
+      "DS-05"
+    ],
+    "detection": "Content monitoring; unexpected uplink carriers; customer reports.",
+    "assessment": {
+      "question": "How fast can we detect and remove an intruding signal on a broadcast carrier?",
+      "environments": [
+        "rf",
+        "tab"
+      ],
+      "evidence": "Detection and response timing from a monitored test.",
+      "recovery_test": "Move the service to another transponder or uplink site."
+    }
+  },
+  {
+    "id": "EFX-12",
+    "phase": "EFX",
+    "name": "Deception of downstream users",
+    "description": "Cause users to act on false products, positions or times, so the harm occurs in the dependent system rather than the space system.",
+    "segments": [
+      "user",
+      "ground"
+    ],
+    "assets": [
+      "rx",
+      "dataproc"
+    ],
+    "vectors": [
+      "net",
+      "rf"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "O",
+    "precondition": "Users trust the service output without independent checks.",
+    "effects": [
+      "ME-03",
+      "ME-07",
+      "ME-11",
+      "ME-10"
+    ],
+    "controls": [
+      "SC-22",
+      "SC-30",
+      "SC-36",
+      "SC-29"
+    ],
+    "data_sources": [
+      "DS-16",
+      "DS-11"
+    ],
+    "detection": "User-side plausibility checks; reports of inconsistent data.",
+    "assessment": {
+      "question": "Which customers would make a safety or financial decision on our data without checking it?",
+      "environments": [
+        "tab",
+        "twin"
+      ],
+      "evidence": "A register of safety-relevant users and the integrity signal they receive.",
+      "recovery_test": "Issue a product recall or integrity warning to users in an exercise and time it."
+    }
+  },
+  {
+    "id": "EFX-13",
+    "phase": "EFX",
+    "name": "Collision risk and debris generation",
+    "description": "Use control of a spacecraft or of orbit data to raise collision risk for it and for others.",
+    "segments": [
+      "space",
+      "ground"
+    ],
+    "assets": [
+      "aocs",
+      "fds"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "The adversary controls manoeuvring or the data used to plan it.",
+    "effects": [
+      "ME-10",
+      "ME-09",
+      "ME-11"
+    ],
+    "controls": [
+      "SC-13",
+      "SC-25",
+      "SC-22",
+      "SC-31"
+    ],
+    "data_sources": [
+      "DS-13",
+      "DS-02"
+    ],
+    "detection": "Independent tracking and conjunction services; coordination with other operators.",
+    "assessment": {
+      "question": "Who would we tell, and how fast, if we lost control of a manoeuvrable spacecraft?",
+      "environments": [
+        "tab",
+        "twin"
+      ],
+      "evidence": "Notification procedure and contact list tested in an exercise.",
+      "recovery_test": "Coordinate a simulated loss-of-control event with tracking and neighbouring operators."
+    }
+  },
+  {
+    "id": "EFX-14",
+    "phase": "EFX",
+    "name": "Extortion over mission control or data",
+    "description": "Demand payment or concessions by threatening to publish stolen data, withhold systems or misuse spacecraft control.",
+    "segments": [
+      "ground",
+      "space"
+    ],
+    "assets": [
+      "moc",
+      "dataproc",
+      "it"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "The adversary holds stolen data or disruptive access.",
+    "effects": [
+      "ME-04",
+      "ME-02",
+      "ME-12",
+      "ME-11"
+    ],
+    "controls": [
+      "SC-31",
+      "SC-35",
+      "SC-28",
+      "SC-15"
+    ],
+    "data_sources": [
+      "DS-07",
+      "DS-15"
+    ],
+    "detection": "Extortion contact; data appearing on leak sites; encryption activity.",
+    "assessment": {
+      "question": "Who decides how we respond to an extortion demand, and on what information?",
+      "environments": [
+        "tab",
+        "range"
+      ],
+      "evidence": "A decision record from an extortion tabletop, including legal and regulator steps.",
+      "recovery_test": "Operate and deliver while the affected systems are held out of service."
+    }
+  },
+  {
+    "id": "EFX-15",
+    "phase": "EFX",
+    "name": "Denial of service against ground and customer services",
+    "description": "Flood or exhaust internet-facing portals, sign-in services, gateways or provider interfaces so customers and operators cannot use them.",
+    "segments": [
+      "ground",
+      "user"
+    ],
+    "assets": [
+      "net",
+      "nms",
+      "cloud",
+      "it"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 1,
+    "basis": "O",
+    "precondition": "Services needed by users or operators are reachable from the internet with limited capacity protection.",
+    "effects": [
+      "ME-04",
+      "ME-05",
+      "ME-11"
+    ],
+    "controls": [
+      "SC-16",
+      "SC-36",
+      "SC-28",
+      "SC-31"
+    ],
+    "data_sources": [
+      "DS-06",
+      "DS-15"
+    ],
+    "detection": "Traffic volume and error-rate alarms; upstream provider alerts; claims on social channels.",
+    "assessment": {
+      "question": "Which internet-facing service, if unavailable for a day, stops customers or operators working?",
+      "environments": [
+        "range",
+        "tab"
+      ],
+      "evidence": "A dependency list of internet-facing services with capacity protection and tested fallback.",
+      "recovery_test": "Operate with the affected service withdrawn and customers redirected to a fallback."
+    }
+  },
+  {
+    "id": "RSL-01",
+    "phase": "RSL",
+    "name": "Safe-mode exploitation",
+    "description": "Use the recovery state itself: safe mode that relaxes authentication, widens antenna coverage or accepts low-level commands.",
+    "segments": [
+      "space",
+      "link"
+    ],
+    "assets": [
+      "fsw",
+      "obc",
+      "tc",
+      "crypto"
+    ],
+    "vectors": [
+      "rf",
+      "net"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "Safe mode trades security for recoverability.",
+    "effects": [
+      "ME-01",
+      "ME-12",
+      "ME-09"
+    ],
+    "controls": [
+      "SC-32",
+      "SC-07",
+      "SC-34",
+      "SC-13"
+    ],
+    "data_sources": [
+      "DS-03",
+      "DS-01",
+      "DS-04"
+    ],
+    "detection": "Commanding during safe mode from unexpected sources; safe-mode entries with no natural cause.",
+    "assessment": {
+      "question": "Is the spacecraft easier to command for an outsider in safe mode than in normal mode?",
+      "environments": [
+        "hil",
+        "twin"
+      ],
+      "evidence": "Flatsat comparison of protections in normal and safe mode.",
+      "recovery_test": "Recover from safe mode with authentication enforced throughout."
+    }
+  },
+  {
+    "id": "RSL-02",
+    "phase": "RSL",
+    "name": "Recovery image and baseline corruption",
+    "description": "Tamper with the images, baselines and procedures used for recovery so that restoring brings the compromise back.",
+    "segments": [
+      "space",
+      "ground",
+      "supply"
+    ],
+    "assets": [
+      "fsw",
+      "dev",
+      "moc"
+    ],
+    "vectors": [
+      "net",
+      "supply"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "Recovery material is stored where the adversary has been.",
+    "effects": [
+      "ME-12",
+      "ME-09"
+    ],
+    "controls": [
+      "SC-34",
+      "SC-17",
+      "SC-11",
+      "SC-35"
+    ],
+    "data_sources": [
+      "DS-04",
+      "DS-10"
+    ],
+    "detection": "Hash verification of recovery material against an offline record.",
+    "assessment": {
+      "question": "Where is our last known-good image, and how do we know it is good?",
+      "environments": [
+        "hil",
+        "range"
+      ],
+      "evidence": "Offline hash records for recovery images and a verification log.",
+      "recovery_test": "Restore from the protected copy and attest independently."
+    }
+  },
+  {
+    "id": "RSL-03",
+    "phase": "RSL",
+    "name": "Destruction of ground backups and configuration",
+    "description": "Delete or encrypt backups, configuration stores and virtual-machine templates before the main attack.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "it",
+      "moc",
+      "dataproc"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 2,
+    "basis": "O",
+    "precondition": "Backups are online and reachable with administrator rights.",
+    "effects": [
+      "ME-09",
+      "ME-04",
+      "ME-12"
+    ],
+    "controls": [
+      "SC-35",
+      "SC-14",
+      "SC-15",
+      "SC-28"
+    ],
+    "data_sources": [
+      "DS-07",
+      "DS-09"
+    ],
+    "detection": "Backup-job failures, retention changes and deletion events.",
+    "assessment": {
+      "question": "Could one administrator account delete every copy of the mission database?",
+      "environments": [
+        "range"
+      ],
+      "evidence": "Evidence of offline or immutable backups and a restore test.",
+      "recovery_test": "Restore the mission database from the offline copy within the target time."
+    }
+  },
+  {
+    "id": "RSL-04",
+    "phase": "RSL",
+    "name": "Key and credential lockout of the operator",
+    "description": "Change keys, counters or credentials so the legitimate operator can no longer authenticate to its own spacecraft or systems.",
+    "segments": [
+      "space",
+      "ground"
+    ],
+    "assets": [
+      "crypto",
+      "kms",
+      "it"
+    ],
+    "vectors": [
+      "net"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "Rekey or credential-change functions can be used by the adversary.",
+    "effects": [
+      "ME-01",
+      "ME-09",
+      "ME-12"
+    ],
+    "controls": [
+      "SC-10",
+      "SC-13",
+      "SC-33",
+      "SC-34"
+    ],
+    "data_sources": [
+      "DS-01",
+      "DS-08"
+    ],
+    "detection": "Rekey events without an approved ceremony; authentication failures from legitimate stations.",
+    "assessment": {
+      "question": "Is there a protected last-resort way to regain command if operational keys are changed against us?",
+      "environments": [
+        "hil",
+        "tab"
+      ],
+      "evidence": "Design and test evidence of a recovery key or path that normal operations cannot alter.",
+      "recovery_test": "Regain command of the flatsat after operational keys are replaced."
+    }
+  },
+  {
+    "id": "RSL-05",
+    "phase": "RSL",
+    "name": "Denial of alternate command paths",
+    "description": "Jam, compromise or pre-empt the backup stations and networks the operator would turn to in a crisis.",
+    "segments": [
+      "link",
+      "ground"
+    ],
+    "assets": [
+      "gs",
+      "tc",
+      "net"
+    ],
+    "vectors": [
+      "rf",
+      "net"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "Backup paths share providers, credentials, locations or frequencies with the primary.",
+    "effects": [
+      "ME-04",
+      "ME-01"
+    ],
+    "controls": [
+      "SC-33",
+      "SC-36",
+      "SC-27",
+      "SC-03"
+    ],
+    "data_sources": [
+      "DS-05",
+      "DS-06"
+    ],
+    "detection": "Health monitoring of backup paths; periodic live use.",
+    "assessment": {
+      "question": "What do the primary and backup command paths have in common?",
+      "environments": [
+        "tab",
+        "twin"
+      ],
+      "evidence": "A common-mode analysis of primary and alternate paths.",
+      "recovery_test": "Command through the alternate path with the shared elements declared lost."
+    }
+  },
+  {
+    "id": "RSL-06",
+    "phase": "RSL",
+    "name": "Interference with incident response",
+    "description": "Watch responder communications, tamper with response tooling or feed false information to slow and misdirect the response.",
+    "segments": [
+      "ground"
+    ],
+    "assets": [
+      "it",
+      "people",
+      "moc"
+    ],
+    "vectors": [
+      "net",
+      "social"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "O",
+    "precondition": "Responders use the same systems the adversary already controls.",
+    "effects": [
+      "ME-12",
+      "ME-06"
+    ],
+    "controls": [
+      "SC-31",
+      "SC-28",
+      "SC-15",
+      "SC-29"
+    ],
+    "data_sources": [
+      "DS-08",
+      "DS-07"
+    ],
+    "detection": "Access to responder mailboxes and tickets; security tools being reconfigured.",
+    "assessment": {
+      "question": "Could we run an incident without using any system the intruder might control?",
+      "environments": [
+        "tab",
+        "range"
+      ],
+      "evidence": "An out-of-band communications plan and evidence it has been used in an exercise.",
+      "recovery_test": "Run one exercise entirely on out-of-band channels."
+    }
+  },
+  {
+    "id": "RSL-07",
+    "phase": "RSL",
+    "name": "Re-entry through unrotated trust",
+    "description": "Return after eviction using credentials, keys, tokens or vendor connections that were not changed during recovery.",
+    "segments": [
+      "ground",
+      "supply",
+      "space"
+    ],
+    "assets": [
+      "it",
+      "kms",
+      "cots",
+      "crypto"
+    ],
+    "vectors": [
+      "net",
+      "supply"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "O",
+    "precondition": "Recovery restores service faster than it rotates secrets.",
+    "effects": [
+      "ME-12",
+      "ME-01"
+    ],
+    "controls": [
+      "SC-10",
+      "SC-15",
+      "SC-03",
+      "SC-31"
+    ],
+    "data_sources": [
+      "DS-08",
+      "DS-10"
+    ],
+    "detection": "Use of pre-incident credentials or keys after recovery.",
+    "assessment": {
+      "question": "After an incident, what is the complete list of secrets to rotate, including on orbit and at suppliers?",
+      "environments": [
+        "tab",
+        "range"
+      ],
+      "evidence": "A rotation checklist with owners and a timed dry run.",
+      "recovery_test": "Complete a full rotation in an exercise and verify old secrets fail everywhere."
+    }
+  },
+  {
+    "id": "RSL-08",
+    "phase": "RSL",
+    "name": "Timing against critical operations",
+    "description": "Strike during launch and early operations, manoeuvres, anomaly recovery or holidays, when margin and attention are lowest.",
+    "segments": [
+      "ground",
+      "space"
+    ],
+    "assets": [
+      "moc",
+      "people",
+      "fds",
+      "launch"
+    ],
+    "vectors": [
+      "net",
+      "rf"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "Critical periods are predictable and staffing or authority is reduced.",
+    "effects": [
+      "ME-04",
+      "ME-09",
+      "ME-10"
+    ],
+    "controls": [
+      "SC-31",
+      "SC-36",
+      "SC-01",
+      "SC-13"
+    ],
+    "data_sources": [
+      "DS-15",
+      "DS-01"
+    ],
+    "detection": "Heightened monitoring during critical periods; intelligence warnings.",
+    "assessment": {
+      "question": "During our most delicate operation, who has authority to stop and switch to a safe configuration?",
+      "environments": [
+        "tab"
+      ],
+      "evidence": "Go and no-go criteria that include security conditions for critical operations.",
+      "recovery_test": "Inject a security event into a critical-operations rehearsal."
+    }
+  },
+  {
+    "id": "RSL-09",
+    "phase": "RSL",
+    "name": "Common-mode defeat of redundancy",
+    "description": "Defeat spares and redundant chains by exploiting what they share: identical software, keys, suppliers or management.",
+    "segments": [
+      "space",
+      "ground"
+    ],
+    "assets": [
+      "obc",
+      "fsw",
+      "gs",
+      "moc"
+    ],
+    "vectors": [
+      "net",
+      "supply"
+    ],
+    "missions": [],
+    "tier": 4,
+    "basis": "T",
+    "precondition": "Redundancy was designed against random failure, not deliberate common cause.",
+    "effects": [
+      "ME-09",
+      "ME-04",
+      "ME-11"
+    ],
+    "controls": [
+      "SC-36",
+      "SC-02",
+      "SC-17",
+      "SC-34"
+    ],
+    "data_sources": [
+      "DS-04",
+      "DS-10"
+    ],
+    "detection": "Simultaneous anomalies in primary and redundant units.",
+    "assessment": {
+      "question": "What single flaw is present in both the primary and the backup?",
+      "environments": [
+        "tab",
+        "twin"
+      ],
+      "evidence": "A common-cause analysis covering software, keys, suppliers and operations.",
+      "recovery_test": "Operate with primary and identical backup both declared untrusted."
+    }
+  },
+  {
+    "id": "RSL-10",
+    "phase": "RSL",
+    "name": "Erosion of assurance and attribution",
+    "description": "Leave doubt: imitate natural anomalies, plant misleading traces or simply make it impossible to prove the system is clean.",
+    "segments": [
+      "space",
+      "ground"
+    ],
+    "assets": [
+      "moc",
+      "fsw",
+      "people"
+    ],
+    "vectors": [
+      "net",
+      "rf",
+      "social"
+    ],
+    "missions": [],
+    "tier": 3,
+    "basis": "T",
+    "precondition": "The operator cannot independently attest spacecraft state or distinguish attack from fault.",
+    "effects": [
+      "ME-12",
+      "ME-06"
+    ],
+    "controls": [
+      "SC-26",
+      "SC-34",
+      "SC-25",
+      "SC-31",
+      "SC-29"
+    ],
+    "data_sources": [
+      "DS-04",
+      "DS-13",
+      "DS-15"
+    ],
+    "detection": "Anomaly investigation that always includes a security hypothesis.",
+    "assessment": {
+      "question": "After an anomaly, how would we prove to a customer that it was not an intrusion?",
+      "environments": [
+        "tab"
+      ],
+      "evidence": "An anomaly procedure with a security branch and the evidence it collects.",
+      "recovery_test": "Produce an attestation of spacecraft state from independent evidence in an exercise."
+    }
+  }
+]
